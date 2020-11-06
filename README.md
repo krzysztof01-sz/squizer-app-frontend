@@ -7,8 +7,4 @@ This repository contains only a frontend part of whole application.
 
 # How to start the app?
 
-cd frontend
-npm start
-
-cd backend
-node app.js
+type: npm start
