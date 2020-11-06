@@ -1,7 +1,18 @@
-import React from 'react';
+import { memo } from 'react';
+import Footer from '../global/Footer/Footer';
+import Header from '../global/Header/Header';
+import WelcomingInformations from './WelcomingInformations';
+import Infographic from './InfoGraphic';
 
 const SplashScreen = () => {
-  return <h1>Hello</h1>;
+  return (
+    <>
+      <Header />
+      <WelcomingInformations />
+      <Infographic />
+      <Footer />
+    </>
+  );
 };
 
-export default SplashScreen;
+export default memo(SplashScreen);
