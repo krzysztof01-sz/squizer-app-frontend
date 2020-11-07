@@ -18,7 +18,7 @@ const CHOOSE_YOUR_PHOTO = 'Choose your profile photo';
 
 // logging
 
-const LOGGING_STATUS = 'Logging...';
+const LOGGING_PROCESS = 'Logging...';
 
 // authentication
 
@@ -38,6 +38,6 @@ export {
   PHOTO_SAVED_IN_DB,
   PHOTO_COMPESSING_START,
   CHOOSE_YOUR_PHOTO,
-  LOGGING_STATUS,
+  LOGGING_PROCESS,
   JWT_ACCESS_DENIED,
 };

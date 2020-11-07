@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
 import DefaultPhoto from '../../assets/images/DefaultPhoto.png';
-import * as messages from '../../utils/feedbackMessages';
+import * as messages from '../../utils/responseMessages';
 import { isFileImage, compressPhoto, savePhotoInDB } from '../../utils/functions';
 
 import SingupButton from '../global/Buttons/SignupButton';
@@ -15,21 +15,22 @@ import ErrorMessage from '../global/Components/ErrorMessage';
 import Input from '../global/Components/Input';
 import InputValidation from '../global/Components/InputValidationMessage';
 import FileInput from './FileInput';
-import Status from '../global/Components/Status';
+import ProcessMessage from '../global/Components/ProcessMessage';
 import FilenameLabel from './FileNameLabel';
-import * as api from '../../api/userAPI';
 import DefaultPhotoButton from './DefaultPhotoButton';
 import Loader from '../global/Loader/Loader';
+import * as api from '../../api/userAPI';
 
 const Form = () => {
   const history = useHistory();
-  const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
+
+  const [csrfToken, setCsrfToken] = useState(null);
+  const [responseMessages, setResponseMessages] = useState([]);
+  const [process, setProcess] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [feedbackMessages, setFeedbackMessages] = useState([]);
   const [userPhoto, setUserPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [csrfToken, setCsrfToken] = useState(null);
+  const [error, setError] = useState('');
 
   const schema = yup.object().shape({
     nickname: yup
@@ -74,18 +75,18 @@ const Form = () => {
     const { type: responseType, id: createdUserId, nick: createdUserNick } = addingUserResponse[0];
     setIsProcessing(false);
 
-    setFeedbackMessages(addingUserResponse);
+    setResponseMessages(addingUserResponse);
 
     if (responseType === 'success') {
       const photoName = `${createdUserId}-${createdUserNick}`;
-      const addingResult = userPhoto?.name ? await savePhotoInDB(userPhoto, photoName) : 'success';
+      // const addingResult = userPhoto?.name ? await savePhotoInDB(userPhoto, photoName) : 'success';
 
-      if (addingResult === 'success') {
-        setStatus(messages.PHOTO_SAVED_IN_DB);
-        setTimeout(() => history.push('/login'), 500);
-      } else {
-        setError(addingResult);
-      }
+      // if (addingResult === 'success') {
+      //   setProcess(messages.PHOTO_SAVED_IN_DB);
+      //   setTimeout(() => history.push('/login'), 500);
+      // } else {
+      //   setError(addingResult);
+      // }
     }
   };
 
@@ -114,16 +115,14 @@ const Form = () => {
     }
 
     setError('');
-    setStatus(messages.PHOTO_COMPESSING_START);
+    setProcess(messages.PHOTO_COMPESSING_START);
     setIsProcessing(true);
 
     const compressedPhoto = await compressPhoto(file);
-
     setIsProcessing(false);
-    setStatus('');
+    setProcess('');
 
     if (!compressedPhoto) return setError(messages.PHOTO_COMPRESSING_ERROR);
-
     showPhoto(file);
     setUserPhoto(compressedPhoto);
   };
@@ -160,7 +159,7 @@ const Form = () => {
           max="15"
         />
         <InputValidation message={errors.confirmedPassword?.message} />
-        <Status message={status} />
+        <ProcessMessage message={process} />
 
         <FileInput handleChange={handlePhotoChange} />
         <FilenameLabel userPhoto={userPhoto} />
@@ -169,7 +168,7 @@ const Form = () => {
         <DefaultPhotoButton handleClick={setDefaultPhoto} />
         <ErrorMessage message={error} />
 
-        {feedbackMessages.map(({ msg, type }, param) => {
+        {responseMessages.map(({ msg, type }, param) => {
           return <FeedbackMessage key={param} type={type} message={msg} />;
         })}
 

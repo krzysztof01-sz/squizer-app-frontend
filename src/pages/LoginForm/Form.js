@@ -5,20 +5,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import Input from '../global/Components/Input';
-import Status from '../global/Components/Status';
-import * as messages from '../../utils/feedbackMessages';
+import ProcessMessage from '../global/Components/ProcessMessage';
 import InputValidation from '../global/Components/InputValidationMessage';
-import * as api from '../../api/userAPI';
 import FeedbackMessage from '../global/Components/FeedbackMessage';
 import LoginButton from '../global/Buttons/LoginButton';
-import { getRandomNumber } from '../../../../backend/utils/functions';
 import Loader from '../global/Loader/Loader';
+import * as messages from '../../utils/responseMessages';
+import * as api from '../../api/userAPI';
 
 const Form = () => {
   const history = useHistory();
-  const [status, setStatus] = useState('');
+  const [process, setProcess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState('');
-  const [feedbackMessages, setFeedbackMessages] = useState([]);
+  const [responseMessages, setResponseMessages] = useState([]);
   const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
@@ -52,20 +51,21 @@ const Form = () => {
 
   const onSubmit = async (formData) => {
     setIsSubmitting(true);
-    setStatus(messages.LOGGING_STATUS);
+    setProcess(messages.LOGGING_PROCESS);
 
     const loggingUserResponse = await api.loginUser(formData, csrfToken);
     const { type: responseType, token: jwtToken } = loggingUserResponse[0];
     localStorage.setItem('auth-token', jwtToken);
 
+    setProcess('');
     setIsSubmitting(false);
-    setStatus('');
-    setFeedbackMessages(loggingUserResponse);
+    setResponseMessages(loggingUserResponse);
 
     if (responseType === 'success') {
-      const authentication = await api.knockTo('dashboard', localStorage.getItem('aut-token'));
-      if (!authentication) {
-        setFeedbackMessages([{ msg: messages.JWT_ACCESS_DENIED, param: getRandomNumber(), type: 'error' }]);
+      const authentication = await api.knockTo('dashboard', localStorage.getItem('auth-token'));
+      const [{ type: responseType }] = authentication;
+      if (responseType === 'error') {
+        setResponseMessages(authentication);
       } else {
         // authenticated user is in auth-token in localStorage
         history.push('/dashboard');
@@ -96,9 +96,9 @@ const Form = () => {
         />
         <InputValidation message={errors.password?.message} />
 
-        <Status message={status} />
+        <ProcessMessage message={process} />
 
-        {feedbackMessages.map(({ msg, type }, param) => {
+        {responseMessages.map(({ msg, type }, param) => {
           return <FeedbackMessage key={param} type={type} message={msg} />;
         })}
 
