@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.button {
+  width: 150px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  font-size: $font-small;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .button {
+    font-size: $font-normal;
+  }
+}
