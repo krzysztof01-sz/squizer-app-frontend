@@ -1,0 +1,14 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.signupButton {
+  font-weight: bold;
+  background-color: $foundation;
+  color: $secondary;
+  border: 2px solid $secondary;
+  &:hover {
+    background: darken($foundation, 15);
+    transition: background 0.3s ease-in-out;
+  }
+  @include accessible;
+}

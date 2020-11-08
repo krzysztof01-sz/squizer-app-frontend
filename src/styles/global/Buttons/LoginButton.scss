@@ -1,0 +1,14 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.loginButton {
+  font-weight: bold;
+  background-color: $secondary;
+  color: $foundation;
+  border: 2px solid $secondary;
+  &:hover {
+    background: transparentize($secondary, 0.2);
+    transition: background 0.3s ease-in-out;
+  }
+  @include accessible;
+}
