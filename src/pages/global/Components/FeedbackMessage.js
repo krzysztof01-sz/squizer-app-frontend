@@ -1,8 +1,10 @@
+import '../../../styles/global/Components/FeedbackMessage.scss';
+
 const FeedbackMessage = ({ message, type }) => {
-  return type === 'success' ? (
-    <p className="feedbackMessage">positive :D {message}</p>
-  ) : (
-    <p className="feedbackMessage">negative {message}</p>
+  return (
+    <p className={`feedbackMessage--${type}`}>
+      {type} {message}
+    </p>
   );
 };
 

@@ -1,7 +1,9 @@
+import '../../../styles/global/Components/Input.scss';
+
 const Input = ({ labelName, register, type, name, ...rest }) => {
   return (
     <label className="label form__label">
-      {labelName}
+      {labelName} <br />
       <input ref={register} type={type} name={name} {...rest} className="input form__input" required />
     </label>
   );
