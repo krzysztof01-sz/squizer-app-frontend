@@ -1,7 +1,25 @@
+import '../../styles/pages/SignupForm/FileInput.scss';
+import '../../styles/global/Components/Button.scss';
+
+const forceClick = (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    e.target.click();
+  }
+};
+
 const FileInput = ({ handleChange }) => {
   return (
-    <label className="label form__label">
-      add an avatar
+    <label className="button fileInput__label">
+      <span
+        className="fileInput__label--accessible"
+        role="button"
+        aria-controls="filename"
+        tabIndex="0"
+        onKeyPress={forceClick}
+      >
+        add a photo
+      </span>
       <input
         type="file"
         name="photo"
