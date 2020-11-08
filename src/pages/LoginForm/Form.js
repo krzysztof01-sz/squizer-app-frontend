@@ -13,12 +13,15 @@ import Loader from '../global/Loader/Loader';
 import * as messages from '../../utils/responseMessages';
 import * as api from '../../api/userAPI';
 
+import '../../styles/global/Components/Form.scss';
+import '../../styles/pages/LoginForm/Form.scss';
+
 const Form = () => {
   const history = useHistory();
   const [process, setProcess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState('');
   const [responseMessages, setResponseMessages] = useState([]);
-  const [csrfToken, setCsrfToken] = useState(null);
+  const [csrfToken, setCsrfToken] = useState('whatever');
 
   const schema = yup.object().shape({
     nickname: yup
@@ -39,6 +42,7 @@ const Form = () => {
     defaultValues: {
       nickname: '',
       password: '',
+      csrf: '',
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -63,6 +67,7 @@ const Form = () => {
 
     if (responseType === 'success') {
       const authentication = await api.knockTo('dashboard', localStorage.getItem('auth-token'));
+      console.log(authentication);
       const [{ type: responseType }] = authentication;
       if (responseType === 'error') {
         setResponseMessages(authentication);
@@ -75,40 +80,43 @@ const Form = () => {
 
   if (csrfToken) {
     return (
-      <form method="POST" className="form" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          labelName="nickname"
-          register={register({ required: true })}
-          type="text"
-          name="nickname"
-          min="3"
-          max="15"
-        />
-        <InputValidation message={errors.nickname?.message} />
+      <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
+        <section className="form">
+          <header className="form__header">Login form</header>
+          <Input
+            labelName="nickname"
+            register={register({ required: true })}
+            type="text"
+            name="nickname"
+            min="3"
+            max="15"
+          />
+          <InputValidation message={errors.nickname?.message} />
 
-        <Input
-          labelName="password"
-          register={register({ required: true })}
-          type="password"
-          name="password"
-          min="8"
-          max="15"
-        />
-        <InputValidation message={errors.password?.message} />
+          <Input
+            labelName="password"
+            register={register({ required: true })}
+            type="password"
+            name="password"
+            min="8"
+            max="15"
+          />
+          <InputValidation message={errors.password?.message} />
 
-        <ProcessMessage message={process} />
+          <ProcessMessage message={process} />
 
-        {responseMessages.map(({ msg, type }, param) => {
-          return <FeedbackMessage key={param} type={type} message={msg} />;
-        })}
+          {responseMessages.map(({ msg, type }, param) => {
+            return <FeedbackMessage key={param} type={type} message={msg} />;
+          })}
 
-        <input type="hidden" name="_csrf" value={csrfToken} />
+          <input type="hidden" ref={register()} name="_csrf" value={csrfToken} />
 
-        <LoginButton isDisabled={isSubmitting} />
+          <LoginButton isDisabled={isSubmitting} />
+        </section>
       </form>
     );
   } else {
-    return <Loader />;
+    return <Loader width={100} height={100} />;
   }
 };
 
