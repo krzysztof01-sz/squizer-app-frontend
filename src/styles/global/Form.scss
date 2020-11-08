@@ -1,0 +1,51 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.form__wrapper {
+  width: 100vw;
+  padding: 10vh 0;
+  @include flexCenter;
+  .form {
+    @include flexCenter;
+    @include primaryShadow;
+    flex-direction: column;
+    width: 90vw;
+    padding: 7vh 5vw;
+    .form__header {
+      align-self: flex-start;
+      font-size: $font-medium;
+      margin-bottom: 10vh;
+    }
+    .form__inputValidation {
+      margin-bottom: 3vh;
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .form__wrapper {
+    .form {
+      width: 45vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .form__wrapper {
+    .form {
+      width: 35vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .form__wrapper {
+    .form {
+      font-size: $font-mediumXXL;
+      width: 25vw;
+      .form__header {
+        font-size: $font-large;
+      }
+    }
+  }
+}
