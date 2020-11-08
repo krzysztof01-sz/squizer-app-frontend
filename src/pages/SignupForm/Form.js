@@ -21,16 +21,19 @@ import DefaultPhotoButton from './DefaultPhotoButton';
 import Loader from '../global/Loader/Loader';
 import * as api from '../../api/userAPI';
 
+import '../../styles/global/Components/Form.scss';
+import '../../styles/pages/SignupForm/Form.scss';
+
 const Form = () => {
   const history = useHistory();
 
-  const [csrfToken, setCsrfToken] = useState(null);
   const [responseMessages, setResponseMessages] = useState([]);
   const [process, setProcess] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [userPhoto, setUserPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState('');
+  const [csrfToken, setCsrfToken] = useState('whatever');
 
   const schema = yup.object().shape({
     nickname: yup
@@ -54,6 +57,7 @@ const Form = () => {
       nickname: '',
       password: '',
       confirmedPassword: '',
+      csrf: '',
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -129,56 +133,62 @@ const Form = () => {
 
   if (csrfToken) {
     return (
-      <form method="POST" className="form" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          labelName="nickname"
-          register={register({ required: true })}
-          type="text"
-          name="nickname"
-          min="3"
-          max="15"
-        />
-        <InputValidation message={errors.nickname?.message} />
+      <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
+        <section className="form">
+          <header className="form__header">Registration form</header>
+          <Input
+            labelName="nickname"
+            register={register({ required: true })}
+            type="text"
+            name="nickname"
+            min="3"
+            max="15"
+          />
+          <InputValidation message={errors.nickname?.message} />
 
-        <Input
-          labelName="password"
-          register={register({ required: true })}
-          type="password"
-          name="password"
-          min="8"
-          max="15"
-        />
-        <InputValidation message={errors.password?.message} />
+          <Input
+            labelName="password"
+            register={register({ required: true })}
+            type="password"
+            name="password"
+            min="8"
+            max="15"
+          />
+          <InputValidation message={errors.password?.message} />
 
-        <Input
-          labelName="confirm the password"
-          register={register({ required: true })}
-          type="password"
-          name="confirmedPassword"
-          min="8"
-          max="15"
-        />
-        <InputValidation message={errors.confirmedPassword?.message} />
-        <ProcessMessage message={process} />
+          <Input
+            labelName="confirm the password"
+            register={register({ required: true })}
+            type="password"
+            name="confirmedPassword"
+            min="8"
+            max="15"
+          />
+          <InputValidation message={errors.confirmedPassword?.message} />
+          <ProcessMessage message={process} />
 
-        <FileInput handleChange={handlePhotoChange} />
-        <FilenameLabel userPhoto={userPhoto} />
-        <PhotoPreview preview={preview} />
+          <PhotoPreview preview={preview} />
 
-        <DefaultPhotoButton handleClick={setDefaultPhoto} />
-        <ErrorMessage message={error} />
+          <FilenameLabel userPhoto={userPhoto} />
+          <div className="fileInputWrapper">
+            <FileInput handleChange={handlePhotoChange} />
+            <DefaultPhotoButton handleClick={setDefaultPhoto} />
+          </div>
 
-        {responseMessages.map(({ msg, type }, param) => {
-          return <FeedbackMessage key={param} type={type} message={msg} />;
-        })}
+          <ErrorMessage message={error} />
 
-        <input type="hidden" name="_csrf" value={csrfToken} />
+          {responseMessages.map(({ msg, type }, param) => {
+            return <FeedbackMessage key={param} type={type} message={msg} />;
+          })}
 
-        <SingupButton isDisabled={isProcessing} />
+          <input ref={register()} type="hidden" name="_csrf" value={csrfToken} />
+
+          <SingupButton isDisabled={isProcessing} />
+        </section>
       </form>
     );
   } else {
-    return <Loader />;
+    return <Loader width={100} height={100} />;
   }
 };
 
