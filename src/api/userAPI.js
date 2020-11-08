@@ -1,6 +1,7 @@
 const baseURL = 'http://localhost:8080';
 
 export const addUser = async (formData, csrfToken) => {
+  console.log(formData);
   const feedback = await fetch(`${baseURL}/api/adduser`, {
     method: 'POST',
     headers: {
@@ -8,7 +9,7 @@ export const addUser = async (formData, csrfToken) => {
       Accept: 'application/json',
       'CSRF-Token': csrfToken,
     },
-    body: JSON.stringify({ ...formData, csrfToken }),
+    body: JSON.stringify({ ...formData }),
   });
 
   return await feedback.json();
@@ -22,7 +23,7 @@ export const loginUser = async (formData, csrfToken) => {
       Accept: 'application/json',
       'CSRF-Token': csrfToken,
     },
-    body: JSON.stringify({ ...formData, csrfToken }),
+    body: JSON.stringify({ ...formData }),
   });
 
   return await feedback.json();
