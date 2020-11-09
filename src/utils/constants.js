@@ -4,6 +4,8 @@ const compressionOptions = {
   useWebWorker: true,
 };
 
+const primaryColor = '#e368d9';
+
 const prefferedImageExtensions = ['image/png', 'image/jpg', 'image/jpeg'];
 
-export { compressionOptions, prefferedImageExtensions };
+export { compressionOptions, prefferedImageExtensions, primaryColor };
