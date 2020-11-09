@@ -1,0 +1,39 @@
+@import './variables.scss';
+
+:root {
+  font-size: 62.5%;
+}
+
+::selection,
+::selection {
+  background-color: $primary;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  background: $foundation;
+  color: $contrast;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+.app {
+  font-size: $font-small;
+}
+
+a {
+  text-decoration: none;
+  color: $contrast;
+}
+
+ul {
+  list-style-type: none;
+}
