@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+@mixin accessible {
+  &--accessible:focus,
+  &--accessible:active {
+    outline: none;
+    border-bottom: 3px solid $primary;
+  }
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin primaryShadow {
+  -webkit-box-shadow: 5px 4px 10px -8px #000000;
+  box-shadow: 5px 4px 10px -8px #000000;
+}
