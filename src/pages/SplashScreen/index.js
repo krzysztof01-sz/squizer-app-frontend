@@ -1,14 +1,16 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import Footer from '../global/Footer/Footer';
 import Header from '../global/Header/Header';
-import WelcomingInformations from './WelcomingInformations';
+import WelcomingInformation from './WelcomingInformation';
 import Infographic from './InfoGraphic';
+import '../../styles/pages/SplashScreen/index.scss';
 
 const SplashScreen = () => {
+  useEffect(() => window.scrollTo(0, 0), []);
   return (
     <>
       <Header />
-      <WelcomingInformations />
+      <WelcomingInformation />
       <Infographic />
       <Footer />
     </>
