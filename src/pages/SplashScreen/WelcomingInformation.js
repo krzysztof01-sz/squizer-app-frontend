@@ -1,5 +1,4 @@
 import '../../styles/pages/SplashScreen/WelcomingInformation.scss';
-
 const WelcomingInformation = () => {
   return (
     <section className="welcomingInformation">

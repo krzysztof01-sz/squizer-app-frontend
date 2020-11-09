@@ -7,6 +7,7 @@ import '../../styles/pages/SplashScreen/index.scss';
 
 const SplashScreen = () => {
   useEffect(() => window.scrollTo(0, 0), []);
+
   return (
     <>
       <Header />

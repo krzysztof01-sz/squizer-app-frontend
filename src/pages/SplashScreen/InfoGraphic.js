@@ -3,6 +3,7 @@ import BackgroundGradient from '../../assets/images/BgGradient.svg';
 import ExamIcon from '../../assets/images/Exam.svg';
 import LoginButton from '../global/Buttons/LoginButton';
 import SingupButton from '../global/Buttons/SignupButton';
+
 import '../../styles/pages/SplashScreen/InfoGraphic.scss';
 
 const Infographic = () => {
