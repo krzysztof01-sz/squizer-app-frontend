@@ -7,11 +7,18 @@
   }
 }
 
-@media only screen and (min-width: 3840px) {
+@media only screen and (min-width: 1366px) and (max-width: 1920px) {
   .header {
-    height: 10vh;
     .header__logo {
-      width: 8vw;
+      width: 10vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .header {
+    .header__logo {
+      width: 10vw;
     }
   }
 }
