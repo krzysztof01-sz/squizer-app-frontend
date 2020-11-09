@@ -1,5 +1,5 @@
 const InputValidation = ({ message }) => {
-  return <p className="errorMessage form__errorMessage">{message}</p>;
+  return <p className="form__inputValidation">{message}</p>;
 };
 
 export default InputValidation;
