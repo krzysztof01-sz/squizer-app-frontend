@@ -8,17 +8,17 @@ import DefaultPhoto from '../../assets/images/DefaultPhoto.png';
 import * as messages from '../../utils/responseMessages';
 import { isFileImage, compressPhoto, savePhotoInDB } from '../../utils/functions';
 
-import SingupButton from '../global/Buttons/SignupButton';
-import FeedbackMessage from '../global/Components/FeedbackMessage';
+import SingupButton from '../../global/Buttons/SignupButton';
+import FeedbackMessage from '../../global/Components/FeedbackMessage';
 import PhotoPreview from './PhotoPreview';
-import ErrorMessage from '../global/Components/ErrorMessage';
-import Input from '../global/Components/Input';
-import InputValidation from '../global/Components/InputValidationMessage';
+import ErrorMessage from '../../global/Components/ErrorMessage';
+import Input from '../../global/Components/Input';
+import InputValidation from '../../global/Components/InputValidationMessage';
 import FileInput from './FileInput';
-import ProcessMessage from '../global/Components/ProcessMessage';
+import ProcessMessage from '../../global/Components/ProcessMessage';
 import FilenameLabel from './FileNameLabel';
 import DefaultPhotoButton from './DefaultPhotoButton';
-import Loader from '../global/Loader/Loader';
+import Loader from '../../global/Loader/Loader';
 import * as api from '../../api/userAPI';
 
 import '../../styles/global/Components/Form.scss';

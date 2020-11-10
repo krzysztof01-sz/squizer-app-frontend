@@ -1,4 +1,4 @@
-import '../../../styles/global/Buttons/SignupButton.scss';
+import '../../styles/global/Buttons/SignupButton.scss';
 
 const SingupButton = ({ isDisabled }) => {
   return isDisabled ? (

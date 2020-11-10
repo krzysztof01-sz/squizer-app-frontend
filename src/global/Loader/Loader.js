@@ -1,6 +1,6 @@
 import ReactLoading from 'react-loading';
-import '../../../styles/global/Components/Loader.scss';
-import { primaryColor } from '../../../utils/constants';
+import '../../styles/global/Components/Loader.scss';
+import { primaryColor } from '../../utils/constants';
 
 const Loader = ({ width, height }) => {
   return (

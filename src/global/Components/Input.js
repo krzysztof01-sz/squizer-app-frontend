@@ -1,4 +1,4 @@
-import '../../../styles/global/Components/Input.scss';
+import '../../styles/global/Components/Input.scss';
 
 const Input = ({ labelName, register, type, name, ...rest }) => {
   return (

@@ -1,4 +1,4 @@
-import '../../../styles/global/Components/FeedbackMessage.scss';
+import '../../styles/global/Components/FeedbackMessage.scss';
 
 const FeedbackMessage = ({ message, type }) => {
   return (
