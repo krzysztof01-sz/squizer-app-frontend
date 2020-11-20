@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { getCurrentYear } from '../../utils/functions';
 import '../../styles/global/Components/Footer.scss';
 
@@ -9,4 +10,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);
