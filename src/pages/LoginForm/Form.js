@@ -66,7 +66,7 @@ const Form = () => {
     setResponseMessages(loggingUserResponse);
 
     if (responseType === 'success') {
-      const authentication = await api.knockTo('dashboard', localStorage.getItem('auth-token'));
+      const authentication = await api.knockTo('dashboard');
       console.log(authentication);
       const [{ type: responseType }] = authentication;
       if (responseType === 'error') {
