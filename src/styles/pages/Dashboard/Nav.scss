@@ -1,0 +1,19 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+.navigation {
+  width: 90%;
+  .nagivation__header {
+    @include flexCenter;
+    justify-content: flex-start;
+    padding: 10px 0 15px;
+    .chevronIcon {
+      margin-left: 5px;
+    }
+  }
+  .navigation__list {
+    .navigation__item {
+      padding: 5px 0 10px 5px;
+    }
+  }
+}
