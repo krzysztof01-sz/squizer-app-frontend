@@ -19,10 +19,11 @@ const CHOOSE_YOUR_PHOTO = 'Choose your profile photo';
 // logging
 
 const LOGGING_PROCESS = 'Logging...';
+const LOGOUT_CONFIRMATION = 'Do you want to log out?';
 
 // authentication
 
-const JWT_ACCESS_DENIED = 'Invalid token. Access denied';
+const JWT_ACCESS_DENIED = 'Access denied. Login first';
 
 export {
   NICKNAME_SHORT,
@@ -39,5 +40,6 @@ export {
   PHOTO_COMPESSING_START,
   CHOOSE_YOUR_PHOTO,
   LOGGING_PROCESS,
+  LOGOUT_CONFIRMATION,
   JWT_ACCESS_DENIED,
 };
