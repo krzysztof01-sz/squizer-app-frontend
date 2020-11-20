@@ -89,7 +89,7 @@ const QuizGame = () => {
     return questionsDots;
   };
 
-  // display before checked user's answer
+  // display the previously marked user answer
   useEffect(() => {
     const answersElements = document.querySelectorAll('.question__answer');
     answersElements.forEach((el) => el.classList.remove('question__answer--checked'));
