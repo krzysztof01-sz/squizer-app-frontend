@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: lighten($contrast, 60);
+  &--filled {
+    @extend .dot;
+    background-color: $secondary;
+  }
+}
