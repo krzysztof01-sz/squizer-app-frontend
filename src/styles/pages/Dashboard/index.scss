@@ -1,0 +1,77 @@
+@import '../../mixins.scss';
+
+.navigation {
+  .navigation__header {
+    margin-bottom: 2vh;
+  }
+  margin: 5vh auto 0;
+}
+.searchBarWrapper {
+  margin: 5vh auto 10vh;
+}
+.dashboardHeader {
+  margin: 5vh auto;
+}
+.quizCard {
+  margin-bottom: 10vh;
+}
+
+@media only screen and (min-width: 1000px) {
+  .searchBarWrapper {
+    width: 25%;
+    margin-left: 5%;
+  }
+  .navigation {
+    display: none;
+  }
+  .dashboardHeader {
+    width: min-content;
+    margin: 5vh 0 2vh 5%;
+    justify-content: space-between;
+    padding: 0;
+    &__title {
+      margin-right: 2vw;
+    }
+  }
+  .quizzesList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .quizzesList {
+    .quizCard {
+      flex: 1 0 30%;
+      margin: 0 2% 10vh 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .searchBarWrapper {
+    width: 30%;
+    margin-left: 5%;
+  }
+  .quizzesList {
+    .quizCard {
+      flex: 1 0 22%;
+      margin: 0 2% 10vh 0;
+      .quizCard__cathegoryImageWrapper {
+        height: 300px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .quizzesList {
+    .quizCard {
+      flex: 1 0 22%;
+      margin: 0 2% 10vh 0;
+      .quizCard__cathegoryImageWrapper {
+        height: 500px;
+      }
+    }
+  }
+}
