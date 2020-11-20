@@ -37,3 +37,15 @@ a {
 ul {
   list-style-type: none;
 }
+
+@media only screen and (min-width: 1367px) and (max-width: 1920) {
+  :root {
+    font-size: 75%;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  :root {
+    font-size: 90%;
+  }
+}
