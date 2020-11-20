@@ -76,21 +76,19 @@ const Form = () => {
 
     setIsProcessing(true);
     const addingUserResponse = await api.addUser(formData, csrfToken);
-    const { type: responseType, id: createdUserId, nick: createdUserNick } = addingUserResponse[0];
+    const { type: responseType, id: createdUserId } = addingUserResponse[0];
     setIsProcessing(false);
 
     setResponseMessages(addingUserResponse);
 
     if (responseType === 'success') {
-      const photoName = `${createdUserId}-${createdUserNick}`;
-      // const addingResult = userPhoto?.name ? await savePhotoInDB(userPhoto, photoName) : 'success';
-
-      // if (addingResult === 'success') {
-      //   setProcess(messages.PHOTO_SAVED_IN_DB);
-      //   setTimeout(() => history.push('/login'), 500);
-      // } else {
-      //   setError(addingResult);
-      // }
+      const addingResult = userPhoto?.name ? await savePhotoInDB(userPhoto, createdUserId) : 'success';
+      if (addingResult === 'success') {
+        setProcess(messages.PHOTO_SAVED_IN_DB);
+        setTimeout(() => history.push('/login'), 500);
+      } else {
+        setError(addingResult);
+      }
     }
   };
 
