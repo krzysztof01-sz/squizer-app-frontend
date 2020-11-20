@@ -62,6 +62,7 @@
     "browser-sync-webpack-plugin": "^2.2.2",
     "firebase": "^8.0.0",
     "font-awesome": "^4.7.0",
+    "moment": "^2.29.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hook-form": "^6.9.0",
