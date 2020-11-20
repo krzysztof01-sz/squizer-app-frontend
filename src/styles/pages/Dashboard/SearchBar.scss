@@ -1,0 +1,19 @@
+@import '../../mixins.scss';
+
+.searchBarWrapper {
+  width: 90%;
+  .label {
+    position: relative;
+    margin: auto 0;
+    .input {
+      font-family: 'Poppins', sans-serif;
+    }
+    .searchIcon {
+      color: $contrast;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 10px;
+    }
+  }
+}
