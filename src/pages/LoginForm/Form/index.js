@@ -4,17 +4,17 @@ import { useHistory } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import Input from '../../global/Components/Input';
-import ProcessMessage from '../../global/Components/ProcessMessage';
-import InputValidation from '../../global/Components/InputValidationMessage';
-import FeedbackMessage from '../../global/Components/FeedbackMessage';
-import LoginButton from '../../global/Buttons/LoginButton';
-import Loader from '../../global/Loader/Loader';
-import * as messages from '../../utils/responseMessages';
-import * as api from '../../api/userAPI';
+import Input from '../../../global/Components/Input';
+import ProcessMessage from '../../../global/Components/ProcessMessage';
+import InputValidation from '../../../global/Components/InputValidationMessage';
+import FeedbackMessage from '../../../global/Components/FeedbackMessage';
+import LoginButton from '../../../global/Buttons/LoginButton';
+import Loader from '../../../global/Components/Loader';
+import * as messages from '../../../utils/responseMessages';
+import * as api from '../../../api/userAPI';
 
-import '../../styles/global/Components/Form.scss';
-import '../../styles/pages/LoginForm/Form.scss';
+import '../../../styles/global/Components/Form.scss';
+import './styles.scss';
 
 const Form = () => {
   const history = useHistory();
