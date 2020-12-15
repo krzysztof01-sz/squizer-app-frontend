@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.finishQuizButton {
+  border-radius: 15px;
+  background-color: $primary;
+  color: $foundation;
+  font-size: $font-smallXL;
+  .finishQuizIcon {
+    margin-left: 10px;
+    font-size: $font-normal;
+  }
+}

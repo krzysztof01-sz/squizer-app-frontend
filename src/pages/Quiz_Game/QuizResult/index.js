@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../styles/pages/Quiz_Game/QuizResult.scss';
-import Answer from './Answer';
-import QuestionContent from './QuestionContent';
-import { colors } from '../../utils/constants';
+import './styles.scss';
+import Answer from '../Answer/index';
+import QuestionContent from '../QuestionContent';
+import { colors } from '../../../utils/constants';
 
 const getPercentageResult = (result, max) => Math.floor((result / max) * 100);
 const getSchoolGrade = (percentageResult) => {

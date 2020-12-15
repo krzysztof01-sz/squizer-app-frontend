@@ -1,4 +1,4 @@
-import '../../styles/pages/Quiz_Game/QuestionDot.scss';
+import './styles.scss';
 
 const QuestionDot = ({ setQuestionID, filled }) => {
   return <div onClick={setQuestionID} className={`${filled ? 'dot--filled' : 'dot'}`}></div>;

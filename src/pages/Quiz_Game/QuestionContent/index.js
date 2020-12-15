@@ -1,4 +1,4 @@
-import '../../styles/pages/Quiz_Game/QuestionContent.scss';
+import './styles.scss';
 
 const QuestionContent = ({ questionID, content }) => {
   return (

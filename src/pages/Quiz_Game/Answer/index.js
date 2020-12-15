@@ -1,4 +1,4 @@
-import '../../styles/pages/Quiz_Game/Answer.scss';
+import './styles.scss';
 
 const Answer = ({ content, setAnswer, letter, borderBottomColor = null }) => {
   return (
@@ -12,10 +12,10 @@ const Answer = ({ content, setAnswer, letter, borderBottomColor = null }) => {
       onClick={({ target }) => {
         if (typeof setAnswer === 'function') {
           setAnswer(letter);
-          target.classList.add('question__answer--checked');
+          target.classList.add('answer__content--checked');
         }
       }}
-      className="question__answer"
+      className="answer__content"
     >
       {content}
     </p>

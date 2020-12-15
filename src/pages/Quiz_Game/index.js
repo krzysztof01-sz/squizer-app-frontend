@@ -1,67 +1,48 @@
 import { useEffect, useState } from 'react';
-import Footer from '../../global/Footer/Footer';
-import Header from '../../global/Header/Header';
-import Answer from './Answer';
-import QuestionContent from './QuestionContent';
-import QuestionDot from './QuestionDot';
+import { useParams } from 'react-router-dom';
 
-import '../../styles/pages/Quiz_Game/index.scss';
-import PreviousQuestionButton from '../../global/Buttons/PreviousQuestionButton';
-import NextQuestionButton from '../../global/Buttons/NextQuestionButton';
-import FinishQuizButton from '../../global/Buttons/FinishQuizButton';
-import QuizResult from './QuizResult';
+import Footer from '../../global/Components/Footer';
+import Header from '../../global/Components/Header';
 
-const questionsDB = [
-  {
-    content: 'Question 1',
-    answers: [
-      { letter: 'A', content: 'Answer 1' },
-      { letter: 'B', content: 'Answer 2' },
-      { letter: 'C', content: 'Answer 3' },
-      { letter: 'D', content: 'Answer 4' },
-    ],
-    correct_answer: 'A',
-  },
-  {
-    content: 'Question 2?',
-    answers: [
-      { letter: 'A', content: 'Answer 1' },
-      { letter: 'B', content: 'Answer 2' },
-      { letter: 'C', content: 'Answer 3' },
-      { letter: 'D', content: 'Answer 4' },
-    ],
-    correct_answer: 'C',
-  },
-  {
-    content: 'Question 3',
-    answers: [
-      { letter: 'A', content: 'Answer 1' },
-      { letter: 'B', content: 'Answer 2' },
-      { letter: 'C', content: 'Answer 3' },
-      { letter: 'D', content: 'Answer 4' },
-    ],
-    correct_answer: 'A',
-  },
-  {
-    content: 'Question 4',
-    answers: [
-      { letter: 'A', content: 'Answer 1' },
-      { letter: 'B', content: 'Answer 2' },
-      { letter: 'C', content: 'Answer 3' },
-      { letter: 'D', content: 'Answer 4' },
-    ],
-    correct_answer: 'C',
-  },
-];
+import Answer from './Answer/index';
+import QuestionContent from './QuestionContent/index';
+import QuestionDot from './QuestionDot/index';
+
+import PreviousQuestionButton from './Buttons/PreviousQuestion';
+import NextQuestionButton from './Buttons/NextQuestion';
+import FinishQuizButton from './Buttons/FinishQuiz';
+
+import QuizResult from './QuizResult/index';
+import './index.scss';
 
 const QuizGame = () => {
-  const [userAnswers, setUserAnswers] = useState(new Array(4).fill(undefined));
+  const { quizId } = useParams();
+  useEffect(() => {
+    const getQuestions = async () => {
+      const data = await fetch(`http://localhost:8080/api/quiz/${quizId}/questions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'auth-token': localStorage.getItem('auth-token'),
+        },
+      });
+      const [questions] = await data.json();
+      setQuestions(questions);
+      setUserAnswers(new Array(questions.length).fill(undefined));
+    };
+    getQuestions();
+  }, []);
+
+  const [questions, setQuestions] = useState([]);
+
+  const [userAnswers, setUserAnswers] = useState([]);
   const [questionID, setQuestionID] = useState(0);
   const [correctUserAnswersQuantity, setCorrectUserAnswersQuantity] = useState(false);
 
   const getCorrectAnswers = () => {
     const correctAnswers = [];
-    questionsDB.forEach(({ correct_answer }) => correctAnswers.push(correct_answer));
+    questions.forEach(({ correctAnswer }) => correctAnswers.push(correctAnswer));
     return correctAnswers;
   };
 
@@ -73,6 +54,7 @@ const QuizGame = () => {
       return result;
     } else {
       const firstSkippedQuestionID = userAnswers.findIndex((answer) => answer === undefined);
+      console.log(firstSkippedQuestionID);
       setQuestionID(firstSkippedQuestionID);
       return false;
     }
@@ -80,7 +62,7 @@ const QuizGame = () => {
 
   const renderQuestionDots = () => {
     const questionsDots = [];
-    for (let i = 0; i < questionsDB.length; i++) {
+    for (let i = 0; i < questions.length; i++) {
       const element = (
         <QuestionDot filled={i === questionID ? true : false} key={i} setQuestionID={() => setQuestionID(i)} />
       );
@@ -96,7 +78,7 @@ const QuizGame = () => {
 
     const checkedAnswer = userAnswers[questionID];
     if (checkedAnswer) {
-      const answerElement = document.querySelector(`p[name=${checkedAnswer}]`);
+      const answerElement = document.querySelector(`p[name="${checkedAnswer}"]`);
       answerElement.classList.add('question__answer--checked');
     }
   }, [questionID, userAnswers]);
@@ -104,14 +86,14 @@ const QuizGame = () => {
   return (
     <>
       <Header />
-      {typeof correctUserAnswersQuantity === 'boolean' ? (
+      {typeof correctUserAnswersQuantity === 'boolean' && questions.length > 0 ? (
         <>
           <section className="quiz">
             <article className="quiz__questionsView">
-              <QuestionContent questionID={questionID} content={questionsDB[questionID].content} />
+              <QuestionContent questionID={questionID} content={questions[questionID].content} />
 
               <section className="question__answers">
-                {questionsDB[questionID].answers.map(({ letter, content }) => {
+                {questions[questionID].answers.map(({ letter, content }) => {
                   return (
                     <Answer
                       letter={letter}
@@ -135,7 +117,7 @@ const QuizGame = () => {
               {questionID > 0 ? <PreviousQuestionButton setQuestion={() => setQuestionID(questionID - 1)} /> : null}
             </div>
             <div className="gameNavigation__right">
-              {questionID < questionsDB.length - 1 ? (
+              {questionID < questions.length - 1 ? (
                 <NextQuestionButton setQuestion={() => setQuestionID(questionID + 1)} />
               ) : (
                 <FinishQuizButton
@@ -151,7 +133,7 @@ const QuizGame = () => {
       ) : (
         <QuizResult
           userAnswers={userAnswers}
-          quizData={questionsDB}
+          quizData={questions}
           correctAnswers={getCorrectAnswers()}
           correctUserAnswersQuantity={correctUserAnswersQuantity}
         />
