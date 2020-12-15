@@ -1,14 +1,14 @@
-import Header from '../../global/Header/Header';
-import Footer from '../../global//Footer/Footer';
+import Header from '../../global/Components/Header';
+import Footer from '../../global/Components/Footer';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as api from '../../api/userAPI';
-import Loader from '../../global/Loader/Loader';
+import Loader from '../../global/Components/Loader';
 
-import Nav from './Nav';
-import QuizzesList from './QuizzesList';
-import SearchBar from './SearchBar';
-import DashboardHeader from './DashboardHeader';
+import Nav from './Nav/index';
+import QuizzesList from './QuizzesList/index';
+import SearchBar from './SearchBar/index';
+import DashboardHeader from './DashboardHeader/index';
 
 import '../../styles/pages/Dashboard/index.scss';
 
@@ -24,6 +24,7 @@ const Dashboard = () => {
 
       setUser(user);
       const quizzes = await api.getQuizzes();
+      console.log(quizzes);
       setQuizzes(quizzes);
     };
     isLogged();

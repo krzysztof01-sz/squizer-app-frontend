@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ChevronIcon } from '../../global/Icons/icons';
-import '../../styles/pages/Dashboard/Nav.scss';
+import { ChevronIcon } from '../../../global/Icons/icons';
+import './styles.scss';
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);

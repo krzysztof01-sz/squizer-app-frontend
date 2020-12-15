@@ -1,5 +1,5 @@
-import { PlusIcon } from '../../global/Icons/icons';
-import '../../styles/pages/Dashboard/DashboardHeader.scss';
+import { PlusIcon } from '../../../global/Icons/icons';
+import './styles.scss';
 
 const DashboardHeader = () => {
   return (

@@ -1,0 +1,50 @@
+@import '../../../styles/variables.scss';
+
+.quizCard {
+  .quizCard__categoryImageWrapper {
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    .quizCard__categoryImage {
+      filter: blur(2px) brightness(40%);
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    .quizCard__userPhoto {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+    .quizCard__authorNick {
+      position: absolute;
+      left: 10px;
+      bottom: 5px;
+      font-size: $font-miniXL;
+      color: transparentize($foundation, 0.2);
+    }
+  }
+  .quizCard__info {
+    background-color: $foundation;
+    padding: 12px;
+    .quizCard__title {
+      margin: 2vh 0;
+      font-size: $font-smallXL;
+      font-weight: bold;
+    }
+    .quizCard__description {
+      font-size: $font-miniXL;
+      min-height: 50px;
+    }
+    .quizCard__buttonAndDateWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: transparent;
+      margin-top: 2vh;
+    }
+  }
+}

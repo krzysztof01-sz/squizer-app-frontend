@@ -1,4 +1,4 @@
-import '../../styles/pages/Dashboard/SearchBar.scss';
+import './styles.scss';
 import '../../styles/global/Components/Input.scss';
 import { SearchIcon } from '../../global/Icons/icons';
 
