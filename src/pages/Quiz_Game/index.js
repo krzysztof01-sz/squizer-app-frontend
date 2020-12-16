@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Footer from '../../global/Components/Footer';
-import Header from '../../global/Components/Header';
+import Footer from '../../global/Components/Footer/index';
+import Header from '../../global/Components/Header/index';
 
 import Answer from './Answer/index';
 import QuestionContent from './QuestionContent/index';
