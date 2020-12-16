@@ -1,4 +1,4 @@
-import '../../styles/pages/SignupForm/PhotoPreview.scss';
+import './styles.scss';
 
 const PhotoPreview = ({ preview }) => {
   return (

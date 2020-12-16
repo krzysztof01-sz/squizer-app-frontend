@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.fileInputWrapper {
+  display: flex;
+  .fileInput__label {
+    display: block;
+    background: transparentize($secondary, 0.1);
+    color: $foundation;
+    @include accessible;
+    .fileInput {
+      display: none;
+    }
+  }
+}

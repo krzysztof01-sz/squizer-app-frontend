@@ -1,5 +1,4 @@
-import '../../styles/pages/SignupForm/FileInput.scss';
-import '../../styles/global/Components/Button.scss';
+import './styles.scss';
 
 const forceClick = (e) => {
   if (e.key === 'Enter') {

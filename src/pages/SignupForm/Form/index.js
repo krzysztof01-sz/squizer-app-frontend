@@ -4,25 +4,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
-import DefaultPhoto from '../../assets/images/DefaultPhoto.png';
-import * as messages from '../../utils/responseMessages';
-import { isFileImage, compressPhoto, savePhotoInDB } from '../../utils/functions';
+import DefaultPhoto from '../../../assets/images/DefaultPhoto.png';
+import * as messages from '../../../utils/responseMessages';
+import { isFileImage, compressPhoto, savePhotoInDB } from '../../../utils/functions';
 
-import SingupButton from '../../global/Buttons/SignupButton';
-import FeedbackMessage from '../../global/Components/FeedbackMessage';
-import PhotoPreview from './PhotoPreview';
-import ErrorMessage from '../../global/Components/ErrorMessage';
-import Input from '../../global/Components/Input';
-import InputValidation from '../../global/Components/InputValidationMessage';
-import FileInput from './FileInput';
-import ProcessMessage from '../../global/Components/ProcessMessage';
-import FilenameLabel from './FileNameLabel';
-import DefaultPhotoButton from './DefaultPhotoButton';
-import Loader from '../../global/Loader/Loader';
-import * as api from '../../api/userAPI';
+import SingupButton from '../../../global/Buttons/Signup/index';
+import FeedbackMessage from '../../../global/Components/FeedbackMessage/index';
+import PhotoPreview from '../PhotoPreview/index';
+import ErrorMessage from '../../../global/Components/ErrorMessage/index';
+import Input from '../../../global/Components/Input/index';
+import InputValidation from '../../../global/Components/InputValidationMessage/index';
+import FileInput from '../FileInput/index';
+import ProcessMessage from '../../../global/Components/ProcessMessage/index';
+import FilenameLabel from '../FilenameLabel/index';
+import DefaultPhotoButton from '../DefaultPhotoButton/index';
+import Loader from '../../../global/Components/Loader/index';
+import * as api from '../../../api/userAPI';
 
-import '../../styles/global/Components/Form.scss';
-import '../../styles/pages/SignupForm/Form.scss';
+import './styles.scss';
 
 const Form = () => {
   const history = useHistory();

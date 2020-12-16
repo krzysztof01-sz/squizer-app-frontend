@@ -1,5 +1,5 @@
-import '../../styles/pages/SignupForm/DefaultPhotoButton.scss';
-import '../../styles/global/Components/Button.scss';
+import './styles.scss';
+import '../../../styles/global/Components/Button.scss';
 
 const DefaultPhotoButton = ({ handleClick }) => {
   return (
