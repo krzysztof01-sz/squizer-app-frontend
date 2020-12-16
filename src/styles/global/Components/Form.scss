@@ -42,9 +42,15 @@
   .form__wrapper {
     .form {
       font-size: $font-mediumXXL;
-      width: 25vw;
+      width: 35vw;
       .form__header {
         font-size: $font-large;
+      }
+      .fileInputWrapper {
+        .button {
+          width: 200px;
+          padding: 17px 6px;
+        }
       }
     }
   }

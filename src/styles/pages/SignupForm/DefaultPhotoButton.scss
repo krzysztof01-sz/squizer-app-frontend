@@ -1,8 +1,0 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
-
-.defaultPhotoButton {
-  background-color: $foundation;
-  color: $secondary;
-  @include accessible;
-}
