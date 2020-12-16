@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/images/Logo.svg';
-import '../../styles/global/Components/Header.scss';
-import LogoutButton from '../Buttons/LogoutButton';
+import Logo from '../../../assets/images/Logo.svg';
+import LogoutButton from '../../Buttons/Logout/index';
+import './styles.scss';
 
 const Header = ({ isLogged = false }) => {
   return (

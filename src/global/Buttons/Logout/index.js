@@ -1,6 +1,6 @@
-import '../../styles/global/Buttons/LogoutButton.scss';
-import { logoutUser } from './../../api/userAPI';
-import { LOGOUT_CONFIRMATION } from '../../utils/responseMessages';
+import { logoutUser } from '../../../api/userAPI';
+import { LOGOUT_CONFIRMATION } from '../../../utils/responseMessages';
+import './styles.scss';
 
 const LogoutButton = () => {
   return (

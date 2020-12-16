@@ -1,4 +1,4 @@
-import '../../styles/global/Buttons/LoginButton.scss';
+import './styles.scss';
 
 const LoginButton = ({ isDisabled }) => {
   return isDisabled ? (

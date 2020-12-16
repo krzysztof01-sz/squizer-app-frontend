@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { getCurrentYear } from '../../utils/functions';
-import '../../styles/global/Components/Footer.scss';
+import { getCurrentYear } from '../../../utils/functions';
+import './styles.scss';
 
 const Footer = () => {
   return (

@@ -1,0 +1,66 @@
+@import '../../../styles/mixins.scss';
+
+.header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  background-color: $foundation;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header__logo {
+    padding: 1vh 0 0 2vw;
+  }
+  .header__nav {
+    display: none;
+  }
+  .logoutButton {
+    width: 100px;
+    margin-right: 5%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header {
+    @include flexCenter;
+    justify-content: space-between;
+    .header__logo {
+      width: 10vw;
+    }
+    .header__nav {
+      display: block;
+      width: 40%;
+      margin-left: 30%;
+      .nav__list {
+        @include flexCenter;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .header {
+    @include flexCenter;
+    justify-content: space-between;
+    .header__logo {
+      width: 10vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .header {
+    .header__logo {
+      width: 11vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .header {
+    .header__logo {
+      width: 10vw;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  .footer__text {
+    padding: 2vh 0;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1920px) {
+  .footer {
+    .footer__text {
+      padding: 2vh 0;
+      text-align: center;
+      font-size: $font-smallXL;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .footer {
+    .footer__text {
+      padding: 5vh 0;
+      text-align: center;
+      font-size: $font-normal;
+    }
+  }
+}

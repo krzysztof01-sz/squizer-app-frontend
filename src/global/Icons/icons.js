@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faArrowCircleRight,
   faArrowLeft,
   faArrowRight,
   faChevronDown,
@@ -22,6 +23,10 @@ export const PlusIcon = () => {
 
 export const ArrowRightIcon = () => {
   return <FontAwesomeIcon className="arrowRightIcon" icon={faArrowRight} />;
+};
+
+export const ArrowCircleRight = () => {
+  return <FontAwesomeIcon className="arrowCircleRightIcon" icon={faArrowCircleRight} />;
 };
 
 export const ArrowLeftIcon = () => {

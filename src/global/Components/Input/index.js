@@ -1,4 +1,4 @@
-import '../../styles/global/Components/Input.scss';
+import './styles.scss';
 
 const Input = ({ labelName, register, type, name, callback, labelClass = '', inputClass = '', ...rest }) => {
   return (

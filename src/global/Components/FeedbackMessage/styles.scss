@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.feedbackMessage {
+  font-weight: bold;
+}
+
+.feedbackMessage--success {
+  color: $valid;
+}
+
+.feedbackMessage--error {
+  color: $invalid;
+}
