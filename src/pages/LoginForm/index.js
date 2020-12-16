@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import Header from '../../global/Components/Header';
-import Footer from '../../global/Components/Footer';
+import Header from '../../global/Components/Header/index';
+import Footer from '../../global/Components/Footer/index';
 import Form from './Form/index';
 
 const LoginForm = () => {

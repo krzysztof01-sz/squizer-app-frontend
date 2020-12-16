@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import Input from '../../../global/Components/Input';
-import ProcessMessage from '../../../global/Components/ProcessMessage';
-import InputValidation from '../../../global/Components/InputValidationMessage';
-import FeedbackMessage from '../../../global/Components/FeedbackMessage';
-import LoginButton from '../../../global/Buttons/LoginButton';
-import Loader from '../../../global/Components/Loader';
+import Input from '../../../global/Components/Input/index';
+import ProcessMessage from '../../../global/Components/ProcessMessage/index';
+import InputValidation from '../../../global/Components/InputValidationMessage/index';
+import FeedbackMessage from '../../../global/Components/FeedbackMessage/index';
+import LoginButton from '../../../global/Buttons/Login/index';
+import Loader from '../../../global/Components/Loader/index';
 import * as messages from '../../../utils/responseMessages';
 import * as api from '../../../api/userAPI';
 
