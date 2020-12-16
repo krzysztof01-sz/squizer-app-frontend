@@ -1,9 +1,9 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
-.navigation {
+.nav {
   width: 90%;
-  .nagivation__header {
+  .nav__header {
     @include flexCenter;
     justify-content: flex-start;
     padding: 10px 0 15px;
@@ -11,8 +11,8 @@
       margin-left: 5px;
     }
   }
-  .navigation__list {
-    .navigation__item {
+  .nav__list {
+    .nav__item {
       padding: 5px 0 10px 5px;
     }
   }

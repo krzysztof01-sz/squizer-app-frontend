@@ -6,14 +6,14 @@ import './styles.scss';
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="navigation">
-      <header onClick={() => setIsOpen(!isOpen)} className="navigation__header">
+    <nav className="nav">
+      <header onClick={() => setIsOpen(!isOpen)} className="nav__header">
         menu <ChevronIcon />
       </header>
-      <ul className="navigation__list" style={{ display: `${isOpen ? 'block' : 'none'}` }}>
-        <li className="navigation__item">add a new quiz</li>
-        <li className="navigation__item">user profile</li>
-        <li className="navigation__item">about</li>
+      <ul className="nav__list" style={{ display: `${isOpen ? 'block' : 'none'}` }}>
+        <li className="nav__item">add a new quiz</li>
+        <li className="nav__item">user profile</li>
+        <li className="nav__item">about</li>
       </ul>
     </nav>
   );
