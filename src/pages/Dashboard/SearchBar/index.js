@@ -1,6 +1,6 @@
 import './styles.scss';
-import '../../styles/global/Components/Input.scss';
-import { SearchIcon } from '../../global/Icons/icons';
+import '../../../global/Components/Input/styles.scss';
+import { SearchIcon } from '../../../global/Icons/icons';
 
 const filterQuizzes = ({ target: { value } }) => {
   value = value.trim().toLowerCase();
