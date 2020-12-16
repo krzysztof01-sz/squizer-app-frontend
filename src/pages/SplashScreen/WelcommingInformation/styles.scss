@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.welcomingInformation {
+  width: 90vw;
+  margin: 10vh auto;
+  .welcomingInformation__title {
+    text-align: center;
+    font-size: $font-large;
+    margin-bottom: 2vh;
+  }
+  .welcomingInformation__paragraph {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 999px) {
+  .welcomingInformation {
+    width: 60vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .welcomingInformation {
+    width: 60vw;
+    margin: 15vh auto;
+    .welcomingInformation__title {
+      font-size: $font-extraLarge;
+      margin: 10vh auto 5vh;
+    }
+    .welcomingInformation__paragraph {
+      font-size: $font-mediumXL;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .welcomingInformation {
+    width: 60vw;
+    margin: 20vh auto 5vh;
+    .welcomingInformation__title {
+      font-size: $font-extraLarge;
+      margin: 10vh auto 5vh;
+    }
+    .welcomingInformation__paragraph {
+      width: 40vw;
+      margin: 0 auto;
+      font-size: $font-mediumXXL;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .welcomingInformation {
+    width: 60vw;
+    margin: 15vh auto 0;
+    .welcomingInformation__title {
+      font-size: $font-hugeXL;
+      margin: 10vh auto 5vh;
+    }
+    .welcomingInformation__paragraph {
+      width: 35vw;
+      margin: 0 auto;
+      font-size: $font-extraLarge;
+    }
+  }
+}

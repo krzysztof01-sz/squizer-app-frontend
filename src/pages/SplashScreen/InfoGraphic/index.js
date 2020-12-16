@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import BackgroundGradient from '../../assets/images/BgGradient.svg';
-import ExamIcon from '../../assets/images/Exam.svg';
-import LoginButton from '../../global/Buttons/LoginButton';
-import SingupButton from '../../global/Buttons/SignupButton';
+import BackgroundGradient from '../../../assets/images/BgGradient.svg';
+import ExamIcon from '../../../assets/images/Exam.svg';
+import LoginButton from '../../../global/Buttons/Login/index';
+import SingupButton from '../../../global/Buttons/Signup/index';
 
-import '../../styles/pages/SplashScreen/InfoGraphic.scss';
+import './styles.scss';
 
 const Infographic = () => {
   return (
