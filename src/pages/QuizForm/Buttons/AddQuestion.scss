@@ -1,0 +1,16 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+.addQuestionButton {
+  @include flexCenter;
+  align-self: flex-end;
+  background-color: darken($primary, 8);
+  color: $foundation;
+  width: 130px;
+  font-size: $font-smallXL;
+  @include accessible;
+  .arrowCircleRightIcon {
+    margin-left: 10px;
+    font-size: $font-medium;
+  }
+}

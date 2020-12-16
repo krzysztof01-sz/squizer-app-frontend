@@ -1,0 +1,10 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+.addQuizButton {
+  width: 100%;
+  align-self: flex-end;
+  color: $primary;
+  font-weight: bold;
+  @include accessible;
+}

@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.previousQuestionButton {
+  width: 100%;
+  background-color: transparent;
+  color: darken($foundation, 10);
+  font-size: $font-smallXL;
+  .arrowLeftIcon {
+    margin-right: 10px;
+  }
+}
