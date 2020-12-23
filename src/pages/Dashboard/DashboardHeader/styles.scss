@@ -5,10 +5,11 @@
   @include flexCenter;
   justify-content: space-between;
   padding: 0 5vw;
-  .dashboardHeader__title {
+  &__title {
     font-size: $font-medium;
   }
   .plusIcon {
+    cursor: pointer;
     font-size: $font-largeXXL;
     color: $primary;
   }
