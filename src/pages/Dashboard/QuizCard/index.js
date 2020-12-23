@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import * as api from '../../../api/userAPI';
+import * as api from '../../../api/index';
 import DefaultPhoto from '../../../assets/images/DefaultPhoto.png';
 import PlayQuizButton from '../PlayQuizButton/index';
-import { categoryToColor as map } from '../../../utils/constants';
+import { categoryToColor as map, responseTypes } from '../../../utils/constants';
 import { formatDate } from '../../../utils/functions';
+import Loader from '../../../global/Components/Loader';
 import './styles.scss';
 
 const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, category } }) => {
@@ -13,15 +14,18 @@ const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, ca
 
   useEffect(() => {
     const getUserPhoto = async () => {
-      const user = await api.getUserById(createdBy);
-      setUserNick(user?.nickname);
-
-      const photoType = user?.photoType || 'default';
-      if (photoType === 'default') {
-        setUserPhoto(DefaultPhoto);
+      const response = await api.getUserById(createdBy);
+      const { type } = response;
+      if (type === responseTypes.success) {
+        const { user } = response;
+        setUserNick(user.nickname);
+        if (user.photoType === 'custom') {
+          const photoLink = await api.getUserPhoto(createdBy);
+          setUserPhoto(photoLink);
+        } else setUserPhoto(DefaultPhoto);
       } else {
-        const photoLink = await api.getUserPhoto(createdBy);
-        setUserPhoto(photoLink);
+        setUserNick('');
+        setUserPhoto(DefaultPhoto);
       }
     };
     getUserPhoto();
@@ -35,11 +39,21 @@ const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, ca
     getCategoryImage(category);
   }, []);
 
+  const renderUserPhoto = () => {
+    return userPhoto ? (
+      <img className="quizCard__userPhoto" src={userPhoto} />
+    ) : (
+      <div className="quizCard__userPhoto">
+        <Loader width={40} height={40} />
+      </div>
+    );
+  };
+
   return (
     <article className="quizCard" style={{ borderBottom: `10px solid ${map.get(category)}` }}>
       <div className="quizCard__categoryImageWrapper">
         <img className="quizCard__categoryImage" src={categoryImage} />
-        <img className="quizCard__userPhoto" src={userPhoto} />
+        {renderUserPhoto()}
         <p className="quizCard__authorNick">author: {userNick}</p>
       </div>
       <div className="quizCard__info">
