@@ -1,53 +1,44 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import * as api from '../../../api/index';
+import * as fb from '../../../utils/feedbackMessages';
 import DefaultPhoto from '../../../assets/images/DefaultPhoto.png';
-import * as messages from '../../../utils/responseMessages';
 import { isFileImage, compressPhoto, savePhotoInDB } from '../../../utils/functions';
 
 import SingupButton from '../../../global/Buttons/Signup/index';
-import FeedbackMessage from '../../../global/Components/FeedbackMessage/index';
-import PhotoPreview from '../PhotoPreview/index';
-import ErrorMessage from '../../../global/Components/ErrorMessage/index';
-import Input from '../../../global/Components/Input/index';
-import InputValidation from '../../../global/Components/InputValidationMessage/index';
-import FileInput from '../FileInput/index';
-import ProcessMessage from '../../../global/Components/ProcessMessage/index';
-import FilenameLabel from '../FilenameLabel/index';
 import DefaultPhotoButton from '../DefaultPhotoButton/index';
+import PhotoPreview from '../PhotoPreview/index';
+import Input from '../../../global/Components/Input/index';
+import FileInput from '../FileInput/index';
+import FilenameLabel from '../FilenameLabel/index';
 import Loader from '../../../global/Components/Loader/index';
-import * as api from '../../../api/userAPI';
 
+import InputValidation from '../../../global/Components/Messages/InputValidationMessage';
+import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
+import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
+import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
+
+import { responseTypes } from '../../../utils/constants';
 import './styles.scss';
 
 const Form = () => {
   const history = useHistory();
 
-  const [responseMessages, setResponseMessages] = useState([]);
+  const [error, setError] = useState([]);
   const [process, setProcess] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [validationMessages, setValidationMessages] = useState([]);
   const [userPhoto, setUserPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [error, setError] = useState('');
-  const [csrfToken, setCsrfToken] = useState('whatever');
+  const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
-    nickname: yup
-      .string()
-      .trim()
-      .min(3, messages.NICKNAME_SHORT)
-      .max(15, messages.NICKNAME_LONG)
-      .required(messages.NICKNAME_REQUIRED),
-    password: yup
-      .string()
-      .trim()
-      .min(8, messages.PASSWORD_SHORT)
-      .max(15, messages.PASSWORD_LONG)
-      .required(messages.PASSWORD_REQUIRED),
-    confirmedPassword: yup.string().oneOf([yup.ref('password'), null], messages.DIFFERENT_PASSWORDS),
+    nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
+    password: yup.string().trim().min(8, fb.PASSWORD_SHORT).max(15, fb.PASSWORD_LONG).required(fb.PASSWORD_REQUIRED),
+    confirmedPassword: yup.string().oneOf([yup.ref('password'), null], fb.DIFFERENT_PASSWORDS),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -68,26 +59,24 @@ const Form = () => {
   }, []);
 
   const onSubmit = async (formData) => {
+    setValidationMessages([]);
+
     formData.photo = userPhoto;
     formData.photoType = userPhoto?.name ? 'custom' : 'default';
+    if (!formData.photo) return setError(fb.CHOOSE_YOUR_PHOTO);
 
-    if (!formData.photo) return setError(messages.CHOOSE_YOUR_PHOTO);
+    setProcess(fb.REGISTERING_PROCESS);
+    const addingUserResponse = await api.registerUser(formData, csrfToken);
+    setProcess('');
 
-    setIsProcessing(true);
-    const addingUserResponse = await api.addUser(formData, csrfToken);
-    const { type: responseType, id: createdUserId } = addingUserResponse[0];
-    setIsProcessing(false);
-
-    setResponseMessages(addingUserResponse);
-
-    if (responseType === 'success') {
-      const addingResult = userPhoto?.name ? await savePhotoInDB(userPhoto, createdUserId) : 'success';
-      if (addingResult === 'success') {
-        setProcess(messages.PHOTO_SAVED_IN_DB);
-        setTimeout(() => history.push('/login'), 500);
-      } else {
-        setError(addingResult);
-      }
+    if (addingUserResponse.type === responseTypes.success) {
+      const { msg, userId } = addingUserResponse;
+      if (formData.photoType === 'custom') await savePhotoInDB(userPhoto, userId);
+      setValidationMessages(msg);
+      setTimeout(() => history.push('/login'), 500);
+    } else {
+      const { msg } = addingUserResponse;
+      setValidationMessages(msg);
     }
   };
 
@@ -109,21 +98,19 @@ const Form = () => {
   const handlePhotoChange = async (e) => {
     const file = e.target.files[0];
     if (!isFileImage(file)) {
-      setError(messages.PHOTO_EXTENSION_ERROR);
+      setError(fb.PHOTO_EXTENSION_ERROR);
       setUserPhoto(null);
       setPreview(null);
       return false;
     }
 
     setError('');
-    setProcess(messages.PHOTO_COMPESSING_START);
-    setIsProcessing(true);
 
+    setProcess(fb.PHOTO_COMPESSING_START);
     const compressedPhoto = await compressPhoto(file);
-    setIsProcessing(false);
     setProcess('');
 
-    if (!compressedPhoto) return setError(messages.PHOTO_COMPRESSING_ERROR);
+    if (!compressedPhoto) return setError(fb.PHOTO_COMPRESSING_ERROR);
     showPhoto(file);
     setUserPhoto(compressedPhoto);
   };
@@ -133,54 +120,33 @@ const Form = () => {
       <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
         <section className="form">
           <header className="form__header">Registration form</header>
-          <Input
-            labelName="nickname"
-            register={register({ required: true })}
-            type="text"
-            name="nickname"
-            min="3"
-            max="15"
-          />
+          <Input labelName="nickname" register={register({ required: true })} type="text" name="nickname" min="3" max="15" />
           <InputValidation message={errors.nickname?.message} />
 
-          <Input
-            labelName="password"
-            register={register({ required: true })}
-            type="password"
-            name="password"
-            min="8"
-            max="15"
-          />
+          <Input labelName="password" register={register({ required: true })} type="password" name="password" min="8" max="15" />
           <InputValidation message={errors.password?.message} />
 
-          <Input
-            labelName="confirm the password"
-            register={register({ required: true })}
-            type="password"
-            name="confirmedPassword"
-            min="8"
-            max="15"
-          />
+          <Input labelName="confirm the password" register={register({ required: true })} type="password" name="confirmedPassword" min="8" max="15" />
           <InputValidation message={errors.confirmedPassword?.message} />
-          <ProcessMessage message={process} />
 
           <PhotoPreview preview={preview} />
-
           <FilenameLabel userPhoto={userPhoto} />
+
           <div className="fileInputWrapper">
             <FileInput handleChange={handlePhotoChange} />
             <DefaultPhotoButton handleClick={setDefaultPhoto} />
           </div>
 
           <ErrorMessage message={error} />
+          <ProcessMessage message={process} />
 
-          {responseMessages.map(({ msg, type }, param) => {
-            return <FeedbackMessage key={param} type={type} message={msg} />;
+          {validationMessages.map(({ msg, type }, index) => {
+            return <ActionResultMessage msg={msg} type={type} key={index} />;
           })}
 
           <input ref={register()} type="hidden" name="_csrf" value={csrfToken} />
 
-          <SingupButton isDisabled={isProcessing} />
+          <SingupButton isDisabled={process} />
         </section>
       </form>
     );
