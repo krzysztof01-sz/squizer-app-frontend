@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.answer__content {
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 4px solid lighten($contrast, 60);
+  background-color: lighten($contrast, 78);
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  &--checked {
+    color: $secondary;
+    border-bottom: 4px solid $secondary;
+  }
+}
+
+.correct {
+  background-color: lighten($valid, 25);
+  border-bottom: 4px solid lighten($valid, 20);
+}
+
+.incorrect {
+  background-color: lighten($invalid, 25);
+  border-bottom: 4px solid lighten($invalid, 20);
+}
