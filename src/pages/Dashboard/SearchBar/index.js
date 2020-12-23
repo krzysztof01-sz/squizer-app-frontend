@@ -1,28 +1,22 @@
 import './styles.scss';
 import '../../../global/Components/Input/styles.scss';
-import { SearchIcon } from '../../../global/Icons/icons';
+import { useContext } from 'react';
+import { FilteringContext } from '../../../contexts/Filtering';
 
-const filterQuizzes = ({ target: { value } }) => {
-  value = value.trim().toLowerCase();
-  const quizzesTitles = document.querySelectorAll('.quizCard__title');
-  quizzesTitles.forEach((quizTitle) => {
-    let quizTitleStyle;
-    !quizTitle.textContent.trim().toLowerCase().includes(value)
-      ? (quizTitleStyle = 'none')
-      : (quizTitleStyle = 'block');
-    quizTitle.closest('.quizCard').style.display = quizTitleStyle;
-  });
-};
-
-const SearchBar = () => {
-  return (
-    <div className="searchBarWrapper">
-      <label className="label">
-        <input type="text" className="input searchBar" placeholder="search..." onChange={(e) => filterQuizzes(e)} />
-        <SearchIcon />
-      </label>
-    </div>
-  );
+const SearchBar = ({ children }) => {
+  const { setInvisibleQuizzesQuantity } = useContext(FilteringContext);
+  const filterQuizzes = ({ target: { value } }) => {
+    value = value.trim().toLowerCase();
+    const quizzesTitles = document.querySelectorAll('.quizCard__title');
+    quizzesTitles.forEach((quizTitle) => {
+      quizTitle.textContent.trim().toLowerCase().includes(value)
+        ? quizTitle.closest('.quizCard').classList.remove('none')
+        : quizTitle.closest('.quizCard').classList.add('none');
+    });
+    const invisibleCardsQuantity = Array.from(document.querySelectorAll('.quizCard')).filter((el) => !el.classList.contains('none')).length;
+    setInvisibleQuizzesQuantity(invisibleCardsQuantity);
+  };
+  return children(filterQuizzes);
 };
 
 export default SearchBar;
