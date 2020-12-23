@@ -12,6 +12,27 @@ const colors = {
   invalidColorLight: '#f9bcbc',
 };
 
+const categories = ['maths', 'it', 'english', 'riddles'];
+
+const categoryToColor = new Map([
+  ['maths', '#ea80ff'],
+  ['it', '#7aff81'],
+  ['english', '#8080ff'],
+  ['riddles', '#e6e84d'],
+]);
+
+const responseTypes = {
+  success: 'success',
+  error: 'error',
+};
+
 const prefferedImageExtensions = ['image/png', 'image/jpg', 'image/jpeg'];
 
-export { compressionOptions, prefferedImageExtensions, colors };
+export {
+  compressionOptions,
+  prefferedImageExtensions,
+  colors,
+  categoryToColor,
+  categories,
+  responseTypes,
+};
