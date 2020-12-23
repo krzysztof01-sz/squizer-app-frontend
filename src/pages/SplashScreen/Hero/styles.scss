@@ -1,0 +1,9 @@
+@import '../../../styles/mixins.scss';
+
+.hero {
+  @include flexCenter;
+  width: 90%;
+  &__image {
+    width: 100%;
+  }
+}

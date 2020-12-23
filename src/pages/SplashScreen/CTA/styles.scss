@@ -1,0 +1,24 @@
+@import '../../../styles/variables.scss';
+
+.CTA {
+  display: flex;
+  padding: 50px 30px;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparentize($foundation, 0.6);
+
+  &__content {
+    color: $contrast;
+    margin: 0 auto 4vh;
+  }
+  a {
+    display: flex;
+    justify-content: flex-end;
+    .CTA__button {
+      width: 120px;
+      font-weight: bold;
+      color: $foundation;
+      background-color: $primary;
+    }
+  }
+}

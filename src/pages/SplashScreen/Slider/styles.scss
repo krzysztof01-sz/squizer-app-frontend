@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.slider {
+  width: 80vw;
+  overflow-x: hidden;
+  margin: 0 auto;
+  &__imageSection {
+    display: flex;
+    .slider__image {
+      object-fit: cover;
+      width: 55vw;
+      height: 45vh;
+      margin-right: 10vw;
+    }
+    &__slide {
+      transform: translateX(200px);
+    }
+  }
+  &__switchSection {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: flex-end;
+    .dot {
+      margin-right: 5vw;
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.description {
+  &__title {
+    font-size: $font-large;
+    text-align: center;
+    margin-bottom: 2vh;
+  }
+  &__content {
+    width: 90%;
+    margin: 0 auto;
+    font-size: $font-smallXL;
+    text-align: center;
+  }
+}

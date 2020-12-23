@@ -1,0 +1,183 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.splashScreen__wrapper {
+  color: $contrast;
+  display: flex;
+  flex-direction: column;
+  .splashScreen__firstPart {
+    .description {
+      margin: 10vh 0 5vh;
+    }
+    .hero {
+      margin: 5vh auto 10vh;
+    }
+  }
+  .splashScreen__secondPart {
+    display: flex;
+    flex-direction: column;
+    .CTA {
+      margin-bottom: 10vh;
+    }
+    .slider {
+      margin-bottom: 10vh;
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .splashScreen__wrapper {
+    padding: 0 8vw 10vh;
+    flex-direction: row;
+    .splashScreen__firstPart,
+    .splashScreen__secondPart {
+      height: 145vh;
+      width: 40%;
+    }
+    .splashScreen__firstPart {
+      margin-right: 15vw;
+      .description {
+        &__title {
+          font-size: $font-largeXXL;
+        }
+        &__content {
+          font-size: $font-medium;
+          margin-bottom: 10vh;
+        }
+      }
+      .hero {
+        width: 80%;
+      }
+    }
+    .splashScreen__secondPart {
+      flex-direction: column-reverse;
+      .slider {
+        width: 95%;
+        &__imageSection {
+          .slider__image {
+            width: 15vw;
+            height: 55vh;
+            margin-right: 7vw;
+          }
+        }
+      }
+      .CTA {
+        border-radius: 10px;
+        width: 95%;
+        margin: 0 auto;
+        @include secondaryShadow;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .splashScreen__wrapper {
+    padding: 0 10vw 10vh 15vw;
+    flex-direction: row;
+    .splashScreen__firstPart,
+    .splashScreen__secondPart {
+      height: 120vh;
+      width: 40%;
+    }
+    .splashScreen__firstPart {
+      margin-right: 10vw;
+      .description {
+        &__title {
+          font-size: $font-largeXXL;
+        }
+        &__content {
+          width: 100%;
+          font-size: $font-mediumXL;
+          margin-bottom: 10vh;
+        }
+      }
+      .hero {
+        width: 90%;
+      }
+    }
+    .splashScreen__secondPart {
+      flex-direction: column-reverse;
+      .slider {
+        width: 85%;
+        &__imageSection {
+          .slider__image {
+            width: 12vw;
+            height: 45vh;
+            margin-right: 6vw;
+          }
+        }
+      }
+      .CTA {
+        border-radius: 10px;
+        width: 85%;
+        margin: 0 auto;
+        @include secondaryShadow;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .splashScreen__wrapper {
+    padding: 0 10vw 10vh 15vw;
+    flex-direction: row;
+    .splashScreen__firstPart,
+    .splashScreen__secondPart {
+      height: 110vh;
+      width: 40%;
+    }
+    .splashScreen__firstPart {
+      margin-right: 10vw;
+      .description {
+        &__title {
+          font-size: $font-hugeXXL;
+        }
+        &__content {
+          width: 100%;
+          font-size: $font-huge;
+          margin-bottom: 10vh;
+        }
+      }
+      .hero {
+        width: 90%;
+      }
+    }
+    .splashScreen__secondPart {
+      flex-direction: column-reverse;
+      .slider {
+        width: 85%;
+        &__imageSection {
+          .slider__image {
+            width: 10vw;
+            height: 40vh;
+            margin-right: 7vw;
+          }
+        }
+        &__switchSection {
+          .dot {
+            width: 30px;
+            height: 30px;
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+      .CTA {
+        border-radius: 10px;
+        width: 85%;
+        font-size: $font-large;
+        margin: 0 auto;
+        @include secondaryShadow;
+        a {
+          .CTA__button {
+            width: 200px;
+            padding: 15px;
+            font-size: $font-large;
+          }
+        }
+      }
+    }
+  }
+}
