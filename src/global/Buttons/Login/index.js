@@ -1,12 +1,8 @@
 import './styles.scss';
 
 const LoginButton = ({ isDisabled }) => {
-  return isDisabled ? (
-    <button className="button loginButton" disabled>
-      Login
-    </button>
-  ) : (
-    <button tabIndex="-1" className="button loginButton">
+  return (
+    <button tabIndex="-1" className="button loginButton" disabled={isDisabled ? true : false}>
       <span role="button" className="loginButton--accessible" aria-controls="filename" tabIndex="0">
         Login
       </span>

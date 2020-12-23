@@ -1,13 +1,16 @@
-import { memo } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/Logo.svg';
+import { AuthContext } from '../../../contexts/Auth';
 import LogoutButton from '../../Buttons/Logout/index';
+import HeaderLoginButton from './LoginButton';
 import './styles.scss';
 
-const Header = ({ isLogged = false }) => {
+const Header = () => {
+  const { isLogged } = useContext(AuthContext);
   return (
     <header className="header">
-      <Link tabIndex="-1" to="/">
+      <Link tabIndex="-1" to={isLogged ? '/dashboard' : '/'}>
         <img className="header__logo" src={Logo} />
       </Link>
       {isLogged ? (
@@ -23,9 +26,11 @@ const Header = ({ isLogged = false }) => {
           </nav>
           <LogoutButton />
         </>
-      ) : null}
+      ) : (
+        <HeaderLoginButton />
+      )}
     </header>
   );
 };
 
-export default memo(Header);
+export default Header;

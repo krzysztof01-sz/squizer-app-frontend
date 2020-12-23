@@ -1,0 +1,13 @@
+@import '../../../../styles/variables.scss';
+
+.resultMessage {
+  font-weight: bold;
+}
+
+.resultMessage-success {
+  color: $valid;
+}
+
+.resultMessage-error {
+  color: $invalid;
+}

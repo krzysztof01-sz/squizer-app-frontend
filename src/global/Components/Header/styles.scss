@@ -1,6 +1,7 @@
 @import '../../../styles/mixins.scss';
 
 .header {
+  width: 100vw;
   position: sticky;
   z-index: 10;
   top: 0;

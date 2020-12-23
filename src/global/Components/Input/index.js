@@ -1,6 +1,6 @@
 import './styles.scss';
 
-const Input = ({ labelName, register, type, name, callback, labelClass = '', inputClass = '', ...rest }) => {
+const Input = ({ labelName, register, type, name, labelClass = '', inputClass = '', ...rest }) => {
   return (
     <label className={`label form__label ${labelClass}`}>
       {labelName} <br />
