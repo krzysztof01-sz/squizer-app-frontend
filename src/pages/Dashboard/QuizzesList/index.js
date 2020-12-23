@@ -1,13 +1,20 @@
+import { useContext } from 'react';
+import { FilteringContext } from '../../../contexts/Filtering';
+import LackOfQuizzesView from '../LackOfQuizzesView';
 import QuizCard from '../QuizCard/index';
 import './styles.scss';
 
 const QuizzesList = ({ quizzes }) => {
+  const { invisibleQuizzesQuantity } = useContext(FilteringContext);
   return (
-    <section className="quizzesList">
-      {quizzes.map((quiz) => {
-        return <QuizCard key={quiz._id} quiz={quiz} />;
-      })}
-    </section>
+    <>
+      {invisibleQuizzesQuantity === 0 ? <LackOfQuizzesView /> : null}
+      <section className="quizzesList">
+        {quizzes.map((quiz) => {
+          return <QuizCard key={quiz._id} quiz={quiz} />;
+        })}
+      </section>
+    </>
   );
 };
 
