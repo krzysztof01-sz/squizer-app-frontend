@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+.errorPage {
+  @include flexCenter;
+  flex-direction: column;
+  height: 80vh;
+  &__message {
+    font-size: $font-medium;
+  }
+  .link {
+    font-size: $font-smallXL;
+  }
+}
