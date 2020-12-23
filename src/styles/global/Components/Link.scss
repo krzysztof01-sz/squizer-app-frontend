@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.link {
+  text-decoration: underline;
+  color: $contrast;
+}
+
+a {
+  text-decoration: none;
+  color: $contrast;
+}

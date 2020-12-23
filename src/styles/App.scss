@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './global/Components/Link.scss';
 
 :root {
   font-size: 62.5%;
@@ -27,11 +28,6 @@ body {
 
 .app {
   font-size: $font-small;
-}
-
-a {
-  text-decoration: none;
-  color: $contrast;
 }
 
 ul {
