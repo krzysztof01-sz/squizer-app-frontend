@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.lackOfQuizzes {
+  @include flexCenter;
+  height: 50vh;
+  &__message {
+    font-size: $font-medium;
+  }
+}
