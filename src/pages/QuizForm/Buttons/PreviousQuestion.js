@@ -1,11 +1,13 @@
-import { ArrowLeftIcon } from '../../../global/Icons/icons';
+import { ArrowLeftIcon } from '../../../global/Icons/index';
 import './PreviousQuestion.scss';
 
 const PreviousQuestionButton = ({ callback }) => {
   return (
-    <button className="button previousQuestionButton" onClick={(e) => callback(e)}>
+    <button tabIndex="-1" className="button previousQuestionButton" onClick={(e) => callback(e)}>
       <ArrowLeftIcon />
-      previous
+      <span role="button" className="signupButton--accessible" tabIndex="0">
+        previous
+      </span>
     </button>
   );
 };

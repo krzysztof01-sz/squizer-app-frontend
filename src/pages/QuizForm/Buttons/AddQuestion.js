@@ -1,4 +1,4 @@
-import { ArrowCircleRight } from '../../../global/Icons/icons';
+import { ArrowCircleRight } from '../../../global/Icons';
 import './AddQuestion.scss';
 
 const AddQuestionButton = ({ callback }) => {

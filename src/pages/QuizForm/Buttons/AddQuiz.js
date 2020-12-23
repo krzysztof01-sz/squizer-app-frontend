@@ -1,6 +1,6 @@
 import './AddQuiz.scss';
 
-const AddQuiz = ({ callback, isActive }) => {
+const AddQuizButton = ({ callback, isActive }) => {
   return (
     <button
       disabled={isActive}
@@ -15,4 +15,4 @@ const AddQuiz = ({ callback, isActive }) => {
   );
 };
 
-export default AddQuiz;
+export default AddQuizButton;
