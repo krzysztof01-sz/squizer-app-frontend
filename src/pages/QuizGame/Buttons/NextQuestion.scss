@@ -1,0 +1,12 @@
+@import '../../../styles/variables.scss';
+
+.nextQuestionButton {
+  border-radius: 15px;
+  background-color: $secondary;
+  color: $foundation;
+  font-size: $font-smallXL;
+  .arrowRightIcon {
+    margin-left: 10px;
+    font-size: $font-normal;
+  }
+}
