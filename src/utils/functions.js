@@ -1,5 +1,5 @@
 import compress from 'browser-image-compression';
-import { firebaseStorage } from '../../config/firebaseConfig';
+import { firebaseStorage } from '../../config/firebase';
 import { prefferedImageExtensions } from './constants';
 import { compressionOptions } from './constants';
 import moment from 'moment';
@@ -22,7 +22,6 @@ export const compressPhoto = async (photo) => {
 export const savePhotoInDB = async (file, name) => {
   try {
     const snapshot = await firebaseStorage.ref(`usersPhotos/${name}`).put(file);
-    console.log(snapshot);
     return snapshot.state;
   } catch (err) {
     return err.message;
