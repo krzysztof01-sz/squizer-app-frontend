@@ -1,0 +1,9 @@
+@import '../../../../styles/variables.scss';
+
+.commentForm__charactersCounter {
+  text-align: right;
+}
+
+.invalid {
+  color: $invalid;
+}
