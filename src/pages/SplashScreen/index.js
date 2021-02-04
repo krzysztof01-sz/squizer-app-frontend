@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import Layout from '../../global/Components/Layout/index';
 
 import Description from './Description';
@@ -6,15 +6,14 @@ import Hero from './Hero';
 import CTA from './CTA';
 import Slider from './Slider';
 
-import './index.scss';
 import SwitchDot from '../QuizGame/SwitchDot';
 import Image from './Slider/Image';
 import BgImage from '../../assets/images/bgs/bg1.png';
 import screen1 from '../../assets/images/screens/screen1.png';
 import screen2 from '../../assets/images/screens/screen2.png';
+import './index.scss';
 
 const SplashScreen = () => {
-  useEffect(() => window.scrollTo(0, 0), []);
   const images = [screen1, screen2, 'https://unsplash.it/900/1900'];
   const translationSize = 100;
   const transitionTime = 0.4;
@@ -45,7 +44,11 @@ const SplashScreen = () => {
                 </section>
                 <section className="slider__switchSection">
                   {images.map((image, index) => (
-                    <SwitchDot key={index} callback={() => setImageID(index)} filled={index === imageID} />
+                    <SwitchDot
+                      key={index}
+                      callback={() => setImageID(index)}
+                      filled={index === imageID}
+                    />
                   ))}
                 </section>
               </section>

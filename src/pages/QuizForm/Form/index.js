@@ -31,14 +31,19 @@ const Form = () => {
     optionalAnswer2: '',
     optionalAnswer3: '',
   };
-  const initialQuestionID = 0;
-  const [messages, setMessages] = useState([]);
-  const [error, setError] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const history = useHistory();
-  const [questionID, setQuestionID] = useState(initialQuestionID);
+  const initialQuestionID = 0;
   const [questions, setQuestions] = useState([{ ...initialQuestionData }]);
-  const [errors, setErrors] = useState([]);
+  const [questionID, setQuestionID] = useState(initialQuestionID);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [authError, setAuthError] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);
+
+  useEffect(() => console.log(authError), [authError]);
+  useEffect(() => console.log(validationErrors), [validationErrors]);
+  useEffect(() => console.log(messages), [messages]);
+  useEffect(() => console.log(questions), [questions]);
 
   const getCurrentQuestionsContents = () => {
     const currentQuestionsContents = [];
@@ -58,7 +63,7 @@ const Form = () => {
   const areAnswersUnique = (answers) => {
     const properUniqueAnswersQuantity = answers.length;
     const uniqueAnswersQuantity = Array.from(new Set(answers)).length;
-    return uniqueAnswersQuantity === properUniqueAnswersQuantity ? true : false;
+    return uniqueAnswersQuantity === properUniqueAnswersQuantity;
   };
 
   const trimObjectFields = (obj) => {
@@ -70,10 +75,7 @@ const Form = () => {
   };
 
   const areAllFieldsFilled = (question) => {
-    const questionWithTrimmedValues = {};
-    for (const [key, value] of Object.entries(question)) {
-      questionWithTrimmedValues[key] = value.trim();
-    }
+    const questionWithTrimmedValues = trimObjectFields({ ...question });
     const trimmedValues = Object.values(questionWithTrimmedValues);
     const allFieldsFilled = !trimmedValues.includes('');
     return allFieldsFilled;
@@ -113,25 +115,26 @@ const Form = () => {
       const generalData = trimObjectFields(generalQuizData);
       const questionsWithTrimmedFields = questions.map((question) => trimObjectFields(question));
 
-      setErrors([]);
       const structuredQuestions = [];
-      questionsWithTrimmedFields.forEach(({ content, correctAnswer, optionalAnswer1, optionalAnswer2, optionalAnswer3 }) => {
-        const correctAnswerID = getRandomNumber();
-        structuredQuestions.push({
-          content: content,
-          answers: [
-            { answerId: correctAnswerID, content: correctAnswer },
-            { answerId: getRandomNumber(), content: optionalAnswer1 },
-            { answerId: getRandomNumber(), content: optionalAnswer2 },
-            { answerId: getRandomNumber(), content: optionalAnswer3 },
-          ],
-          correctAnswer: correctAnswerID,
-        });
-      });
+      questionsWithTrimmedFields.forEach(
+        ({ content, correctAnswer, optionalAnswer1, optionalAnswer2, optionalAnswer3 }) => {
+          const correctAnswerID = getRandomNumber();
+          structuredQuestions.push({
+            content: content,
+            answers: [
+              { answerId: correctAnswerID, content: correctAnswer },
+              { answerId: getRandomNumber(), content: optionalAnswer1 },
+              { answerId: getRandomNumber(), content: optionalAnswer2 },
+              { answerId: getRandomNumber(), content: optionalAnswer3 },
+            ],
+            correctAnswer: correctAnswerID,
+          });
+        },
+      );
       structuredQuestions.pop();
       const quiz = { ...generalData, questions: [...structuredQuestions] };
       return quiz;
-    } else return setErrors([fb.FILL_ALL_DATA]);
+    }
   };
 
   const focusOnFirstInput = () => document.querySelector('input[name="content"]').focus();
@@ -140,10 +143,10 @@ const Form = () => {
     const thereAreAtLeast2QuestionsSet = questionID >= 2;
     const userIsFillingTheNewestQuestion = !questions[questionID + 1];
 
-    return thereAreAtLeast2QuestionsSet && userIsFillingTheNewestQuestion ? true : false;
+    return thereAreAtLeast2QuestionsSet && userIsFillingTheNewestQuestion;
   };
 
-  if (error) return <ErrorPage msg={error} />;
+  if (authError) return <ErrorPage msg={authError} />;
 
   const currentQuestion = questions[questionID];
 
@@ -157,7 +160,9 @@ const Form = () => {
               name="title"
               labelName="title"
               value={generalQuizData?.title}
-              callback={({ target }) => setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
             />
 
             <SelectInput
@@ -166,7 +171,9 @@ const Form = () => {
               name="category"
               options={categories}
               value={generalQuizData?.category}
-              callback={({ target }) => setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
             />
 
             <TextAreaInput
@@ -175,7 +182,9 @@ const Form = () => {
               rows="5"
               cols="40"
               value={generalQuizData?.description}
-              callback={({ target }) => setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
             />
           </section>
 
@@ -215,7 +224,7 @@ const Form = () => {
 
             <p className="questionNumber">question no. {questionID + 1}</p>
 
-            {errors.map((error, index) => {
+            {validationErrors.map((error, index) => {
               return <ErrorMessage key={index} message={error} />;
             })}
 
@@ -239,18 +248,19 @@ const Form = () => {
                 <AddQuestionButton
                   callback={(e) => {
                     e.preventDefault();
-                    setErrors([]);
+                    setValidationErrors([]);
                     if (questionID < questions.length) {
                       const validationResult = isQuestionValid(currentQuestion);
 
                       if (typeof validationResult === 'boolean') {
-                        const currentQuestionIsDisplayed = questions[questionID + 1] ? false : true;
-                        if (currentQuestionIsDisplayed) {
+                        const nextQuestion = questions[questionID + 1];
+                        const isShowedCurrentQuestion = !nextQuestion;
+                        if (isShowedCurrentQuestion) {
                           setQuestions(() => [...questions, initialQuestionData]);
                         }
                       } else {
                         focusOnFirstInput();
-                        return setErrors(validationResult);
+                        return setValidationErrors(validationResult);
                       }
                     }
                     setQuestionID(questionID + 1);
@@ -266,11 +276,13 @@ const Form = () => {
                   callback={async () => {
                     setIsSubmitting(true);
                     const quiz = prepareQuestionStructure();
-                    let { type, msg } = await api.addQuiz(quiz);
+                    const { type, msg } = await api.addQuiz(quiz);
 
                     // when token is invalid, middleware returns plain text, so here I preserve it
-                    if (type === responseTypes.error && typeof msg === 'string') {
-                      setError(msg);
+                    const isAuthError = type === responseTypes.error && typeof msg === 'string';
+
+                    if (isAuthError) {
+                      setAuthError(msg);
                     } else {
                       setMessages(msg);
                     }

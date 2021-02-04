@@ -13,13 +13,3 @@
     border-bottom: 4px solid $secondary;
   }
 }
-
-.correct {
-  background-color: lighten($valid, 25);
-  border-bottom: 4px solid lighten($valid, 20);
-}
-
-.incorrect {
-  background-color: lighten($invalid, 25);
-  border-bottom: 4px solid lighten($invalid, 20);
-}

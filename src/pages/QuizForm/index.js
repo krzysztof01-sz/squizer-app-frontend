@@ -1,4 +1,4 @@
-import Form from './Form/index';
+import Form from './Form';
 import './index.scss';
 
 const QuizForm = () => {

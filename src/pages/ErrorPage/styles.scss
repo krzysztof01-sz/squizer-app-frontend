@@ -1,9 +1,11 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
+
 .errorPage {
   @include flexCenter;
   flex-direction: column;
   height: 80vh;
+  text-align: center;
   &__message {
     font-size: $font-medium;
   }
