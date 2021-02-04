@@ -1,6 +1,6 @@
 @import '../../../styles/variables.scss';
 
-.photoPreview {
+.avatarPreview {
   position: relative;
   width: 200px;
   height: 200px;
@@ -15,7 +15,7 @@
     bottom: -30px;
     text-align: center;
   }
-  .photoPreview__image {
+  .avatarPreview__image {
     object-fit: cover;
     border-radius: 50%;
     width: 100%;
@@ -24,7 +24,7 @@
 }
 
 @media only screen and (min-width: 1921px) and (max-width: 3840px) {
-  .photoPreview {
+  .avatarPreview {
     &::before {
       bottom: -60px;
       font-size: $font-smallXL;

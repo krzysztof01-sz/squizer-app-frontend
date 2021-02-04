@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
-.defaultPhotoButton {
+.defaultAvatarButton {
   background-color: $foundation;
   color: $secondary;
   @include accessible;

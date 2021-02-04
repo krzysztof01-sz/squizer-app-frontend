@@ -4,18 +4,18 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import * as api from '../../../api/index';
+import * as api from '../../../api';
 import * as fb from '../../../utils/feedbackMessages';
-import DefaultPhoto from '../../../assets/images/DefaultPhoto.png';
-import { isFileImage, compressPhoto, savePhotoInDB } from '../../../utils/functions';
+import DefaultAvatar from '../../../assets/images/DefaultAvatar.png';
+import { isFileImage, compressPhoto, saveAvatarInDB } from '../../../utils/functions';
 
-import SingupButton from '../../../global/Buttons/Signup/index';
-import DefaultPhotoButton from '../DefaultPhotoButton/index';
-import PhotoPreview from '../PhotoPreview/index';
-import Input from '../../../global/Components/Input/index';
-import FileInput from '../FileInput/index';
-import FilenameLabel from '../FilenameLabel/index';
-import Loader from '../../../global/Components/Loader/index';
+import SingupButton from '../../../global/Buttons/Signup';
+import DefaultAvatarButton from '../DefaultAvatarButton';
+import AvatarPreview from '../AvatarPreview';
+import Input from '../../../global/Components/Input';
+import FileInput from '../FileInput';
+import FilenameLabel from '../FilenameLabel';
+import Loader from '../../../global/Components/Loader';
 
 import InputValidation from '../../../global/Components/Messages/InputValidationMessage';
 import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
@@ -31,7 +31,7 @@ const Form = () => {
   const [error, setError] = useState([]);
   const [process, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
-  const [userPhoto, setUserPhoto] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [preview, setPreview] = useState(null);
   const [csrfToken, setCsrfToken] = useState(null);
 
@@ -61,9 +61,9 @@ const Form = () => {
   const onSubmit = async (formData) => {
     setValidationMessages([]);
 
-    formData.photo = userPhoto;
-    formData.photoType = userPhoto?.name ? 'custom' : 'default';
-    if (!formData.photo) return setError(fb.CHOOSE_YOUR_PHOTO);
+    formData.avatar = avatar;
+    formData.avatarType = avatar?.name ? 'custom' : 'default';
+    if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
     setProcess(fb.REGISTERING_PROCESS);
     const addingUserResponse = await api.registerUser(formData, csrfToken);
@@ -71,7 +71,7 @@ const Form = () => {
 
     if (addingUserResponse.type === responseTypes.success) {
       const { msg, userId } = addingUserResponse;
-      if (formData.photoType === 'custom') await savePhotoInDB(userPhoto, userId);
+      if (formData.avatarType === 'custom') await saveAvatarInDB(avatar, userId);
       setValidationMessages(msg);
       setTimeout(() => history.push('/login'), 500);
     } else {
@@ -80,7 +80,7 @@ const Form = () => {
     }
   };
 
-  const showPhoto = (file) => {
+  const showAvatar = (file) => {
     const reader = new FileReader();
     reader.addEventListener('load', function () {
       setPreview(this.result);
@@ -88,31 +88,31 @@ const Form = () => {
     reader.readAsDataURL(file);
   };
 
-  const setDefaultPhoto = (e) => {
+  const setDefaultAvatar = (e) => {
     e.preventDefault();
     setError('');
-    setUserPhoto('defaultPhoto');
-    setPreview(DefaultPhoto);
+    setAvatar('default');
+    setPreview(DefaultAvatar);
   };
 
-  const handlePhotoChange = async (e) => {
-    const file = e.target.files[0];
-    if (!isFileImage(file)) {
-      setError(fb.PHOTO_EXTENSION_ERROR);
-      setUserPhoto(null);
+  const handleAvatarChange = async (e) => {
+    const avatar = e.target.files[0];
+    if (!isFileImage(avatar)) {
+      setError(fb.AVATAR_EXTENSION_ERROR);
+      setAvatar(null);
       setPreview(null);
       return false;
     }
 
     setError('');
 
-    setProcess(fb.PHOTO_COMPESSING_START);
-    const compressedPhoto = await compressPhoto(file);
+    setProcess(fb.AVATAR_COMPESSING_START);
+    const compressedAvatar = await compressPhoto(avatar);
     setProcess('');
 
-    if (!compressedPhoto) return setError(fb.PHOTO_COMPRESSING_ERROR);
-    showPhoto(file);
-    setUserPhoto(compressedPhoto);
+    if (!compressedAvatar) return setError(fb.AVATAR_COMPRESSING_ERROR);
+    showAvatar(avatar);
+    setAvatar(compressedAvatar);
   };
 
   if (csrfToken) {
@@ -129,12 +129,12 @@ const Form = () => {
           <Input labelName="confirm the password" register={register({ required: true })} type="password" name="confirmedPassword" min="8" max="15" />
           <InputValidation message={errors.confirmedPassword?.message} />
 
-          <PhotoPreview preview={preview} />
-          <FilenameLabel userPhoto={userPhoto} />
+          <AvatarPreview preview={preview} />
+          <FilenameLabel avatar={avatar} />
 
           <div className="fileInputWrapper">
-            <FileInput handleChange={handlePhotoChange} />
-            <DefaultPhotoButton handleClick={setDefaultPhoto} />
+            <FileInput handleChange={handleAvatarChange} />
+            <DefaultAvatarButton handleClick={setDefaultAvatar} />
           </div>
 
           <ErrorMessage message={error} />
