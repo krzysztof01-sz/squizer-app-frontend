@@ -1,8 +1,14 @@
-import compress from 'browser-image-compression';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { firebaseStorage } from '../../config/firebase';
-import { prefferedImageExtensions } from './constants';
-import { compressionOptions } from './constants';
-import moment from 'moment';
+import compress from 'browser-image-compression';
+import {
+  maxDescrptionLengthOnCard,
+  prefferedImageExtensions,
+  compressionOptions,
+} from './constants';
+
+dayjs.extend(relativeTime);
 
 export const getCurrentYear = () => new Date().getFullYear();
 
@@ -19,9 +25,9 @@ export const compressPhoto = async (photo) => {
   }
 };
 
-export const savePhotoInDB = async (file, name) => {
+export const saveAvatarInDB = async (avatar, name) => {
   try {
-    const snapshot = await firebaseStorage.ref(`usersPhotos/${name}`).put(file);
+    const snapshot = await firebaseStorage.ref(`avatars/${name}`).put(avatar);
     return snapshot.state;
   } catch (err) {
     return err.message;
@@ -29,5 +35,18 @@ export const savePhotoInDB = async (file, name) => {
 };
 
 export const formatDate = (date) => {
-  return moment.utc(date).calendar().split('/').join('-');
+  return dayjs(date).format('MMMM D, YYYY h:mm A');
+};
+
+export const shortenDescription = (description = '') => {
+  if (description.length > maxDescrptionLengthOnCard) {
+    description = description.slice(0, maxDescrptionLengthOnCard).concat('...');
+  }
+
+  return description;
+};
+
+export const shuffleArray = (arr) => {
+  arr = arr.sort(() => Math.random() - 0.5);
+  return arr;
 };
