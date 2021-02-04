@@ -17,9 +17,10 @@
   }
   .quizResult__link {
     text-align: center;
-    color: $secondary;
     text-decoration: underline;
+    color: $secondary;
     font-size: $font-smallXL;
+    display: block;
   }
   .quizResult__questionSolution {
     margin-top: 8vh;
@@ -45,7 +46,7 @@
   }
 }
 
-@media only screen and (min-width: 1000px) and (max-width: 1920px) {
+@media only screen and (min-width: 1008px) {
   .quizResult {
     width: 50%;
     .quizResult__questionSolution {

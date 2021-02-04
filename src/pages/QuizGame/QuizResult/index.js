@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles.scss';
-import AnswerView from './AnswerView/index';
-import QuestionContent from '../QuestionContent';
 import { Link } from 'react-router-dom';
+import AnswerView from './AnswerView';
+import QuestionContent from '../QuestionContent';
+import './styles.scss';
 
 const getPercentageResult = (result, max) => Math.floor((result / max) * 100);
 const getSchoolGrade = (percentageResult) => {
@@ -39,10 +39,8 @@ const QuizResult = ({ correctUserAnswersQuantity, userAnswers, questions }) => {
             <QuestionContent questionID={questionID} content={question.content} />
 
             {question.answers.map(({ content, answerId: answer }) => {
-              if (answer === correctAnswer)
-                return <AnswerView extraClass={'correct'} key={answer} content={content} />;
-              if (answer === userAnswer)
-                return <AnswerView extraClass={'incorrect'} key={answer} content={content} />;
+              if (answer === correctAnswer) return <AnswerView extraClass={'correct'} key={answer} content={content} />;
+              if (answer === userAnswer) return <AnswerView extraClass={'incorrect'} key={answer} content={content} />;
               else return <AnswerView key={answer} content={content} />;
             })}
           </article>
