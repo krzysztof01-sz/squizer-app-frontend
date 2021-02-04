@@ -1,4 +1,6 @@
 import { firebaseStorage } from '../../config/firebase';
+import { responseTypes } from '../utils/constants';
+import DefaultAvatar from '../assets/images/DefaultAvatar.png';
 
 const baseURL = 'http://localhost:8080';
 
@@ -52,8 +54,25 @@ export const logoutUser = () => {
 };
 
 export const getUserById = async (userId) => {
-  const userResponse = await fetch(`${baseURL}/api/users/${userId}`, getRequestObject());
-  const user = await userResponse.json();
+  const response = await fetch(`${baseURL}/api/users/${userId}`, getRequestObject());
+  const data = await response.json();
+
+  const { type, user } = data;
+
+  if (type === responseTypes.success) {
+    delete user.password;
+
+    if (user.avatarType === 'custom') {
+      const avatarLink = await getAvatar(userId);
+      user.avatar = avatarLink;
+    } else {
+      user.avatar = DefaultAvatar;
+    }
+  } else {
+    user.nick = '';
+    user.avatar = DefaultAvatar;
+  }
+
   return user;
 };
 
@@ -63,9 +82,14 @@ export const getQuizzes = async () => {
   return response;
 };
 
-export const getUserPhoto = async (userId) => {
-  const userPhotoLink = await firebaseStorage.ref(`usersPhotos/${userId}`).getDownloadURL();
-  return userPhotoLink;
+export const getAvatar = async (userId) => {
+  const avatarLink = await firebaseStorage.ref(`avatars/${userId}`).getDownloadURL();
+  return avatarLink;
+};
+
+export const getCategoryImage = async (moduleName) => {
+  const { default: image } = await import(`../assets/images/categories/${moduleName}.png`);
+  return image;
 };
 
 export const addQuiz = async (quiz) => {
@@ -84,7 +108,36 @@ export const addQuiz = async (quiz) => {
 };
 
 export const getQuizQuestions = async (quizId) => {
-  const data = await fetch(`http://localhost:8080/api/quizzes/${quizId}/questions`, getRequestObject());
+  const data = await fetch(`${baseURL}/api/quizzes/${quizId}/questions`, getRequestObject());
   const response = await data.json();
   return response;
+};
+
+export const getQuiz = async (id) => {
+  const response = await fetch(`${baseURL}/api/quizzes/${id}`, getRequestObject());
+  const data = await response.json();
+
+  return data;
+};
+
+export const addComment = async (comment) => {
+  const response = await fetch(`${baseURL}/api/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'auth-token': localStorage.getItem('auth-token'),
+    },
+    body: JSON.stringify({ ...comment }),
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const getQuizComments = async (quizId) => {
+  const response = await fetch(`${baseURL}/api/quizzes/${quizId}/comments`, getRequestObject());
+
+  const result = await response.json();
+  return result;
 };
