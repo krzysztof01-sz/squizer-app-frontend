@@ -1,4 +1,4 @@
-import { FinishIcon } from '../../../global/Icons/index';
+import { FinishIcon } from '../../../global/Icons';
 import './FinishQuiz.scss';
 
 const FinishQuizButton = ({ checkAnswers }) => {
