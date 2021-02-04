@@ -1,7 +1,7 @@
-import './styles.scss';
-import '../../../global/Components/Input/styles.scss';
 import { useContext } from 'react';
 import { FilteringContext } from '../../../contexts/Filtering';
+import '../../../global/Components/Input/styles.scss';
+import './styles.scss';
 
 const SearchBar = ({ children }) => {
   const { setInvisibleQuizzesQuantity } = useContext(FilteringContext);

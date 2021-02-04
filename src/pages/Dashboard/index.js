@@ -1,39 +1,20 @@
-import { useEffect, useState, memo } from 'react';
-import * as api from '../../api/index';
+import { memo } from 'react';
 
-import Nav from './Nav/index';
-import QuizzesList from './QuizzesList/index';
-import SearchBar from './SearchBar/index';
-import DashboardHeader from './DashboardHeader/index';
+import Nav from './Nav';
+import QuizzesList from './QuizzesList';
+import SearchBar from './SearchBar';
+import DashboardHeader from './DashboardHeader';
 import ErrorPage from '../ErrorPage';
-import Layout from '../../global/Components/Layout/index';
-import Loader from '../../global/Components/Loader/index';
-import { SearchIcon } from '../../global/Icons/index';
-
-import './index.scss';
-import { responseTypes } from '../../utils/constants';
+import Layout from '../../global/Components/Layout';
+import Loader from '../../global/Components/Loader';
+import { SearchIcon } from '../../global/Icons';
 import FilteringProvider from '../../contexts/Filtering';
 
-const Dashboard = () => {
-  const [quizzes, setQuizzes] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+import { useQuizzes } from '../../hooks';
+import './index.scss';
 
-  useEffect(async () => {
-    const getQuizzes = async () => {
-      const response = await api.getQuizzes();
-      const { type } = response;
-      if (type === responseTypes.success) {
-        const { quizzes } = response;
-        setQuizzes(quizzes);
-      } else {
-        const { msg } = response;
-        setError(msg);
-      }
-      setLoading(false);
-    };
-    getQuizzes();
-  }, []);
+const Dashboard = () => {
+  const { quizzes, loading, error } = useQuizzes();
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage msg={error} />;

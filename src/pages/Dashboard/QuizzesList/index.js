@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FilteringContext } from '../../../contexts/Filtering';
 import LackOfQuizzesView from '../LackOfQuizzesView';
-import QuizCard from '../QuizCard/index';
+import QuizCard from '../QuizCard';
 import './styles.scss';
 
 const QuizzesList = ({ quizzes }) => {
