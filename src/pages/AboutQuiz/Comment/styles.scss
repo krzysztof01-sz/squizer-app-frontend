@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.comment {
+  background-color: darken($foundation, 5);
+  width: 100%;
+  padding: 10px;
+  border-bottom: 3px solid darken($foundation, 20);
+  margin-bottom: 5vh;
+  .commentInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vh;
+    .comment__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 2vw;
+    }
+    .comment__date {
+      width: 100%;
+      text-align: right;
+      margin-right: 2vw;
+    }
+  }
+}
