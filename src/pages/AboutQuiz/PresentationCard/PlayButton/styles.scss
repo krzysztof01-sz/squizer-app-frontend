@@ -1,0 +1,41 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+a {
+  display: contents;
+  .quizCard__button {
+    border: 1px solid $contrast;
+    width: 30%;
+    margin-right: 10%;
+    @include accessible;
+    &--accessible:focus {
+      background-color: $primary;
+      color: $foundation;
+      border: 2px solid $foundation;
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1599px) {
+  a {
+    .quizCard__button {
+      width: 15%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1920px) {
+  a {
+    .quizCard__button {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  a {
+    .quizCard__button {
+      width: 20%;
+    }
+  }
+}
