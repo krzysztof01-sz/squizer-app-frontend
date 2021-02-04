@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PlusIcon } from '../../../global/Icons/index';
+import { PlusIcon } from '../../../global/Icons';
 import './styles.scss';
 
 const DashboardHeader = () => {
