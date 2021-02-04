@@ -3,19 +3,17 @@
 const NICKNAME_SHORT = 'Nickname is too short';
 const NICKNAME_LONG = 'Nickname is too long';
 const NICKNAME_REQUIRED = 'Nickname is required';
-const USER_PHOTO_REQUIRED = 'User photo is required';
 
 const PASSWORD_SHORT = 'Password is too short';
 const PASSWORD_LONG = 'Password is too long';
 const PASSWORD_REQUIRED = 'Password is required';
 const DIFFERENT_PASSWORDS = 'Passwords are not the same';
 
-const PHOTO_SAVED_IN_DB = 'Photo saved successfully!';
-const PHOTO_COMPRESSING_ERROR =
-  'Compression has failed Try to upload a photo with a smaller file size';
-const PHOTO_EXTENSION_ERROR = 'Choose a file with a right extension (jpg, jpeg or png)';
-const PHOTO_COMPESSING_START = 'Photo compressing...';
-const CHOOSE_YOUR_PHOTO = 'Choose your profile photo';
+const CHOOSE_YOUR_AVATAR = 'Choose your avatar';
+const AVATAR_COMPESSING_START = 'Avatar compressing...';
+const AVATAR_COMPRESSING_ERROR =
+  'Compression has failed. Try to upload an avatar with a smaller file size';
+const AVATAR_EXTENSION_ERROR = 'Choose a file with a right extension (jpg, jpeg or png)';
 
 const REGISTERING_PROCESS = 'Registering...';
 
@@ -39,6 +37,8 @@ const FILL_ALL_DATA = 'Fill all data about the quiz';
 
 const PAGE_DOESNT_EXISTS = `Page doesn't exists`;
 
+const COMMENTS_NOT_FOUND = `Nobody comments this quiz yet.`;
+
 export {
   NICKNAME_SHORT,
   NICKNAME_LONG,
@@ -47,12 +47,10 @@ export {
   PASSWORD_LONG,
   PASSWORD_REQUIRED,
   DIFFERENT_PASSWORDS,
-  USER_PHOTO_REQUIRED,
-  PHOTO_COMPRESSING_ERROR,
-  PHOTO_EXTENSION_ERROR,
-  PHOTO_SAVED_IN_DB,
-  PHOTO_COMPESSING_START,
-  CHOOSE_YOUR_PHOTO,
+  AVATAR_COMPRESSING_ERROR,
+  AVATAR_EXTENSION_ERROR,
+  AVATAR_COMPESSING_START,
+  CHOOSE_YOUR_AVATAR,
   LOGGING_PROCESS,
   LOGOUT_CONFIRMATION,
   JWT_ACCESS_DENIED,
@@ -62,4 +60,5 @@ export {
   NOT_UNIQUE_ANSWERS,
   FILL_ALL_DATA,
   PAGE_DOESNT_EXISTS,
+  COMMENTS_NOT_FOUND,
 };
