@@ -1,6 +1,6 @@
 import './styles.scss';
 
-const ActionResultMessage = ({ msg, type }) => {
+const ActionResultMessage = ({ msg = '', type }) => {
   return <p className={`resultMessage resultMessage-${type}`}>{msg}</p>;
 };
 

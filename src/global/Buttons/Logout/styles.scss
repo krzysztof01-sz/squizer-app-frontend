@@ -4,3 +4,9 @@
   background-color: $primary;
   color: $foundation;
 }
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .logoutButton {
+    width: 140px !important;
+  }
+}
