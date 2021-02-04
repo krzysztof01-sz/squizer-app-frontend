@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/Logo.svg';
 import { AuthContext } from '../../../contexts/Auth';
-import LogoutButton from '../../Buttons/Logout/index';
+import LogoutButton from '../../Buttons/Logout';
 import HeaderLoginButton from './LoginButton';
 import './styles.scss';
 
@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="header">
       <Link tabIndex="-1" to={isLogged ? '/dashboard' : '/'}>
-        <img className="header__logo" src={Logo} />
+        <img className="header__logo" src={Logo} alt="logo" />
       </Link>
       {isLogged ? (
         <>

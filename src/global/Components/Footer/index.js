@@ -5,7 +5,7 @@ import './styles.scss';
 const Footer = () => {
   return (
     <footer className="footer">
-      <p className="footer__text">Krzysztof Szczepański - All rights Reserved {getCurrentYear()}</p>
+      <p className="footer__text">Krzysztof Szczepański - All rights reserved {getCurrentYear()}</p>
     </footer>
   );
 };
