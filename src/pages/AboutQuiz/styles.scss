@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.commentsView {
+  width: 90vw;
+  margin: 5vh auto;
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1599px) {
+  .commentsView {
+    width: 55vw;
+  }
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1920px) {
+  .commentsView {
+    width: 55vw;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .commentsView {
+    width: 40vw;
+  }
+}
