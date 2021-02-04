@@ -4,14 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as yup from 'yup';
 import * as fb from '../../../utils/feedbackMessages';
-import * as api from '../../../api/index';
+import * as api from '../../../api';
 
-import Input from '../../../global/Components/Input/index';
+import Input from '../../../global/Components/Input';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
-import InputValidation from '../../../global/Components/Messages/InputValidationMessage/index';
+import InputValidation from '../../../global/Components/Messages/InputValidationMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
-import LoginButton from '../../../global/Buttons/Login/index';
-import Loader from '../../../global/Components/Loader/index';
+import LoginButton from '../../../global/Buttons/Login';
+import Loader from '../../../global/Components/Loader';
 
 import { AuthContext } from '../../../contexts/Auth';
 import { responseTypes } from '../../../utils/constants';
