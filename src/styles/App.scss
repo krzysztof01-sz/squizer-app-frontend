@@ -34,6 +34,10 @@ ul {
   list-style-type: none;
 }
 
+textarea {
+  font-family: 'Poppins', sans-serif;
+}
+
 @media only screen and (min-width: 1367px) and (max-width: 1920px) {
   :root {
     font-size: 75%;
@@ -42,6 +46,6 @@ ul {
 
 @media only screen and (min-width: 1921px) {
   :root {
-    font-size: 70%;
+    font-size: 80%;
   }
 }
