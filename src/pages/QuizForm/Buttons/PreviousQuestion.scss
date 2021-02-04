@@ -2,8 +2,7 @@
 
 .previousQuestionButton {
   width: 100%;
-  background-color: transparent;
-  color: darken($foundation, 10);
+  color: $contrast;
   font-size: $font-smallXL;
   .arrowLeftIcon {
     margin-right: 10px;

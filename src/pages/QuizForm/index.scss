@@ -3,11 +3,10 @@
 .quizForm__wrapper {
   display: flex;
   flex-direction: column;
-  background-color: $secondary;
   padding: 5vh 0;
   .quizForm__header {
     position: relative;
-    color: $foundation;
+    color: $contrast;
     font-size: $font-mediumXL;
     margin-bottom: 2vh;
     &::before {
@@ -27,15 +26,12 @@
     align-items: flex-start;
     width: 95vw;
     margin-top: 5vh;
-    background-color: darken($secondary, 15);
     .quizDataPart {
       display: flex;
       flex-direction: column;
       margin-bottom: 10vh;
       width: 100%;
       .quizForm__label {
-        margin-bottom: 2vh;
-        color: $foundation;
         .quizForm__input {
           margin-top: 2px;
         }
@@ -49,8 +45,8 @@
         .quizForm__input,
         .quizForm__selectInput,
         .quizForm__textArea {
-          color: $foundation;
-          background-color: lighten($secondary, 20);
+          resize: none;
+          margin-bottom: 2vh;
         }
       }
     }
@@ -58,7 +54,7 @@
       text-align: right;
       width: 100%;
       font-size: $font-small;
-      color: $foundation;
+      color: $contrast;
     }
     .feedbackMessage {
       margin-top: 2vh;
@@ -70,10 +66,7 @@
       width: 100%;
       .quizForm__label {
         margin-bottom: 2vh;
-        color: $foundation;
         .quizForm__input {
-          color: $foundation;
-          background-color: lighten($secondary, 20);
           margin-top: 2px;
         }
       }

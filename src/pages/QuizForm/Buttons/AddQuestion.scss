@@ -13,4 +13,8 @@
     margin-left: 10px;
     font-size: $font-medium;
   }
+  &:focus,
+  &:hover {
+    border: 2px solid $secondary;
+  }
 }

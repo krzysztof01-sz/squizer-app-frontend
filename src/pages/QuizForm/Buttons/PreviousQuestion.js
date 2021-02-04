@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '../../../global/Icons/index';
+import { ArrowLeftIcon } from '../../../global/Icons';
 import './PreviousQuestion.scss';
 
 const PreviousQuestionButton = ({ callback }) => {
