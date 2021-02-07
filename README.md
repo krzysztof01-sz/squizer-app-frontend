@@ -1,10 +1,18 @@
 # squizer-app-frontend
 
-Squizer - a web application that stores away a base of online quizzes
-from many different categories. You can create, manage your quiz or solve those created by other users.
+Squizer - a fullstack JavaScript quiz application.
 
-This repository contains only a frontend part of whole application.
+Implemented features:
+- login and registration
+- dashboard
+- adding quizzes
+- playing in a quizzes
+- adding comments
+- basic accessibility and security
+
+This repository contains only a frontend part of whole project.
 
 # How to start the app?
 
-type: npm start
+cd frontend
+npm start
