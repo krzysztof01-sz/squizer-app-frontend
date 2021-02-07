@@ -1,0 +1,73 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.rankingWrapper {
+  width: 90vw;
+  margin: 3vh auto 0;
+  .ranking__header {
+    font-size: $font-smallXL;
+    margin: 5vh 0;
+  }
+  .chart {
+    margin: 10vh 0 5vh;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: space-between;
+    .chart__bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 18%;
+      height: 100%;
+      .chart__bar-points {
+        text-align: center;
+        margin-top: -30px;
+      }
+      .chart__lineWrapper {
+        position: relative;
+        width: 100%;
+        height: 80%;
+        .bar__line {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          background-color: $primary;
+          &--forUser {
+            background-color: $secondary;
+          }
+        }
+      }
+      .bar__data {
+        width: 100%;
+        height: 20%;
+        @include flexCenter;
+        flex-direction: column;
+        .data__avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .data__nickname {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .rankingList {
+    @include flexCenter;
+    flex-direction: column;
+    .rankingList__item {
+      @include flexCenter;
+      align-self: flex-start;
+      margin-bottom: 2vh;
+      .data__avatar {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
