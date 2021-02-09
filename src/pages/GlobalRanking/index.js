@@ -2,7 +2,7 @@ import Layout from '../../global/Components/Layout';
 import ErrorPage from '../ErrorPage';
 import Loader from '../../global/Components/Loader';
 import Chart from './Chart';
-import RankingHeader from './RankingHeader.js';
+import RankingHeader from './RankingHeader';
 import RankingList from './RankingList';
 import { useUsers } from '../../hooks';
 import './index.scss';
@@ -15,12 +15,16 @@ const Ranking = () => {
 
   return (
     <Layout>
-      <section className="rankingWrapper">
-        <RankingHeader>Top players 🏆</RankingHeader>
-        <Chart users={users} />
+      <section className="statsWrapper">
+        <section className="chartWrapper">
+          <RankingHeader>Top players 🏆</RankingHeader>
+          <Chart users={users} />
+        </section>
 
-        <RankingHeader>Global ranking</RankingHeader>
-        <RankingList users={users} />
+        <section className="rankingWrapper">
+          <RankingHeader>Global ranking</RankingHeader>
+          <RankingList users={users} />
+        </section>
       </section>
     </Layout>
   );
