@@ -141,3 +141,26 @@ export const getQuizComments = async (quizId) => {
   const result = await response.json();
   return result;
 };
+
+export const getAllUsers = async () => {
+  const response = await fetch(`${baseURL}/api/users`, getRequestObject());
+
+  const result = await response.json();
+  return result;
+};
+
+export const updateUserAfterGame = async (quizId, points) => {
+  const response = await fetch(`${baseURL}/api/users`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'auth-token': localStorage.getItem('auth-token'),
+    },
+
+    body: JSON.stringify({ quizId, points }),
+  });
+
+  const result = await response.json();
+  return result;
+};
