@@ -6,7 +6,7 @@ const ChartBar = ({ user: { nickname, points, avatar }, loading, barHeight }) =>
   return (
     <div className="chart__bar">
       <div className="chart__lineWrapper">
-        <div style={{ height: `${barHeight}%` }} className={`bar__line`}>
+        <div style={{ height: `${barHeight}%` }} className="bar__line">
           <p className="chart__bar-points">{points} pt</p>
         </div>
       </div>

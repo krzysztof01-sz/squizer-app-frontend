@@ -1,0 +1,19 @@
+@import '../../../styles/mixins.scss';
+
+.rankingList__item {
+  @include flexCenter;
+  align-self: flex-start;
+  margin-bottom: 3vh;
+  .data__avatar {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .rankingList__item {
+    margin-bottom: 4vh;
+  }
+}
