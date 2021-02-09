@@ -7,9 +7,10 @@ import SplashScreen from './pages/SplashScreen';
 import Dashboard from './pages/Dashboard';
 import QuizGame from './pages/QuizGame';
 import QuizForm from './pages/QuizForm';
-import AuthProvider, { AuthContext } from './contexts/Auth';
 import ErrorPage from './pages/ErrorPage';
 import AboutQuiz from './pages/AboutQuiz';
+import Ranking from './pages/GlobalRanking';
+import AuthProvider, { AuthContext } from './contexts/Auth';
 import * as fb from './utils/feedbackMessages';
 import './styles/App.scss';
 
@@ -17,6 +18,7 @@ const wrapper = document.querySelector('.app');
 
 const App = () => {
   const { isLogged } = useContext(AuthContext);
+
   return (
     <React.StrictMode>
       <Router>
@@ -28,8 +30,13 @@ const App = () => {
           <Route path="/login">{isLogged ? <Redirect to="/dashboard" /> : <LoginForm />}</Route>
           <Route path="/dashboard">{isLogged ? <Dashboard /> : <Redirect to="/login" />}</Route>
           <Route path="/quizform">{isLogged ? <QuizForm /> : <Redirect to="/login" />}</Route>
-          <Route path="/quiz/:quizId/play">{isLogged ? <QuizGame /> : <Redirect to="/login" />}</Route>
-          <Route path="/quiz/:quizId/about">{isLogged ? <AboutQuiz /> : <Redirect to="/login" />} </Route>
+          <Route path="/quiz/:quizId/play">
+            {isLogged ? <QuizGame /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/quiz/:quizId/about">
+            {isLogged ? <AboutQuiz /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/ranking">{isLogged ? <Ranking /> : <Redirect to="/login" />}</Route>
           <Route>
             <ErrorPage msg={fb.PAGE_DOESNT_EXISTS} />
           </Route>
