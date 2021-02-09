@@ -26,8 +26,18 @@ const Form = () => {
   const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
-    nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
-    password: yup.string().trim().min(8, fb.PASSWORD_SHORT).max(15, fb.PASSWORD_LONG).required(fb.PASSWORD_REQUIRED),
+    nickname: yup
+      .string()
+      .trim()
+      .min(3, fb.NICKNAME_SHORT)
+      .max(15, fb.NICKNAME_LONG)
+      .required(fb.NICKNAME_REQUIRED),
+    password: yup
+      .string()
+      .trim()
+      .min(8, fb.PASSWORD_SHORT)
+      .max(15, fb.PASSWORD_LONG)
+      .required(fb.PASSWORD_REQUIRED),
   });
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -70,10 +80,24 @@ const Form = () => {
       <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
         <section className="form">
           <header className="form__header">Login form</header>
-          <Input labelName="nickname" register={register({ required: true })} type="text" name="nickname" min="3" max="15" />
+          <Input
+            labelName="nickname"
+            register={register({ required: true })}
+            type="text"
+            name="nickname"
+            min="3"
+            max="15"
+          />
           <InputValidation message={errors.nickname?.message} />
 
-          <Input labelName="password" register={register({ required: true })} type="password" name="password" min="8" max="15" />
+          <Input
+            labelName="password"
+            register={register({ required: true })}
+            type="password"
+            name="password"
+            min="8"
+            max="15"
+          />
           <InputValidation message={errors.password?.message} />
 
           <ProcessMessage message={process} />

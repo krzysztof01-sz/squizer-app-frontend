@@ -141,3 +141,26 @@ export const useQuizComments = (quizId) => {
 
   return { comments, error, loading };
 };
+
+export const useUsers = () => {
+  const [users, setUsers] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const response = await api.getAllUsers();
+        if (response.type === responseTypes.error) throw response.msg;
+        setUsers(response.users);
+      } catch (e) {
+        setError(e);
+      }
+
+      setLoading(false);
+    };
+    getAllUsers();
+  }, []);
+
+  return { users, error, loading };
+};
