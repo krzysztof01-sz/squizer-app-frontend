@@ -7,7 +7,8 @@ Implemented features:
 - dashboard
 - adding quizzes
 - playing in a quizzes
-- adding comments
+- scoring and ranking system
+- adding comments under the quiz
 - basic accessibility and security
 
 This repository contains only a frontend part of whole project.
