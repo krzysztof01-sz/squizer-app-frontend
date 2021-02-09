@@ -38,12 +38,12 @@ export const formatDate = (date) => {
   return dayjs(date).format('MMMM D, YYYY h:mm A');
 };
 
-export const shortenDescription = (description = '') => {
-  if (description.length > maxDescrptionLengthOnCard) {
-    description = description.slice(0, maxDescrptionLengthOnCard).concat('...');
+export const shortenText = (text, length) => {
+  if (text.length > length) {
+    text = text.slice(0, length).concat('...');
   }
 
-  return description;
+  return text;
 };
 
 export const shuffleArray = (arr) => {
