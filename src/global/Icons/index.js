@@ -3,6 +3,7 @@ import {
   faArrowCircleRight,
   faArrowLeft,
   faArrowRight,
+  faChartBar,
   faChevronDown,
   faFlagCheckered,
   faPlusCircle,
@@ -35,4 +36,8 @@ export const ArrowLeftIcon = () => {
 
 export const FinishIcon = () => {
   return <FontAwesomeIcon className="finishQuizIcon" icon={faFlagCheckered} />;
+};
+
+export const ChartBarIcon = () => {
+  return <FontAwesomeIcon className="chartBarIcon" icon={faChartBar} />;
 };
