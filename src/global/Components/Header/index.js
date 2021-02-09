@@ -20,6 +20,9 @@ const Header = () => {
               <Link to="/quizform">
                 <li className="nav__item">add a new quiz</li>
               </Link>
+              <Link to="/ranking">
+                <li className="nav__item">ranking</li>
+              </Link>
               <li className="nav__item">user profile</li>
               <li className="nav__item">about</li>
             </ul>
