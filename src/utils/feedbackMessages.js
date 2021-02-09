@@ -38,6 +38,7 @@ const FILL_ALL_DATA = 'Fill all data about the quiz';
 const PAGE_DOESNT_EXISTS = `Page doesn't exists`;
 
 const COMMENTS_NOT_FOUND = `Nobody comments this quiz yet.`;
+const UPDATING_USER_RESULT_ERROR = `Your result cannot be updated. Try again later.`;
 
 export {
   NICKNAME_SHORT,
@@ -61,4 +62,5 @@ export {
   FILL_ALL_DATA,
   PAGE_DOESNT_EXISTS,
   COMMENTS_NOT_FOUND,
+  UPDATING_USER_RESULT_ERROR,
 };
