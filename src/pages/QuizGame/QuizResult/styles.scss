@@ -1,6 +1,12 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
+.errorMessage {
+  font-size: $font-medium;
+  text-align: center;
+  margin: 4vh 0;
+}
+
 .quizResult {
   width: 90%;
   margin: 0 auto;

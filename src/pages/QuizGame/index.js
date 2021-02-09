@@ -8,19 +8,26 @@ import QuizResult from './QuizResult';
 import Layout from '../../global/Components/Layout';
 import Loader from '../../global/Components/Loader';
 import ErrorPage from '../ErrorPage';
+import ErrorMessage from '../../global/Components/Messages/ErrorMessage';
 
 import PreviousQuestionButton from './Buttons/PreviousQuestion';
 import NextQuestionButton from './Buttons/NextQuestion';
 import FinishQuizButton from './Buttons/FinishQuiz';
+
 import { useQuestions } from '../../hooks';
+import { responseTypes } from '../../utils/constants';
+import * as fb from '../../utils/feedbackMessages';
+import * as api from '../../api';
 import './index.scss';
 
 const QuizGame = () => {
   const { quizId } = useParams();
-  const [userAnswers, setUserAnswers] = useState([]);
-  const [questionID, setQuestionID] = useState(0);
-  const [correctUserAnswersQuantity, setCorrectUserAnswersQuantity] = useState(false);
   const { questions, loading, error } = useQuestions(quizId);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [correctUserAnswersQuantity, setCorrectUserAnswersQuantity] = useState(false);
+  const [questionID, setQuestionID] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [updatingError, setUpdatingError] = useState(null);
 
   useEffect(() => setUserAnswers(new Array(questions.length).fill(undefined)), [loading]);
 
@@ -72,7 +79,7 @@ const QuizGame = () => {
 
   const quizNotFinished = typeof correctUserAnswersQuantity === 'boolean';
 
-  if (loading) return <Loader />;
+  if (loading || isSubmitting) return <Loader />;
   if (error) return <ErrorPage msg={error} />;
 
   if (quizNotFinished) {
@@ -115,9 +122,19 @@ const QuizGame = () => {
               <NextQuestionButton setQuestion={() => setQuestionID(questionID + 1)} />
             ) : (
               <FinishQuizButton
-                checkAnswers={() => {
+                callback={async () => {
                   const result = checkAnswers(userAnswers);
-                  if (typeof result === 'number') return setCorrectUserAnswersQuantity(result);
+                  if (typeof result === 'number') {
+                    setIsSubmitting(true);
+                    const { type } = await api.updateUserAfterGame(quizId, result);
+                    setIsSubmitting(false);
+
+                    setCorrectUserAnswersQuantity(result);
+
+                    if (type === responseTypes.error) {
+                      return setUpdatingError(fb.UPDATING_USER_RESULT_ERROR);
+                    }
+                  }
                 }}
               />
             )}
@@ -128,6 +145,7 @@ const QuizGame = () => {
   } else
     return (
       <Layout>
+        <ErrorMessage message={updatingError} />
         <QuizResult
           userAnswers={userAnswers}
           questions={questions}

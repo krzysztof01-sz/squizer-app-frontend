@@ -1,9 +1,9 @@
 import { FinishIcon } from '../../../global/Icons';
 import './FinishQuiz.scss';
 
-const FinishQuizButton = ({ checkAnswers }) => {
+const FinishQuizButton = ({ callback }) => {
   return (
-    <button onClick={checkAnswers} className="button finishQuizButton">
+    <button onClick={callback} className="button finishQuizButton">
       Finish <FinishIcon />
     </button>
   );
