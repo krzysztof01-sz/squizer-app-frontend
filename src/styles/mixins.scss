@@ -8,6 +8,12 @@
   }
 }
 
+@mixin avatar($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
 @mixin flexCenter {
   display: flex;
   justify-content: center;
