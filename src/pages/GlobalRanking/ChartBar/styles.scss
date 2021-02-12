@@ -36,9 +36,7 @@
     @include flexCenter;
     flex-direction: column;
     .data__avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      @include avatar(40px);
     }
     .data__nickname {
       white-space: nowrap;

@@ -5,10 +5,8 @@
   align-self: flex-start;
   margin-bottom: 3vh;
   .data__avatar {
-    width: 30px;
-    height: 30px;
+    @include avatar(30px);
     margin-left: 10px;
-    border-radius: 50%;
   }
 }
 
