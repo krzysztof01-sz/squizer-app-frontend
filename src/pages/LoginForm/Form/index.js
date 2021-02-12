@@ -12,6 +12,7 @@ import InputValidation from '../../../global/Components/Messages/InputValidation
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import LoginButton from '../../../global/Buttons/Login';
 import Loader from '../../../global/Components/Loader';
+import SectionHeader from '../../../global/Components/SectionHeader';
 
 import { AuthContext } from '../../../contexts/Auth';
 import { responseTypes } from '../../../utils/constants';
@@ -79,7 +80,7 @@ const Form = () => {
     return (
       <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
         <section className="form">
-          <header className="form__header">Login form</header>
+          <SectionHeader isCenter={true}>Login form</SectionHeader>
           <Input
             labelName="nickname"
             register={register({ required: true })}
