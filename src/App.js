@@ -11,6 +11,7 @@ import ErrorPage from './pages/ErrorPage';
 import AboutQuiz from './pages/AboutQuiz';
 import Ranking from './pages/GlobalRanking';
 import AuthProvider, { AuthContext } from './contexts/Auth';
+import UserProfile from './pages/UserProfile';
 import * as fb from './utils/feedbackMessages';
 import './styles/App.scss';
 
@@ -37,6 +38,7 @@ const App = () => {
             {isLogged ? <AboutQuiz /> : <Redirect to="/login" />}
           </Route>
           <Route path="/ranking">{isLogged ? <Ranking /> : <Redirect to="/login" />}</Route>
+          <Route path="/profile">{isLogged ? <UserProfile /> : <Redirect to="/login" />}</Route>
           <Route>
             <ErrorPage msg={fb.PAGE_DOESNT_EXISTS} />
           </Route>
