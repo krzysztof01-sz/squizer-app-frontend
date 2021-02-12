@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.sectionHeader {
+  font-weight: normal;
+  font-size: $font-medium;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 5vh;
+}
+
+.center {
+  text-align: center;
+}
