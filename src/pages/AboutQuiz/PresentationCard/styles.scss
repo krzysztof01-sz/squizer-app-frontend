@@ -23,9 +23,7 @@
         position: absolute;
         bottom: 20px;
         right: 10px;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
+        @include avatar(70px);
       }
     }
 
