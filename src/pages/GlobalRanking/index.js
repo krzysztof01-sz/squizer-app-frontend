@@ -2,9 +2,9 @@ import Layout from '../../global/Components/Layout';
 import ErrorPage from '../ErrorPage';
 import Loader from '../../global/Components/Loader';
 import Chart from './Chart';
-import RankingHeader from './RankingHeader';
 import RankingList from './RankingList';
 import { useUsers } from '../../hooks';
+import SectionHeader from '../../global/Components/SectionHeader';
 import './index.scss';
 
 const Ranking = () => {
@@ -17,12 +17,12 @@ const Ranking = () => {
     <Layout>
       <section className="statsWrapper">
         <section className="chartWrapper">
-          <RankingHeader>Top players 🏆</RankingHeader>
+          <SectionHeader>Top players 🏆</SectionHeader>
           <Chart users={users} />
         </section>
 
         <section className="rankingWrapper">
-          <RankingHeader>Global ranking</RankingHeader>
+          <SectionHeader>Global ranking</SectionHeader>
           <RankingList users={users} />
         </section>
       </section>
