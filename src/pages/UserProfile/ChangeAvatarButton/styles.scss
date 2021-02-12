@@ -1,0 +1,12 @@
+@import '../../../styles/mixins.scss';
+
+.profile__buttonWrapper {
+  @include flexCenter;
+  margin-top: 5px;
+  .profile__button {
+    margin: 0 5px;
+  }
+  .iconWrapper {
+    @include flexCenter;
+  }
+}

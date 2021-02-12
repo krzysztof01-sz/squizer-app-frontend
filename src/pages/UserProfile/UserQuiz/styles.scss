@@ -1,0 +1,52 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+.userQuiz {
+  padding: 20px 10px 15px;
+  border-radius: 10px;
+  background-color: darken($foundation, 5);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-bottom: 5vh;
+  &__title {
+    font-weight: bold;
+    font-size: $font-smallXL;
+    margin-bottom: 10px;
+  }
+  &__description {
+    margin-bottom: 10px;
+    font-size: $font-mini;
+  }
+  .userQuiz__actionsBar {
+    @include flexCenter;
+    justify-content: space-between;
+    .iconsWrapper {
+      @include flexCenter;
+      justify-content: space-between;
+      width: 20%;
+    }
+    .userQuiz__button {
+      width: 100px;
+      padding: 5px;
+      background-color: $secondary;
+      color: $foundation;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .userQuiz {
+    padding: 25px 15px 20px;
+    .userQuiz__actionsBar {
+      .iconsWrapper {
+        width: 15%;
+      }
+    }
+    .userQuiz__button {
+      width: 100px;
+      padding: 5px;
+      margin-top: 10px;
+      background-color: $secondary;
+      color: $foundation;
+    }
+  }
+}

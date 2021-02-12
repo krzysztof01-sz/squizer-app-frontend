@@ -1,0 +1,75 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: 0 auto;
+  .userData {
+    width: 300px;
+    margin-top: 3vh;
+    @include flexCenter;
+    .userData__profile {
+      @include flexCenter;
+      flex-direction: column;
+      width: 50%;
+      margin-right: 5%;
+    }
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 999px) {
+  .pageWrapper {
+    width: 70vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .pageWrapper {
+    flex-direction: row;
+    justify-content: space-around;
+    .page__secondPart {
+      padding: 10px;
+      height: 80vh;
+      overflow-y: scroll;
+      width: 45%;
+      margin: 5vh 5% 0 0;
+    }
+    .page__secondPart::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    .page__secondPart::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: lighten($primary, 10);
+    }
+
+    .page__secondPart::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: lighten($secondary, 10);
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .pageWrapper {
+    width: 90vw;
+    .page__firstPart {
+      width: 45%;
+      margin-left: 5%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .pageWrapper {
+    width: 80vw;
+    .page__firstPart {
+      margin: 0;
+      .userData {
+        width: 500px;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import '../../../styles/mixins.scss';
+
+.correctAnswersBar {
+  width: 300px;
+  height: 45px;
+  margin: 7vh 0;
+  border-radius: 10px;
+  color: $foundation;
+  background-color: $primary;
+  .progressBar {
+    @include flexCenter;
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    font-size: $font-miniXL;
+    letter-spacing: $letter-spacing-small;
+    background-color: $secondary;
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .correctAnswersBar {
+    width: 500px;
+    height: 55px;
+    .progressBar {
+      font-size: $font-small;
+    }
+  }
+}

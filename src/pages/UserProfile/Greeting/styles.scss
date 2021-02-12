@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.greeting {
+  margin: 5vh 0 2vh;
+  font-size: $font-medium;
+  font-weight: normal;
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .greeting {
+    font-size: $font-mediumXL;
+  }
+}

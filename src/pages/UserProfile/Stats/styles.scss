@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.userData__stats {
+  width: 45%;
+}
+
+@media only screen and (min-width: 1367px) {
+  .userData__stats {
+    font-size: $font-smallXL;
+  }
+}
