@@ -1,4 +1,5 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .quizCard {
   width: 100%;
@@ -16,9 +17,7 @@
       position: absolute;
       bottom: 10px;
       right: 10px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
+      @include avatar(70px);
     }
   }
   .quizCard__info {
@@ -84,8 +83,7 @@
     .quizCard__categoryImageWrapper {
       height: 400px;
       .quizCard__avatar {
-        width: 100px;
-        height: 100px;
+        @include avatar(100px);
       }
     }
     .quizCard__info {
