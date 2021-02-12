@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as api from '../../../api';
 
@@ -39,11 +39,6 @@ const Form = () => {
   const [authError, setAuthError] = useState(null);
   const [messages, setMessages] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
-
-  useEffect(() => console.log(authError), [authError]);
-  useEffect(() => console.log(validationErrors), [validationErrors]);
-  useEffect(() => console.log(messages), [messages]);
-  useEffect(() => console.log(questions), [questions]);
 
   const getCurrentQuestionsContents = () => {
     const currentQuestionsContents = [];
