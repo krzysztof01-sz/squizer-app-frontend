@@ -23,7 +23,9 @@ const Header = () => {
               <Link to="/ranking">
                 <li className="nav__item">ranking</li>
               </Link>
-              <li className="nav__item">user profile</li>
+              <Link to="/profile">
+                <li className="nav__item">user profile</li>
+              </Link>
               <li className="nav__item">about</li>
             </ul>
           </nav>
