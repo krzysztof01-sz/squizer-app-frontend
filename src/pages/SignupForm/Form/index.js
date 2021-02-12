@@ -24,6 +24,7 @@ import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 
 import { responseTypes } from '../../../utils/constants';
 import './styles.scss';
+import SectionHeader from '../../../global/Components/SectionHeader';
 
 const Form = () => {
   const history = useHistory();
@@ -36,8 +37,18 @@ const Form = () => {
   const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
-    nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
-    password: yup.string().trim().min(8, fb.PASSWORD_SHORT).max(15, fb.PASSWORD_LONG).required(fb.PASSWORD_REQUIRED),
+    nickname: yup
+      .string()
+      .trim()
+      .min(3, fb.NICKNAME_SHORT)
+      .max(15, fb.NICKNAME_LONG)
+      .required(fb.NICKNAME_REQUIRED),
+    password: yup
+      .string()
+      .trim()
+      .min(8, fb.PASSWORD_SHORT)
+      .max(15, fb.PASSWORD_LONG)
+      .required(fb.PASSWORD_REQUIRED),
     confirmedPassword: yup.string().oneOf([yup.ref('password'), null], fb.DIFFERENT_PASSWORDS),
   });
 
@@ -119,14 +130,35 @@ const Form = () => {
     return (
       <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
         <section className="form">
-          <header className="form__header">Registration form</header>
-          <Input labelName="nickname" register={register({ required: true })} type="text" name="nickname" min="3" max="15" />
+          <SectionHeader isCenter={true}>Registration form</SectionHeader>
+          <Input
+            labelName="nickname"
+            register={register({ required: true })}
+            type="text"
+            name="nickname"
+            min="3"
+            max="15"
+          />
           <InputValidation message={errors.nickname?.message} />
 
-          <Input labelName="password" register={register({ required: true })} type="password" name="password" min="8" max="15" />
+          <Input
+            labelName="password"
+            register={register({ required: true })}
+            type="password"
+            name="password"
+            min="8"
+            max="15"
+          />
           <InputValidation message={errors.password?.message} />
 
-          <Input labelName="confirm the password" register={register({ required: true })} type="password" name="confirmedPassword" min="8" max="15" />
+          <Input
+            labelName="confirm the password"
+            register={register({ required: true })}
+            type="password"
+            name="confirmedPassword"
+            min="8"
+            max="15"
+          />
           <InputValidation message={errors.confirmedPassword?.message} />
 
           <AvatarPreview preview={preview} />
