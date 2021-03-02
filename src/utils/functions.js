@@ -1,12 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { firebaseStorage } from '../../config/firebase';
 import compress from 'browser-image-compression';
-import {
-  maxDescrptionLengthOnCard,
-  prefferedImageExtensions,
-  compressionOptions,
-} from './constants';
+import { prefferedImageExtensions, compressionOptions } from './constants';
 
 dayjs.extend(relativeTime);
 
@@ -22,15 +17,6 @@ export const compressPhoto = async (photo) => {
     return compressedPhoto;
   } catch (err) {
     return false;
-  }
-};
-
-export const saveAvatarInDB = async (avatar, name) => {
-  try {
-    const snapshot = await firebaseStorage.ref(`avatars/${name}`).put(avatar);
-    return snapshot.state;
-  } catch (err) {
-    return err.message;
   }
 };
 
