@@ -95,11 +95,11 @@ export const useQuizCard = (quizId) => {
         const response = await api.getQuiz(id);
         const { type } = response;
 
-        if (type === responseTypes.success) {
-          setQuiz(response.data);
-        } else {
+        if (type === responseTypes.error) {
           throw response.msg;
         }
+
+        setQuiz(response.data);
 
         const { createdBy, category } = response.data;
         const user = await api.getUserById(createdBy);
@@ -163,4 +163,68 @@ export const useUsers = () => {
   }, []);
 
   return { users, error, loading };
+};
+
+export const useUserProfile = () => {
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getProfileData = async () => {
+      try {
+        const profileData = await api.getProfileData();
+        if (profileData.type === responseTypes.error) throw profileData.msg;
+
+        const userId = profileData.user._id;
+
+        const userQuizzes = await api.getUserQuizzes(userId);
+        if (userQuizzes.type === responseTypes.error) throw userQuizzes.msg;
+
+        const userCorrectAnswersRate = await api.getUserCorrectAnswersRate(userId);
+        if (userCorrectAnswersRate.type === responseTypes.error) throw userCorrectAnswersRate.msg;
+
+        profileData.user.quizzes = userQuizzes.quizzes;
+        profileData.user.correctAnswersRate = userCorrectAnswersRate.correctAnswersRate;
+
+        if (profileData.type === responseTypes.success) {
+          setProfileData(profileData);
+        } else {
+          throw profileData.msg;
+        }
+      } catch (e) {
+        setError(e);
+      }
+
+      setLoading(false);
+    };
+    getProfileData();
+  }, []);
+
+  return { user: profileData?.user, error, loading };
+};
+
+export const useQuiz = (quizId) => {
+  const [quiz, setQuiz] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getQuiz = async (id) => {
+      try {
+        const response = await api.getQuiz(id);
+        if (response.type === responseTypes.error) {
+          throw response.msg;
+        }
+        setQuiz(response.data);
+      } catch (e) {
+        setError(e);
+      }
+
+      setLoading(false);
+    };
+    getQuiz(quizId);
+  }, []);
+
+  return { quiz, error, loading };
 };
