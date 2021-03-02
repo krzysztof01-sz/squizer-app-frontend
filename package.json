@@ -58,7 +58,7 @@
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@hookform/resolvers": "^1.0.0",
     "browser-image-compression": "^1.0.12",
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.26.14",
     "browser-sync-webpack-plugin": "^2.2.2",
     "dayjs": "^1.10.4",
     "firebase": "^8.0.0",

@@ -15,14 +15,14 @@
   &__description {
     margin-bottom: 10px;
     font-size: $font-mini;
+    word-wrap: break-word;
   }
   .userQuiz__actionsBar {
     @include flexCenter;
     justify-content: space-between;
     .iconsWrapper {
-      @include flexCenter;
-      justify-content: space-between;
       width: 20%;
+      margin-top: 5px;
     }
     .userQuiz__button {
       width: 100px;
