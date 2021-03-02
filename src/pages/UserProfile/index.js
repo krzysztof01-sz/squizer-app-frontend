@@ -5,30 +5,53 @@ import CorrectAnswersBar from './CorrectAnswersBar';
 import Greeting from './Greeting';
 import Stats from './Stats';
 import UserQuizzesList from './UserQuizzesList';
+import { useUserProfile } from '../../hooks';
+import Loader from '../../global/Components/Loader';
+import ErrorPage from '../ErrorPage';
+import SectionHeader from '../../global/Components/SectionHeader';
+import Nav from '../Dashboard/Nav';
 import './index.scss';
-
-import DefaultAvatar from '../../assets/images/DefaultAvatar.png';
+import { useState } from 'react';
+import ChangeAvatarModal from './ChangeAvatarModal';
 
 const UserProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user, error, loading } = useUserProfile();
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage msg={error} />;
+
   return (
     <Layout>
       <main className="pageWrapper">
+        <Nav />
+        <ChangeAvatarModal
+          shouldDefaultOptionRender={user.avatarType === 'custom'}
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          userId={user._id}
+        />
+
         <section className="page__firstPart">
-          <Greeting name="Krzysiek" />
+          <Greeting name={user.nickname} />
 
           <section className="userData">
             <div className="userData__profile">
-              <Avatar src={DefaultAvatar} />
-              <ChangeAvatarButton />
+              <Avatar userId={user._id} />
+              <ChangeAvatarButton onClickCallback={() => setIsModalOpen(!isModalOpen)} />
             </div>
-            <Stats rankingPlace={4} usersQuantity={20} points={100} />
+            <Stats rankingPlace={user.rankingPlace} points={user.points} />
           </section>
 
-          <CorrectAnswersBar percent={60} />
+          <CorrectAnswersBar percent={user.correctAnswersRate} />
         </section>
 
         <section className="page__secondPart">
-          <UserQuizzesList />
+          {user.quizzes?.length === 0 ? (
+            <SectionHeader isCenter={true}>You haven't created any quizzes yet.</SectionHeader>
+          ) : (
+            <UserQuizzesList userQuizzes={user.quizzes} />
+          )}
         </section>
       </main>
     </Layout>

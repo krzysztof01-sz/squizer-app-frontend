@@ -7,7 +7,7 @@
   width: 90vw;
   margin: 0 auto;
   .userData {
-    width: 300px;
+    width: 100%;
     margin-top: 3vh;
     @include flexCenter;
     .userData__profile {
@@ -29,6 +29,9 @@
   .pageWrapper {
     flex-direction: row;
     justify-content: space-around;
+    .userData {
+      width: 350px;
+    }
     .page__secondPart {
       padding: 10px;
       height: 80vh;
