@@ -4,13 +4,14 @@ import {
   faArrowLeft,
   faArrowRight,
   faChartBar,
+  faCheck,
   faChevronDown,
   faFlagCheckered,
   faPlusCircle,
   faSearch,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import cameraIcon from './camera.svg';
-import editIcon from './edit.svg';
 import binIcon from './bin.svg';
 
 export const ChevronIcon = () => {
@@ -49,10 +50,14 @@ export const CameraIcon = () => {
   return <img src={cameraIcon} alt="camera icon" />;
 };
 
-export const EditIcon = () => {
-  return <img src={editIcon} alt="edit icon" />;
-};
-
 export const BinIcon = () => {
   return <img src={binIcon} alt="bin icon" />;
+};
+
+export const ExitIcon = () => {
+  return <FontAwesomeIcon className="exitIcon" icon={faTimes} />;
+};
+
+export const CheckIcon = () => {
+  return <FontAwesomeIcon className="checkIcon" icon={faCheck} />;
 };
