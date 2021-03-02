@@ -40,6 +40,8 @@ const PAGE_DOESNT_EXISTS = `Page doesn't exists`;
 const COMMENTS_NOT_FOUND = `Nobody comments this quiz yet.`;
 const UPDATING_USER_RESULT_ERROR = `Your result cannot be updated. Try again later.`;
 
+const UPDATING_AVATAR_ERROR = `Couldn't update an avatar. Try again later.`;
+
 export {
   NICKNAME_SHORT,
   NICKNAME_LONG,
@@ -63,4 +65,5 @@ export {
   PAGE_DOESNT_EXISTS,
   COMMENTS_NOT_FOUND,
   UPDATING_USER_RESULT_ERROR,
+  UPDATING_AVATAR_ERROR,
 };
