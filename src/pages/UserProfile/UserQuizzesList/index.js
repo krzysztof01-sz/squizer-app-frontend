@@ -6,11 +6,9 @@ const UserQuizzesList = ({ userQuizzes }) => {
   return (
     <section className="userQuizzes">
       <SectionHeader>Your quizzes</SectionHeader>
-      <UserQuiz />
-      <UserQuiz />
-      <UserQuiz />
-      <UserQuiz />
-      <UserQuiz />
+      {userQuizzes.map((quiz) => {
+        return <UserQuiz key={quiz._id} quizId={quiz._id} />;
+      })}
     </section>
   );
 };
