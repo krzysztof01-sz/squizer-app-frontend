@@ -4,9 +4,42 @@ import DefaultAvatar from '../assets/images/DefaultAvatar.png';
 
 const baseURL = 'http://localhost:8080';
 
-const getRequestObject = () => {
+const getBasicRequestObject = () => {
   return {
     headers: {
+      'auth-token': localStorage.getItem('auth-token'),
+    },
+  };
+};
+
+const getPostRequestObject = () => {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'auth-token': localStorage.getItem('auth-token'),
+    },
+  };
+};
+
+const getAuthRequestObject = (csrfToken) => {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'CSRF-Token': csrfToken,
+    },
+  };
+};
+
+const getUpdateRequestObject = () => {
+  return {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
       'auth-token': localStorage.getItem('auth-token'),
     },
   };
@@ -20,12 +53,7 @@ export const getToken = async () => {
 
 export const registerUser = async (formData, csrfToken) => {
   const feedback = await fetch(`${baseURL}/auth/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'CSRF-Token': csrfToken,
-    },
+    ...getAuthRequestObject(csrfToken),
     body: JSON.stringify({ ...formData }),
   });
 
@@ -35,12 +63,7 @@ export const registerUser = async (formData, csrfToken) => {
 
 export const loginUser = async (formData, csrfToken) => {
   const feedback = await fetch(`${baseURL}/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'CSRF-Token': csrfToken,
-    },
+    ...getAuthRequestObject(csrfToken),
     body: JSON.stringify({ ...formData }),
   });
 
@@ -54,7 +77,7 @@ export const logoutUser = () => {
 };
 
 export const getUserById = async (userId) => {
-  const response = await fetch(`${baseURL}/api/users/${userId}`, getRequestObject());
+  const response = await fetch(`${baseURL}/api/users/${userId}`, getBasicRequestObject());
   const data = await response.json();
 
   const { type, user } = data;
@@ -77,7 +100,7 @@ export const getUserById = async (userId) => {
 };
 
 export const getQuizzes = async () => {
-  const quizzes = await fetch(`${baseURL}/api/quizzes`, getRequestObject());
+  const quizzes = await fetch(`${baseURL}/api/quizzes`, getBasicRequestObject());
   const response = await quizzes.json();
   return response;
 };
@@ -94,12 +117,7 @@ export const getCategoryImage = async (moduleName) => {
 
 export const addQuiz = async (quiz) => {
   const result = await fetch(`${baseURL}/api/quizzes`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
-    },
+    ...getPostRequestObject(),
     body: JSON.stringify({ ...quiz }),
   });
 
@@ -108,13 +126,13 @@ export const addQuiz = async (quiz) => {
 };
 
 export const getQuizQuestions = async (quizId) => {
-  const data = await fetch(`${baseURL}/api/quizzes/${quizId}/questions`, getRequestObject());
+  const data = await fetch(`${baseURL}/api/quizzes/${quizId}/questions`, getBasicRequestObject());
   const response = await data.json();
   return response;
 };
 
 export const getQuiz = async (id) => {
-  const response = await fetch(`${baseURL}/api/quizzes/${id}`, getRequestObject());
+  const response = await fetch(`${baseURL}/api/quizzes/${id}`, getBasicRequestObject());
   const data = await response.json();
 
   return data;
@@ -122,12 +140,7 @@ export const getQuiz = async (id) => {
 
 export const addComment = async (comment) => {
   const response = await fetch(`${baseURL}/api/comments`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
-    },
+    ...getPostRequestObject(),
     body: JSON.stringify({ ...comment }),
   });
 
@@ -136,14 +149,17 @@ export const addComment = async (comment) => {
 };
 
 export const getQuizComments = async (quizId) => {
-  const response = await fetch(`${baseURL}/api/quizzes/${quizId}/comments`, getRequestObject());
+  const response = await fetch(
+    `${baseURL}/api/quizzes/${quizId}/comments`,
+    getBasicRequestObject(),
+  );
 
   const result = await response.json();
   return result;
 };
 
 export const getAllUsers = async () => {
-  const response = await fetch(`${baseURL}/api/users`, getRequestObject());
+  const response = await fetch(`${baseURL}/api/users`, getBasicRequestObject());
 
   const result = await response.json();
   return result;
@@ -151,16 +167,75 @@ export const getAllUsers = async () => {
 
 export const updateUserAfterGame = async (quizId, points) => {
   const response = await fetch(`${baseURL}/api/users`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
-    },
-
+    ...getUpdateRequestObject(),
     body: JSON.stringify({ quizId, points }),
   });
 
   const result = await response.json();
   return result;
+};
+
+export const getProfileData = async () => {
+  const response = await fetch(`${baseURL}/api/account`, getBasicRequestObject());
+  const data = await response.json();
+
+  return data;
+};
+
+export const getUserQuizzes = async (userId) => {
+  const response = await fetch(`${baseURL}/api/users/${userId}/quizzes`, getBasicRequestObject());
+  const data = await response.json();
+
+  return data;
+};
+
+export const getUserCorrectAnswersRate = async (userId) => {
+  const response = await fetch(
+    `${baseURL}/api/users/${userId}/correct-answers-rate`,
+    getBasicRequestObject(),
+  );
+  const data = await response.json();
+
+  return data;
+};
+
+export const setUserAvatar = async (userId, avatar) => {
+  try {
+    const snapshot = await firebaseStorage.ref(`avatars/${userId}`).put(avatar);
+    return snapshot.state;
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const deleteUserPhoto = async (userId) => {
+  try {
+    await firebaseStorage.ref(`avatars/${userId}`).delete();
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const setUserAvatarType = async (userId, type) => {
+  const response = await fetch(`${baseURL}/api/users/${userId}/set-avatar/${type}`, {
+    ...getUpdateRequestObject(),
+    body: JSON.stringify({ avatarType: type }),
+  });
+  const data = await response.json();
+  return data;
+};
+
+export const setAvatar = async (userId, avatarType, avatar = null) => {
+  try {
+    if (avatarType === 'default') {
+      await deleteUserPhoto(userId);
+      await setUserAvatarType(userId, avatarType);
+    } else {
+      await setUserAvatar(userId, avatar);
+      await setUserAvatarType(userId, avatarType);
+    }
+    return { success: true };
+  } catch (e) {
+    return { success: false };
+  }
 };
