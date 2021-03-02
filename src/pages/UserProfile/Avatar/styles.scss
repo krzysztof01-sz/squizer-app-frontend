@@ -1,5 +1,17 @@
 @import '../../../styles/mixins.scss';
 
 .profile__avatar {
-  @include avatar(80%);
+  @include avatar(150px);
+}
+
+@media only screen and (min-width: 1366px) {
+  .profile__avatar {
+    @include avatar(200px);
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .profile__avatar {
+    @include avatar(250px);
+  }
 }
