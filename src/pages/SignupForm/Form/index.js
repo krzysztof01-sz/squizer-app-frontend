@@ -7,13 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as api from '../../../api';
 import * as fb from '../../../utils/feedbackMessages';
 import DefaultAvatar from '../../../assets/images/DefaultAvatar.png';
-import { isFileImage, compressPhoto, saveAvatarInDB } from '../../../utils/functions';
+import { isFileImage, compressPhoto } from '../../../utils/functions';
 
 import SingupButton from '../../../global/Buttons/Signup';
-import DefaultAvatarButton from '../DefaultAvatarButton';
-import AvatarPreview from '../AvatarPreview';
+import DefaultAvatarButton from '../../../global/Buttons/DefaultAvatarButton';
+import AvatarPreview from '../../../global/Components/AvatarPreview';
 import Input from '../../../global/Components/Input';
-import FileInput from '../FileInput';
+import FileInput from '../../../global/Components/FileInput';
 import FilenameLabel from '../FilenameLabel';
 import Loader from '../../../global/Components/Loader';
 
@@ -82,7 +82,7 @@ const Form = () => {
 
     if (addingUserResponse.type === responseTypes.success) {
       const { msg, userId } = addingUserResponse;
-      if (formData.avatarType === 'custom') await saveAvatarInDB(avatar, userId);
+      if (formData.avatarType === 'custom') await api.setUserAvatar(userId, avatar);
       setValidationMessages(msg);
       setTimeout(() => history.push('/login'), 500);
     } else {
