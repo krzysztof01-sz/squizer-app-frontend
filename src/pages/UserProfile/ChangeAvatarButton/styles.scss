@@ -1,12 +1,13 @@
 @import '../../../styles/mixins.scss';
 
-.profile__buttonWrapper {
+.changeAvatarButton__wrapper {
   @include flexCenter;
   margin-top: 5px;
-  .profile__button {
+  cursor: pointer;
+  .changeAvatarButton {
     margin: 0 5px;
   }
-  .iconWrapper {
+  .changeAvatarButton__icon {
     @include flexCenter;
   }
 }

@@ -1,11 +1,11 @@
 import { CameraIcon } from '../../../global/Icons';
 import './styles.scss';
 
-const ChangeAvatarButton = () => {
+const ChangeAvatarButton = ({ onClickCallback }) => {
   return (
-    <div className="profile__buttonWrapper">
-      <p className="profile__button">change</p>
-      <span className="iconWrapper">
+    <div onClick={onClickCallback} className="changeAvatarButton__wrapper">
+      <p className="changeAvatarButton">change</p>
+      <span className="changeAvatarButton__icon">
         <CameraIcon />
       </span>
     </div>
