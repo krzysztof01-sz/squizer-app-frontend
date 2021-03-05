@@ -1,0 +1,9 @@
+@import '../../../../styles/mixins.scss';
+
+.deleteQuizButton {
+  width: 40px;
+  @include flexCenter;
+  .binIcon {
+    cursor: pointer;
+  }
+}
