@@ -2,7 +2,9 @@ import { shortenText } from '../../../utils/functions';
 import { renderAvatar } from '../helpers/renderAvatar';
 import './styles.scss';
 
-const ChartBar = ({ user: { nickname, points, avatar }, loading, barHeight }) => {
+const ChartBar = ({ user: { nickname, stats, avatar }, loading, barHeight }) => {
+  const points = stats.correctAnswers;
+
   return (
     <div className="chart__bar">
       <div className="chart__lineWrapper">

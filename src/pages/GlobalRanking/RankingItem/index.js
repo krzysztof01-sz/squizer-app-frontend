@@ -1,7 +1,9 @@
 import { renderAvatar } from '../helpers/renderAvatar';
 import './styles.scss';
 
-const RankingItem = ({ place, user: { nickname, points, avatar, isItMe }, loading }) => {
+const RankingItem = ({ place, user: { nickname, stats, avatar, isItMe }, loading }) => {
+  const points = stats.correctAnswers;
+
   return (
     <section className="rankingList__item">
       <span
