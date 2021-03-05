@@ -21,6 +21,8 @@ const UserProfile = () => {
   if (loading) return <Loader />;
   if (error) return <ErrorPage msg={error} />;
 
+  const { stats } = user;
+
   return (
     <Layout>
       <main className="pageWrapper">
@@ -40,10 +42,13 @@ const UserProfile = () => {
               <Avatar userId={user._id} />
               <ChangeAvatarButton onClickCallback={() => setIsModalOpen(!isModalOpen)} />
             </div>
-            <Stats rankingPlace={user.rankingPlace} points={user.points} />
+            <Stats rankingPlace={user.rankingPlace} points={user.stats.correctAnswers} />
           </section>
 
-          <CorrectAnswersBar percent={user.correctAnswersRate} />
+          <CorrectAnswersBar
+            givenAnswersQuantity={stats.givenAnswers}
+            correctAnswersQuantity={stats.correctAnswers}
+          />
         </section>
 
         <section className="page__secondPart">

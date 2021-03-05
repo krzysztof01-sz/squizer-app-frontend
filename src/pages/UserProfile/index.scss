@@ -38,19 +38,7 @@
       overflow-y: scroll;
       width: 45%;
       margin: 5vh 5% 0 0;
-    }
-    .page__secondPart::-webkit-scrollbar {
-      width: 15px;
-    }
-
-    .page__secondPart::-webkit-scrollbar-track {
-      border-radius: 10px;
-      background: lighten($primary, 10);
-    }
-
-    .page__secondPart::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background: lighten($secondary, 10);
+      @include primaryScroll;
     }
   }
 }
