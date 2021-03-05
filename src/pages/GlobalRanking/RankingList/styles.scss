@@ -1,13 +1,9 @@
 @import '../../../styles/mixins.scss';
-@import '../../../styles/variables.scss';
 
 .rankingList {
-  @include flexCenter;
+  display: flex;
   flex-direction: column;
-}
-
-@media only screen and (min-width: 1000px) {
-  .rankingList {
-    border-bottom: 10px solid lighten($primary, 10);
-  }
+  height: 70vh;
+  overflow-y: scroll;
+  @include primaryScroll;
 }
