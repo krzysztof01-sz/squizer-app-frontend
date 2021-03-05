@@ -20,6 +20,7 @@
   .userQuiz__actionsBar {
     @include flexCenter;
     justify-content: space-between;
+    margin-bottom: 1.5vh;
     .iconsWrapper {
       width: 20%;
       margin-top: 5px;
