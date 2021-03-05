@@ -3,7 +3,7 @@ import { categoryToColor as map, maxDescrptionLengthOnCard } from '../../../util
 import { formatDate, shortenText } from '../../../utils/functions';
 import { useCategoryImage, useUser } from '../../../hooks';
 import Loader from '../../../global/Components/Loader';
-import './index.scss';
+import './styles.scss';
 
 const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, category } }) => {
   const { categoryImage } = useCategoryImage(category);
