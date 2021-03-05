@@ -12,12 +12,20 @@ import FilteringProvider from '../../contexts/Filtering';
 
 import { useQuizzes } from '../../hooks';
 import './index.scss';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { quizzes, loading, error } = useQuizzes();
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage msg={error} />;
+  if (error)
+    return (
+      <ErrorPage msg={error}>
+        <Link className="link" to="/quizform">
+          Add the first quiz.
+        </Link>
+      </ErrorPage>
+    );
 
   return (
     <Layout>
@@ -29,7 +37,12 @@ const Dashboard = () => {
               return (
                 <div className="searchBarWrapper">
                   <label className="label">
-                    <input type="text" className="input searchBar" placeholder="search..." onChange={(e) => filterQuizzes(e)} />
+                    <input
+                      type="text"
+                      className="input searchBar"
+                      placeholder="search..."
+                      onChange={(e) => filterQuizzes(e)}
+                    />
                     <SearchIcon />
                   </label>
                 </div>
