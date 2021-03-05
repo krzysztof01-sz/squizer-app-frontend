@@ -24,7 +24,7 @@ const QuizGame = () => {
   const { quizId } = useParams();
   const { questions, loading, error } = useQuestions(quizId);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [correctUserAnswersQuantity, setCorrectUserAnswersQuantity] = useState(false);
+  const [correctAnswersQuantity, setCorrectAnswersQuantity] = useState(false);
   const [questionID, setQuestionID] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [updatingError, setUpdatingError] = useState(null);
@@ -77,7 +77,7 @@ const QuizGame = () => {
     }
   }, [questionID, userAnswers]);
 
-  const quizNotFinished = typeof correctUserAnswersQuantity === 'boolean';
+  const quizNotFinished = typeof correctAnswersQuantity === 'boolean';
 
   if (loading || isSubmitting) return <Loader />;
   if (error) return <ErrorPage msg={error} />;
@@ -123,13 +123,16 @@ const QuizGame = () => {
             ) : (
               <FinishQuizButton
                 callback={async () => {
-                  const result = checkAnswers(userAnswers);
-                  if (typeof result === 'number') {
+                  const correctAnswers = checkAnswers(userAnswers);
+                  const givenAnswers = questions.length;
+                  const stats = { correctAnswers, givenAnswers };
+
+                  if (typeof correctAnswers === 'number') {
                     setIsSubmitting(true);
-                    const { type } = await api.updateUserAfterGame(quizId, result);
+                    const { type } = await api.updateUserAfterGame(quizId, stats);
                     setIsSubmitting(false);
 
-                    setCorrectUserAnswersQuantity(result);
+                    setCorrectAnswersQuantity(correctAnswers);
 
                     if (type === responseTypes.error) {
                       return setUpdatingError(fb.UPDATING_USER_RESULT_ERROR);
@@ -149,7 +152,7 @@ const QuizGame = () => {
         <QuizResult
           userAnswers={userAnswers}
           questions={questions}
-          correctUserAnswersQuantity={correctUserAnswersQuantity}
+          correctAnswersQuantity={correctAnswersQuantity}
         />
       </Layout>
     );

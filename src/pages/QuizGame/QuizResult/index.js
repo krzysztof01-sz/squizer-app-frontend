@@ -13,16 +13,16 @@ const getSchoolGrade = (percentageResult) => {
   else return 5;
 };
 
-const QuizResult = ({ correctUserAnswersQuantity, userAnswers, questions }) => {
+const QuizResult = ({ correctAnswersQuantity, userAnswers, questions }) => {
   const questionsQuantity = questions.length;
-  const percentageResult = getPercentageResult(correctUserAnswersQuantity, questionsQuantity);
+  const percentageResult = getPercentageResult(correctAnswersQuantity, questionsQuantity);
   const schoolGrade = getSchoolGrade(percentageResult);
 
   return (
     <section className="quizResult">
       <section className="quizResult__generalData">
         <p className="result">
-          {correctUserAnswersQuantity}/{questionsQuantity}
+          {correctAnswersQuantity}/{questionsQuantity}
         </p>
         <p className="result">Percentage result: {percentageResult}%</p>
         <p className="result">School grade: {schoolGrade}</p>
@@ -39,8 +39,10 @@ const QuizResult = ({ correctUserAnswersQuantity, userAnswers, questions }) => {
             <QuestionContent questionID={questionID} content={question.content} />
 
             {question.answers.map(({ content, answerId: answer }) => {
-              if (answer === correctAnswer) return <AnswerView extraClass={'correct'} key={answer} content={content} />;
-              if (answer === userAnswer) return <AnswerView extraClass={'incorrect'} key={answer} content={content} />;
+              if (answer === correctAnswer)
+                return <AnswerView extraClass={'correct'} key={answer} content={content} />;
+              if (answer === userAnswer)
+                return <AnswerView extraClass={'incorrect'} key={answer} content={content} />;
               else return <AnswerView key={answer} content={content} />;
             })}
           </article>
