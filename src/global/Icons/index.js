@@ -51,7 +51,7 @@ export const CameraIcon = () => {
 };
 
 export const BinIcon = () => {
-  return <img src={binIcon} alt="bin icon" />;
+  return <img className="binIcon" src={binIcon} alt="bin icon" />;
 };
 
 export const ExitIcon = () => {
