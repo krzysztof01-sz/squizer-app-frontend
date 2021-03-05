@@ -6,6 +6,7 @@ const baseURL = 'http://localhost:8080';
 
 const getBasicRequestObject = () => {
   return {
+    method: 'GET',
     headers: {
       'auth-token': localStorage.getItem('auth-token'),
     },
@@ -37,6 +38,17 @@ const getAuthRequestObject = (csrfToken) => {
 const getUpdateRequestObject = () => {
   return {
     method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'auth-token': localStorage.getItem('auth-token'),
+    },
+  };
+};
+
+const getDeleteRequestObject = () => {
+  return {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -228,4 +240,10 @@ export const setAvatar = async (userId, avatarType, avatar = null) => {
   } catch (e) {
     return { success: false };
   }
+};
+
+export const deleteQuiz = async (quizId) => {
+  const response = await fetch(`${baseURL}/api/quizzes/${quizId}`, getDeleteRequestObject());
+  const result = await response.json();
+  return result;
 };
