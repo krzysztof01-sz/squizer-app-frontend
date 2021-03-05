@@ -138,10 +138,10 @@ export const getQuiz = async (id) => {
   return data;
 };
 
-export const addComment = async (comment) => {
-  const response = await fetch(`${baseURL}/api/comments`, {
-    ...getPostRequestObject(),
-    body: JSON.stringify({ ...comment }),
+export const addComment = async (quizId, comment) => {
+  const response = await fetch(`${baseURL}/api/quizzes/${quizId}/comments`, {
+    ...getUpdateRequestObject(),
+    body: JSON.stringify({ content: comment }),
   });
 
   const result = await response.json();
@@ -165,10 +165,10 @@ export const getAllUsers = async () => {
   return result;
 };
 
-export const updateUserAfterGame = async (quizId, points) => {
+export const updateUserAfterGame = async (quizId, stats) => {
   const response = await fetch(`${baseURL}/api/users`, {
     ...getUpdateRequestObject(),
-    body: JSON.stringify({ quizId, points }),
+    body: JSON.stringify({ quizId, stats }),
   });
 
   const result = await response.json();
@@ -184,16 +184,6 @@ export const getProfileData = async () => {
 
 export const getUserQuizzes = async (userId) => {
   const response = await fetch(`${baseURL}/api/users/${userId}/quizzes`, getBasicRequestObject());
-  const data = await response.json();
-
-  return data;
-};
-
-export const getUserCorrectAnswersRate = async (userId) => {
-  const response = await fetch(
-    `${baseURL}/api/users/${userId}/correct-answers-rate`,
-    getBasicRequestObject(),
-  );
   const data = await response.json();
 
   return data;
