@@ -5,6 +5,7 @@ import * as api from '../../../api';
 import AddCommentButton from './AddCommentButton';
 import TextArea from './TextArea';
 import CharactersCounter from './CharactersCounter';
+import { responseTypes } from '../../../utils/constants';
 
 const CommentForm = () => {
   const { quizId } = useParams();
@@ -18,11 +19,15 @@ const CommentForm = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        const result = await api.addComment({ content: comment, quizId });
+        const result = await api.addComment(quizId, comment);
+
         setIsSubmitting(false);
         setComment('');
         setResult(result);
-        location.reload();
+
+        if (result.type === responseTypes.success) {
+          location.reload();
+        }
       }}
       method="POST"
       className="form commentForm"
