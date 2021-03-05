@@ -42,6 +42,8 @@ const UPDATING_USER_RESULT_ERROR = `Your result cannot be updated. Try again lat
 
 const UPDATING_AVATAR_ERROR = `Couldn't update an avatar. Try again later.`;
 
+const QUIZ_DELETING_CONFIRMATION = 'Do you want to delete this quiz?';
+
 export {
   NICKNAME_SHORT,
   NICKNAME_LONG,
@@ -66,4 +68,5 @@ export {
   COMMENTS_NOT_FOUND,
   UPDATING_USER_RESULT_ERROR,
   UPDATING_AVATAR_ERROR,
+  QUIZ_DELETING_CONFIRMATION,
 };
