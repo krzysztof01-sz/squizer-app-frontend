@@ -181,11 +181,7 @@ export const useUserProfile = () => {
         const userQuizzes = await api.getUserQuizzes(userId);
         if (userQuizzes.type === responseTypes.error) throw userQuizzes.msg;
 
-        const userCorrectAnswersRate = await api.getUserCorrectAnswersRate(userId);
-        if (userCorrectAnswersRate.type === responseTypes.error) throw userCorrectAnswersRate.msg;
-
         profileData.user.quizzes = userQuizzes.quizzes;
-        profileData.user.correctAnswersRate = userCorrectAnswersRate.correctAnswersRate;
 
         if (profileData.type === responseTypes.success) {
           setProfileData(profileData);
