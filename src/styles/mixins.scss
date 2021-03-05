@@ -32,3 +32,19 @@
   -webkit-box-shadow: 0px 0px 8px -3px rgba(164, 164, 164, 0.75);
   -moz-box-shadow: 0px 0px 8px -3px rgba(164, 164, 164, 0.75);
 }
+
+@mixin primaryScroll() {
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: lighten($primary, 10);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: lighten($secondary, 10);
+  }
+}
