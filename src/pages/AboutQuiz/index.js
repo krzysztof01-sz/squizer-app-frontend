@@ -13,8 +13,8 @@ const AboutQuiz = () => {
   const { comments, error: commentError, loading: commentsLoading } = useQuizComments(quizId);
   const { quiz, user, categoryImage, error: cardError, loading: cardLoading } = useQuizCard(quizId);
 
-  if (commentError) return <ErrorPage msg={commentError} />;
   if (cardError) return <ErrorPage msg={cardError} />;
+  if (commentError) return <ErrorPage msg={commentError} />;
   if (commentsLoading || cardLoading) return <Loader />;
 
   return (
