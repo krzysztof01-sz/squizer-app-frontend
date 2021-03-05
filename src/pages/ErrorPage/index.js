@@ -1,7 +1,7 @@
 import Layout from '../../global/Components/Layout';
 import Nav from '../Dashboard/Nav';
 
-import './styles.scss';
+import './index.scss';
 
 const ErrorPage = ({ msg, children }) => {
   return (
