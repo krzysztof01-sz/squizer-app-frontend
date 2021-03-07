@@ -19,12 +19,13 @@ import { responseTypes } from '../../../utils/constants';
 
 import '../../../styles/global/Components/Form.scss';
 import './styles.scss';
+import { useCsrfToken } from '../../../hooks';
 
 const Form = () => {
   const { setIsLogged } = useContext(AuthContext);
+  const { csrfToken } = useCsrfToken();
   const [process, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
-  const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
     nickname: yup
@@ -51,24 +52,17 @@ const Form = () => {
     reValidateMode: 'onChange',
   });
 
-  useEffect(async () => {
-    const token = await api.getToken();
-    setCsrfToken(token);
-  }, []);
-
   const onSubmit = async (formData) => {
     setValidationMessages([]);
 
     setProcess(fb.LOGGING_PROCESS);
-    const loginUserResponse = await api.loginUser(formData, csrfToken);
+    const loginUserResponse = await api.loginUser(formData);
     setProcess('');
 
     const { msg, type } = loginUserResponse;
 
     if (type === responseTypes.success) {
-      const { token } = loginUserResponse;
       localStorage.setItem('isLogged', true);
-      localStorage.setItem('auth-token', token);
       setValidationMessages(msg);
       setIsLogged(true);
     } else {
@@ -76,46 +70,43 @@ const Form = () => {
     }
   };
 
-  if (csrfToken) {
-    return (
-      <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
-        <section className="form">
-          <SectionHeader isCenter={true}>Login form</SectionHeader>
-          <Input
-            labelName="nickname"
-            register={register({ required: true })}
-            type="text"
-            name="nickname"
-            min="3"
-            max="15"
-          />
-          <InputValidation message={errors.nickname?.message} />
+  if (!csrfToken) return <Loader width={100} height={100} />;
+  return (
+    <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
+      <section className="form">
+        <SectionHeader isCenter={true}>Login form</SectionHeader>
+        <Input
+          labelName="nickname"
+          register={register({ required: true })}
+          type="text"
+          name="nickname"
+          min="3"
+          max="15"
+        />
+        <InputValidation message={errors.nickname?.message} />
 
-          <Input
-            labelName="password"
-            register={register({ required: true })}
-            type="password"
-            name="password"
-            min="8"
-            max="15"
-          />
-          <InputValidation message={errors.password?.message} />
+        <Input
+          labelName="password"
+          register={register({ required: true })}
+          type="password"
+          name="password"
+          min="8"
+          max="15"
+        />
+        <InputValidation message={errors.password?.message} />
 
-          <ProcessMessage message={process} />
+        <ProcessMessage message={process} />
 
-          {validationMessages.map(({ msg, type }, index) => {
-            return <ActionResultMessage key={index} type={type} msg={msg} />;
-          })}
+        {validationMessages.map(({ msg, type }, index) => {
+          return <ActionResultMessage key={index} type={type} msg={msg} />;
+        })}
 
-          <input type="hidden" ref={register()} name="_csrf" value={csrfToken} />
+        <input type="hidden" ref={register()} name="_csrf" value={csrfToken} />
 
-          <LoginButton isDisabled={process} />
-        </section>
-      </form>
-    );
-  } else {
-    return <Loader width={100} height={100} />;
-  }
+        <LoginButton isDisabled={process} />
+      </section>
+    </form>
+  );
 };
 
 export default Form;

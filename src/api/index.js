@@ -7,9 +7,8 @@ const baseURL = 'http://localhost:8080';
 const getBasicRequestObject = () => {
   return {
     method: 'GET',
-    headers: {
-      'auth-token': localStorage.getItem('auth-token'),
-    },
+    credentials: 'include',
+    'Access-Control-Allow-Origin': baseURL,
   };
 };
 
@@ -19,8 +18,9 @@ const getPostRequestObject = () => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
     },
+    credentials: 'include',
+    'Access-Control-Allow-Origin': baseURL,
   };
 };
 
@@ -30,8 +30,10 @@ const getAuthRequestObject = (csrfToken) => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'CSRF-Token': csrfToken,
+      'csrf-token': csrfToken,
     },
+    credentials: 'include',
+    'Access-Control-Allow-Origin': baseURL,
   };
 };
 
@@ -41,8 +43,9 @@ const getUpdateRequestObject = () => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
     },
+    credentials: 'include',
+    'Access-Control-Allow-Origin': baseURL,
   };
 };
 
@@ -52,8 +55,9 @@ const getDeleteRequestObject = () => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'auth-token': localStorage.getItem('auth-token'),
     },
+    credentials: 'include',
+    'Access-Control-Allow-Origin': baseURL,
   };
 };
 
@@ -63,9 +67,9 @@ export const getToken = async () => {
   return csrfToken;
 };
 
-export const registerUser = async (formData, csrfToken) => {
+export const registerUser = async (formData) => {
   const feedback = await fetch(`${baseURL}/auth/register`, {
-    ...getAuthRequestObject(csrfToken),
+    ...getAuthRequestObject(formData._csrf),
     body: JSON.stringify({ ...formData }),
   });
 
@@ -73,9 +77,9 @@ export const registerUser = async (formData, csrfToken) => {
   return response;
 };
 
-export const loginUser = async (formData, csrfToken) => {
+export const loginUser = async (formData) => {
   const feedback = await fetch(`${baseURL}/auth/login`, {
-    ...getAuthRequestObject(csrfToken),
+    ...getAuthRequestObject(formData._csrf),
     body: JSON.stringify({ ...formData }),
   });
 

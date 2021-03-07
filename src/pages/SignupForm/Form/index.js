@@ -25,16 +25,17 @@ import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 import { responseTypes } from '../../../utils/constants';
 import './styles.scss';
 import SectionHeader from '../../../global/Components/SectionHeader';
+import { useCsrfToken } from '../../../hooks';
 
 const Form = () => {
   const history = useHistory();
+  const { csrfToken, loading } = useCsrfToken();
 
   const [error, setError] = useState([]);
   const [process, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
   const [avatar, setAvatar] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [csrfToken, setCsrfToken] = useState(null);
 
   const schema = yup.object().shape({
     nickname: yup
@@ -64,11 +65,6 @@ const Form = () => {
     reValidateMode: 'onChange',
   });
 
-  useEffect(async () => {
-    const token = await api.getToken();
-    setCsrfToken(token);
-  }, []);
-
   const onSubmit = async (formData) => {
     setValidationMessages([]);
 
@@ -77,7 +73,7 @@ const Form = () => {
     if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
     setProcess(fb.REGISTERING_PROCESS);
-    const addingUserResponse = await api.registerUser(formData, csrfToken);
+    const addingUserResponse = await api.registerUser(formData);
     setProcess('');
 
     if (addingUserResponse.type === responseTypes.success) {
@@ -126,65 +122,62 @@ const Form = () => {
     setAvatar(compressedAvatar);
   };
 
-  if (csrfToken) {
-    return (
-      <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
-        <section className="form">
-          <SectionHeader isCenter={true}>Registration form</SectionHeader>
-          <Input
-            labelName="nickname"
-            register={register({ required: true })}
-            type="text"
-            name="nickname"
-            min="3"
-            max="15"
-          />
-          <InputValidation message={errors.nickname?.message} />
+  if (!csrfToken) return <Loader width={100} height={100} />;
+  return (
+    <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
+      <section className="form">
+        <SectionHeader isCenter={true}>Registration form</SectionHeader>
+        <Input
+          labelName="nickname"
+          register={register({ required: true })}
+          type="text"
+          name="nickname"
+          min="3"
+          max="15"
+        />
+        <InputValidation message={errors.nickname?.message} />
 
-          <Input
-            labelName="password"
-            register={register({ required: true })}
-            type="password"
-            name="password"
-            min="8"
-            max="15"
-          />
-          <InputValidation message={errors.password?.message} />
+        <Input
+          labelName="password"
+          register={register({ required: true })}
+          type="password"
+          name="password"
+          min="8"
+          max="15"
+        />
+        <InputValidation message={errors.password?.message} />
 
-          <Input
-            labelName="confirm the password"
-            register={register({ required: true })}
-            type="password"
-            name="confirmedPassword"
-            min="8"
-            max="15"
-          />
-          <InputValidation message={errors.confirmedPassword?.message} />
+        <Input
+          labelName="confirm the password"
+          register={register({ required: true })}
+          type="password"
+          name="confirmedPassword"
+          min="8"
+          max="15"
+        />
+        <InputValidation message={errors.confirmedPassword?.message} />
 
-          <AvatarPreview preview={preview} />
-          <FilenameLabel avatar={avatar} />
+        <AvatarPreview preview={preview} />
+        <FilenameLabel avatar={avatar} />
 
-          <div className="fileInputWrapper">
-            <FileInput handleChange={handleAvatarChange} />
-            <DefaultAvatarButton handleClick={setDefaultAvatar} />
-          </div>
+        <div className="fileInputWrapper">
+          <FileInput handleChange={handleAvatarChange} />
+          <DefaultAvatarButton handleClick={setDefaultAvatar} />
+        </div>
 
-          <ErrorMessage message={error} />
-          <ProcessMessage message={process} />
+        <ErrorMessage message={error} />
+        <ProcessMessage message={process} />
 
-          {validationMessages.map(({ msg, type }, index) => {
-            return <ActionResultMessage msg={msg} type={type} key={index} />;
-          })}
+        {validationMessages.map(({ msg, type }, index) => {
+          return <ActionResultMessage msg={msg} type={type} key={index} />;
+        })}
 
-          <input ref={register()} type="hidden" name="_csrf" value={csrfToken} />
+        <input ref={register()} type="hidden" name="_csrf" value={csrfToken} />
 
-          <SingupButton isDisabled={process} />
-        </section>
-      </form>
-    );
-  } else {
-    return <Loader width={100} height={100} />;
-  }
+        <SingupButton isDisabled={process} />
+      </section>
+    </form>
+  );
 };
 
 export default Form;

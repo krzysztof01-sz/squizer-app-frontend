@@ -12,20 +12,12 @@ import FilteringProvider from '../../contexts/Filtering';
 
 import { useQuizzes } from '../../hooks';
 import './index.scss';
-import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { quizzes, loading, error } = useQuizzes();
 
   if (loading) return <Loader />;
-  if (error)
-    return (
-      <ErrorPage msg={error}>
-        <Link className="link" to="/quizform">
-          Add the first quiz.
-        </Link>
-      </ErrorPage>
-    );
+  if (error) return <ErrorPage msg={error} />;
 
   return (
     <Layout>
