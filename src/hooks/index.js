@@ -224,3 +224,14 @@ export const useQuiz = (quizId) => {
 
   return { quiz, error, loading };
 };
+
+export const useCsrfToken = () => {
+  const [csrfToken, setCsrfToken] = useState(undefined);
+
+  useEffect(async () => {
+    const token = await api.getToken();
+    setCsrfToken(token);
+  }, []);
+
+  return { csrfToken };
+};
