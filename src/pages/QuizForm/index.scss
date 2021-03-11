@@ -64,6 +64,10 @@
       flex-direction: column;
       margin-bottom: 2vh;
       width: 100%;
+      .errorMessage {
+        font-size: $font-smallXL;
+        margin-bottom: 0;
+      }
       .quizForm__label {
         margin-bottom: 2vh;
         .quizForm__input {
