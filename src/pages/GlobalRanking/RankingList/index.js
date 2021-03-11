@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import RankingDataWrapper from '../helpers/RankingDataWrapper';
 import RankingItem from '../RankingItem';
 import { emojiCupsMap as emojiCups } from '../../../utils/constants';
@@ -31,4 +31,4 @@ const RankingList = ({ users }) => {
   );
 };
 
-export default RankingList;
+export default memo(RankingList);
