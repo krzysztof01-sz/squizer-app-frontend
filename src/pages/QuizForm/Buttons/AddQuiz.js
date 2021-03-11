@@ -3,6 +3,7 @@ import './AddQuiz.scss';
 const AddQuizButton = ({ callback, isActive }) => {
   return (
     <button
+      aria-label="add a quiz"
       disabled={isActive}
       onClick={(e) => {
         e.preventDefault();
