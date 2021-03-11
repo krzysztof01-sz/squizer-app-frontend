@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import SectionHeader from '../../../global/Components/SectionHeader';
 import UserQuiz from '../UserQuiz';
 import './styles.scss';
 
 const UserQuizzesList = ({ userQuizzes }) => {
   return (
-    <section className="userQuizzes">
+    <section role="list" className="userQuizzes">
       <SectionHeader>Your quizzes</SectionHeader>
       {userQuizzes.map((quiz) => {
         return <UserQuiz key={quiz._id} quizId={quiz._id} />;
@@ -13,4 +14,4 @@ const UserQuizzesList = ({ userQuizzes }) => {
   );
 };
 
-export default UserQuizzesList;
+export default memo(UserQuizzesList);
