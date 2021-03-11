@@ -6,7 +6,7 @@ import './styles.scss';
 const UserQuizzesList = ({ userQuizzes }) => {
   return (
     <section role="list" className="userQuizzes">
-      <SectionHeader>Your quizzes</SectionHeader>
+      <SectionHeader isCenter={true}>Your quizzes</SectionHeader>
       {userQuizzes.map((quiz) => {
         return <UserQuiz key={quiz._id} quizId={quiz._id} />;
       })}
