@@ -19,7 +19,7 @@ const QuizResult = ({ correctAnswersQuantity, userAnswers, questions }) => {
   const schoolGrade = getSchoolGrade(percentageResult);
 
   return (
-    <section className="quizResult">
+    <section aria-label="result" className="quizResult">
       <section className="quizResult__generalData">
         <p className="result">
           {correctAnswersQuantity}/{questionsQuantity}

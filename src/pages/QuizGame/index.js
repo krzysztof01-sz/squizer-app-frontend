@@ -19,6 +19,7 @@ import { responseTypes } from '../../utils/constants';
 import * as fb from '../../utils/feedbackMessages';
 import * as api from '../../api';
 import './index.scss';
+import SectionHeader from '../../global/Components/SectionHeader';
 
 const QuizGame = () => {
   const { quizId } = useParams();
@@ -88,6 +89,7 @@ const QuizGame = () => {
     return (
       <Layout>
         <section className="quiz">
+          <SectionHeader isCenter={true}>Question no.{questionID + 1}</SectionHeader>
           <article className="quiz__questionsView">
             <QuestionContent questionID={questionID} content={currentQuestion.content} />
 
@@ -109,7 +111,12 @@ const QuizGame = () => {
               })}
             </section>
           </article>
-          <aside className="switchDots">{renderSwitchDots()}</aside>
+          <aside
+            aria-label="click tab to go to the next question or shift+tab to go to the previous question"
+            className="switchDots"
+          >
+            {renderSwitchDots()}
+          </aside>
         </section>
         <section className="gameNavigationButtons">
           <div className="gameNavigation__left">

@@ -1,7 +1,12 @@
+import AccessibleWrapper from '../../../global/AccessibleWrapper';
 import './styles.scss';
 
 const SwitchDot = ({ callback, filled }) => {
-  return <div onClick={callback} className={`dot ${filled ? 'dot--filled' : ''}`}></div>;
+  return (
+    <AccessibleWrapper>
+      <div onClick={callback} className={`dot ${filled ? 'dot--filled' : ''}`}></div>
+    </AccessibleWrapper>
+  );
 };
 
 export default SwitchDot;

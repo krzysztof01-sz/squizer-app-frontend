@@ -3,6 +3,9 @@
 .quiz {
   width: 90%;
   margin: 0 auto;
+  .sectionHeader {
+    margin-top: 3vh;
+  }
   .quiz__questionsView {
     .question__content {
       z-index: 0;
