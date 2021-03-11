@@ -1,8 +1,13 @@
+import Layout from '../../global/Components/Layout';
 import Form from './Form';
 import './index.scss';
 
 const QuizForm = () => {
-  return <Form />;
+  return (
+    <Layout>
+      <Form />
+    </Layout>
+  );
 };
 
 export default QuizForm;
