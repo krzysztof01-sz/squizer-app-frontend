@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.mobileNav {
+  width: 90%;
+  .mobileNav__header {
+    @include flexCenter;
+    justify-content: flex-start;
+    padding: 10px 0 15px;
+    .chevronIcon {
+      margin-left: 5px;
+    }
+  }
+  .mobileNav__list {
+    .mobileNav__item {
+      padding: 5px 0 10px 5px;
+    }
+  }
+}
+
+@media only screen and (min-width: 999px) {
+  .mobileNav {
+    display: none;
+  }
+}
