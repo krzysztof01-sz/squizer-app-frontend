@@ -4,13 +4,18 @@
 .dashboardHeader {
   @include flexCenter;
   justify-content: space-between;
+  align-items: center;
   padding: 0 5vw;
   &__title {
     font-size: $font-medium;
   }
-  .plusIcon {
-    cursor: pointer;
-    font-size: $font-largeXXL;
-    color: $primary;
+  a {
+    @include flexCenter;
+    .plusIcon {
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: $font-largeXXL;
+      color: $primary;
+    }
   }
 }
