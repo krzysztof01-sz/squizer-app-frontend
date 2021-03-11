@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { formatDate } from '../../../utils/functions';
 import PlayButton from './PlayButton';
@@ -20,7 +21,7 @@ const PresentationCard = ({ card: { quiz, user, categoryImage } }) => {
             <img className="quizCard__categoryImage" src={categoryImage} alt={quiz.category} />
             <img className="quizCard__avatar" src={user.avatar} alt={user.nickname} />
           </div>
-          <p className="quizCard__title">{quiz.title}</p>
+          <h1 className="quizCard__title">{quiz.title}</h1>
           <p className="quizCard__description">{quiz.description}</p>
           <div className="buttonAndInfoWrapper">
             <PlayButton link={`/quiz/${quizId}/play`} />
@@ -35,4 +36,4 @@ const PresentationCard = ({ card: { quiz, user, categoryImage } }) => {
   );
 };
 
-export default PresentationCard;
+export default memo(PresentationCard);
