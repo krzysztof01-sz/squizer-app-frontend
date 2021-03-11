@@ -1,11 +1,15 @@
-import ReactLoading from 'react-loading';
+import LoaderImg from '../../../assets/images/Loader.svg';
 import './styles.scss';
-import { colors } from '../../../utils/constants';
 
-const Loader = ({ width, height }) => {
+const Loader = ({ width = 100, height = 100 }) => {
   return (
     <div className="loader">
-      <ReactLoading type="spinningBubbles" color={colors.primaryColor} height={width} width={height} />
+      <img
+        style={{ width: `${width}px`, height: `${height}px` }}
+        src={LoaderImg}
+        alt="loader"
+        className="loader__img"
+      />
     </div>
   );
 };
