@@ -16,6 +16,7 @@ import ActionResultMessage from '../../../global/Components/Messages/ActionResul
 
 import ErrorPage from '../../ErrorPage';
 import { categories, responseTypes } from '../../../utils/constants';
+import Layout from '../../../global/Components/Layout';
 
 const Form = () => {
   const [generalQuizData, setGeneralQuizData] = useState({
@@ -145,152 +146,154 @@ const Form = () => {
   const currentQuestion = questions[questionID];
 
   return (
-    <form method="POST" className="form__wrapper quizForm__wrapper">
-      <h1 className="form__header quizForm__header">Quiz creator</h1>
-      <section className="form quizForm">
-        <section className="quizDataPart">
-          <Input
-            name="title"
-            labelName="title"
-            value={generalQuizData?.title}
-            callback={({ target }) =>
-              setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
-            }
-          />
+    <Layout>
+      <form method="POST" className="form__wrapper quizForm__wrapper">
+        <h1 className="form__header quizForm__header">Quiz creator</h1>
+        <section className="form quizForm">
+          <section className="quizDataPart">
+            <Input
+              name="title"
+              labelName="title"
+              value={generalQuizData?.title}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
+            />
 
-          <SelectInput
-            labelName="category"
-            inputText="Choose a category"
-            name="category"
-            options={categories}
-            value={generalQuizData?.category}
-            callback={({ target }) =>
-              setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
-            }
-          />
+            <SelectInput
+              labelName="category"
+              inputText="Choose a category"
+              name="category"
+              options={categories}
+              value={generalQuizData?.category}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
+            />
 
-          <TextAreaInput
-            labelName="description"
-            name="description"
-            rows="5"
-            cols="40"
-            value={generalQuizData?.description}
-            callback={({ target }) =>
-              setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
-            }
-          />
-        </section>
+            <TextAreaInput
+              labelName="description"
+              name="description"
+              rows="5"
+              cols="40"
+              value={generalQuizData?.description}
+              callback={({ target }) =>
+                setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
+              }
+            />
+          </section>
 
-        <section className="questionsPart">
-          <Input
-            name="content"
-            labelName="question"
-            value={currentQuestion?.content}
-            callback={({ target: { value, name } }) => setQuestionData(value, name)}
-          />
-          <Input
-            name="correctAnswer"
-            labelName="correct answer"
-            value={currentQuestion?.correctAnswer}
-            callback={({ target: { value, name } }) => setQuestionData(value, name)}
-          />
-          <Input
-            name="optionalAnswer1"
-            labelName="1st optional answer"
-            value={currentQuestion?.optionalAnswer1}
-            callback={({ target: { value, name } }) => setQuestionData(value, name)}
-          />
+          <section className="questionsPart">
+            <Input
+              name="content"
+              labelName="question"
+              value={currentQuestion?.content}
+              callback={({ target: { value, name } }) => setQuestionData(value, name)}
+            />
+            <Input
+              name="correctAnswer"
+              labelName="correct answer"
+              value={currentQuestion?.correctAnswer}
+              callback={({ target: { value, name } }) => setQuestionData(value, name)}
+            />
+            <Input
+              name="optionalAnswer1"
+              labelName="1st optional answer"
+              value={currentQuestion?.optionalAnswer1}
+              callback={({ target: { value, name } }) => setQuestionData(value, name)}
+            />
 
-          <Input
-            name="optionalAnswer2"
-            labelName="2nd optional answer"
-            value={currentQuestion?.optionalAnswer2}
-            callback={({ target: { value, name } }) => setQuestionData(value, name)}
-          />
+            <Input
+              name="optionalAnswer2"
+              labelName="2nd optional answer"
+              value={currentQuestion?.optionalAnswer2}
+              callback={({ target: { value, name } }) => setQuestionData(value, name)}
+            />
 
-          <Input
-            name="optionalAnswer3"
-            labelName="3rd optional answer"
-            value={currentQuestion?.optionalAnswer3}
-            callback={({ target: { value, name } }) => setQuestionData(value, name)}
-          />
+            <Input
+              name="optionalAnswer3"
+              labelName="3rd optional answer"
+              value={currentQuestion?.optionalAnswer3}
+              callback={({ target: { value, name } }) => setQuestionData(value, name)}
+            />
 
-          <p aria-label={`question no. ${questionID + 1}`} className="questionNumber">
-            question no. {questionID + 1}
-          </p>
+            <p aria-label={`question no. ${questionID + 1}`} className="questionNumber">
+              question no. {questionID + 1}
+            </p>
 
-          {validationErrors.map((error, index) => {
-            return <ErrorMessage key={index} message={error} />;
-          })}
+            {validationErrors.map((error, index) => {
+              return <ErrorMessage key={index} message={error} />;
+            })}
 
-          {messages.map(({ msg, type }, index) => {
-            return <ActionResultMessage key={index} msg={msg} type={type} />;
-          })}
+            {messages.map(({ msg, type }, index) => {
+              return <ActionResultMessage key={index} msg={msg} type={type} />;
+            })}
 
-          <section className="questionsNavigation">
-            <div className="buttonWrapper">
-              {questionID >= 1 ? (
-                <PreviousQuestionButton
+            <section className="questionsNavigation">
+              <div className="buttonWrapper">
+                {questionID >= 1 ? (
+                  <PreviousQuestionButton
+                    callback={(e) => {
+                      e.preventDefault();
+                      setQuestionID(questionID - 1);
+                    }}
+                  />
+                ) : null}
+              </div>
+
+              <div className="buttonWrapper">
+                <AddQuestionButton
                   callback={(e) => {
                     e.preventDefault();
-                    setQuestionID(questionID - 1);
+                    setValidationErrors([]);
+                    if (questionID < questions.length) {
+                      const validationResult = isQuestionValid(currentQuestion);
+
+                      if (typeof validationResult === 'boolean') {
+                        const nextQuestion = questions[questionID + 1];
+                        const isShowedCurrentQuestion = !nextQuestion;
+                        if (isShowedCurrentQuestion) {
+                          setQuestions(() => [...questions, initialQuestionData]);
+                        }
+                      } else {
+                        focusOnFirstInput();
+                        return setValidationErrors(validationResult);
+                      }
+                    }
+                    setQuestionID(questionID + 1);
+                    focusOnFirstInput();
+                  }}
+                />
+              </div>
+            </section>
+            <aside className="buttonWrapper">
+              {userCanAddAQuiz() ? (
+                <AddQuizButton
+                  isActive={isSubmitting}
+                  callback={async () => {
+                    setIsSubmitting(true);
+                    const quiz = prepareQuestionStructure();
+                    const { type, msg } = await api.addQuiz(quiz);
+
+                    // when token is invalid, middleware returns plain text, so here I preserve it
+                    const isAuthError = type === responseTypes.error && typeof msg === 'string';
+
+                    if (isAuthError) {
+                      setAuthError(msg);
+                    } else {
+                      setMessages(msg);
+                    }
+
+                    if (type === responseTypes.success) return history.push('/dashboard');
+                    setIsSubmitting(false);
                   }}
                 />
               ) : null}
-            </div>
-
-            <div className="buttonWrapper">
-              <AddQuestionButton
-                callback={(e) => {
-                  e.preventDefault();
-                  setValidationErrors([]);
-                  if (questionID < questions.length) {
-                    const validationResult = isQuestionValid(currentQuestion);
-
-                    if (typeof validationResult === 'boolean') {
-                      const nextQuestion = questions[questionID + 1];
-                      const isShowedCurrentQuestion = !nextQuestion;
-                      if (isShowedCurrentQuestion) {
-                        setQuestions(() => [...questions, initialQuestionData]);
-                      }
-                    } else {
-                      focusOnFirstInput();
-                      return setValidationErrors(validationResult);
-                    }
-                  }
-                  setQuestionID(questionID + 1);
-                  focusOnFirstInput();
-                }}
-              />
-            </div>
+            </aside>
           </section>
-          <aside className="buttonWrapper">
-            {userCanAddAQuiz() ? (
-              <AddQuizButton
-                isActive={isSubmitting}
-                callback={async () => {
-                  setIsSubmitting(true);
-                  const quiz = prepareQuestionStructure();
-                  const { type, msg } = await api.addQuiz(quiz);
-
-                  // when token is invalid, middleware returns plain text, so here I preserve it
-                  const isAuthError = type === responseTypes.error && typeof msg === 'string';
-
-                  if (isAuthError) {
-                    setAuthError(msg);
-                  } else {
-                    setMessages(msg);
-                  }
-
-                  if (type === responseTypes.success) return history.push('/dashboard');
-                  setIsSubmitting(false);
-                }}
-              />
-            ) : null}
-          </aside>
         </section>
-      </section>
-    </form>
+      </form>
+    </Layout>
   );
 };
 
