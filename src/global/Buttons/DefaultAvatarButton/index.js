@@ -1,13 +1,14 @@
 import './styles.scss';
 import '../../../styles/global/Components/Button.scss';
+import AccessibleWrapper from '../../AccessibleWrapper';
 
 const DefaultAvatarButton = ({ handleClick }) => {
   return (
-    <button tabIndex="-1" className="button defaultAvatarButton" onClick={handleClick}>
-      <span role="button" className="defaultAvatarButton--accessible" aria-controls="filename" tabIndex="0">
+    <AccessibleWrapper>
+      <button className="button defaultAvatarButton" onClick={handleClick}>
         use default
-      </span>
-    </button>
+      </button>
+    </AccessibleWrapper>
   );
 };
 

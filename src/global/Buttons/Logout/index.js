@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { logoutUser } from '../../../api';
+import * as api from '../../../api';
 import { AuthContext } from '../../../contexts/Auth';
 import { LOGOUT_CONFIRMATION } from '../../../utils/feedbackMessages';
 import './styles.scss';
@@ -13,11 +13,11 @@ const LogoutButton = () => {
         if (confirm(LOGOUT_CONFIRMATION)) {
           localStorage.removeItem('isLogged');
           setIsLogged(false);
-          return logoutUser();
+          return api.logoutUser();
         } else return false;
       }}
     >
-      Logout
+      <p>Logout</p>
     </button>
   );
 };

@@ -1,5 +1,4 @@
 @import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
 
 .signupButton {
   font-weight: bold;
@@ -10,5 +9,4 @@
     background: darken($foundation, 15);
     transition: background 0.3s ease-in-out;
   }
-  @include accessible;
 }

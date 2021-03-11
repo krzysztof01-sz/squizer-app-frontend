@@ -1,12 +1,13 @@
 import './styles.scss';
+import AccessibleWrapper from '../../AccessibleWrapper';
 
 const LoginButton = ({ isDisabled }) => {
   return (
-    <button tabIndex="-1" className="button loginButton" disabled={isDisabled ? true : false}>
-      <span role="button" className="loginButton--accessible" aria-controls="filename" tabIndex="0">
+    <AccessibleWrapper>
+      <button className="button loginButton" disabled={isDisabled}>
         Login
-      </span>
-    </button>
+      </button>
+    </AccessibleWrapper>
   );
 };
 
