@@ -15,7 +15,11 @@ const CorrectAnswersBar = ({ givenAnswersQuantity, correctAnswersQuantity }) => 
   });
 
   return (
-    <section className="correctAnswersBar">
+    <section
+      aria-label="Your percentage of correct answers"
+      role="contentinfo"
+      className="correctAnswersBar"
+    >
       <div className="progressBar" style={{ width: `${percentage}%` }}>
         <p className="progressBar__percentage">{percentage}% correct answers</p>
       </div>
