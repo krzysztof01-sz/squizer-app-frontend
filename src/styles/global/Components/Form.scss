@@ -2,7 +2,6 @@
 @import '../../mixins.scss';
 
 .form__wrapper {
-  width: 100vw;
   padding: 10vh 0;
   @include flexCenter;
   .form {
@@ -33,10 +32,10 @@
   }
 }
 
-@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+@media only screen and (min-width: 1921px) {
   .form__wrapper {
     .form {
-      font-size: $font-mediumXXL;
+      font-size: $font-medium;
       width: 35vw;
       .form__header {
         font-size: $font-large;
