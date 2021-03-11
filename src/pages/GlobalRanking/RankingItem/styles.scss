@@ -20,3 +20,13 @@
     margin-bottom: 4vh;
   }
 }
+
+@media only screen and (min-width: 1921px) {
+  .rankingList__item {
+    font-size: $font-normal;
+    .data__avatar {
+      @include avatar(60px);
+      margin-left: 10px;
+    }
+  }
+}

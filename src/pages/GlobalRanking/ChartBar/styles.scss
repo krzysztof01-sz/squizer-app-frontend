@@ -43,3 +43,14 @@
     }
   }
 }
+
+@media only screen and (min-width: 1921px) {
+  .chart__bar {
+    .bar__data {
+      font-size: $font-normal;
+      .data__avatar {
+        @include avatar(60px);
+      }
+    }
+  }
+}

@@ -52,7 +52,7 @@
   }
 }
 
-@media only screen and (min-width: 1008px) {
+@media only screen and (min-width: 1000px) {
   .quizResult {
     width: 50%;
     .quizResult__questionSolution {
@@ -67,5 +67,11 @@
 @media only screen and (min-width: 1921px) {
   .quizResult {
     width: 40%;
+    .quizResult__questionSolution {
+      font-size: $font-medium;
+      .question__content {
+        font-size: $font-largeXL;
+      }
+    }
   }
 }

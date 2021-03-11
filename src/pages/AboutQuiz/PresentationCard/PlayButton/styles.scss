@@ -7,8 +7,7 @@ a {
     border: 1px solid $contrast;
     width: 30%;
     margin-right: 10%;
-    @include accessible;
-    &--accessible:focus {
+    &:focus {
       background-color: $primary;
       color: $foundation;
       border: 2px solid $foundation;

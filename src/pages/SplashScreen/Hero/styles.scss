@@ -7,3 +7,27 @@
     width: 100%;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .hero {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .hero {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .hero {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .hero {
+    width: 90%;
+  }
+}

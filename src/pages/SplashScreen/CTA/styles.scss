@@ -1,4 +1,5 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .CTA {
   display: flex;
@@ -19,6 +20,48 @@
       font-weight: bold;
       color: $foundation;
       background-color: $primary;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .CTA {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .CTA {
+    border-radius: 10px;
+    width: 95%;
+    margin: 0 auto;
+    @include secondaryShadow;
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .CTA {
+    border-radius: 10px;
+    width: 85%;
+    margin: 0 auto;
+    @include secondaryShadow;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .CTA {
+    border-radius: 10px;
+    width: 100%;
+    font-size: $font-medium;
+    margin: 0 auto;
+    @include secondaryShadow;
+    a {
+      .CTA__button {
+        width: 200px;
+        padding: 15px;
+        font-size: $font-medium;
+      }
     }
   }
 }

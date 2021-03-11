@@ -3,6 +3,7 @@
 
 .quizCard__wrapper {
   width: 100vw;
+  height: 100vh;
   padding: 5vh 0;
   backdrop-filter: blur(20px);
   background-repeat: no-repeat;
@@ -23,7 +24,7 @@
         position: absolute;
         bottom: 20px;
         right: 10px;
-        @include avatar(100px);
+        @include avatar(80px);
       }
     }
 
@@ -110,6 +111,7 @@
 
 @media only screen and (min-width: 1921px) {
   .quizCard__wrapper {
+    height: auto;
     .quizCard {
       width: 45%;
       padding: 3%;
@@ -119,18 +121,18 @@
           height: 600px;
         }
       }
-
       .quizCard__title {
         font-size: $font-medium;
       }
       .quizCard__description {
         overflow-wrap: break-word;
         font-size: $font-smallXL;
-        margin: 4vh 0;
+        margin: 2vh 0;
       }
       .buttonAndInfoWrapper {
         .infoWrapper {
           width: 75%;
+          font-size: $font-normal;
         }
       }
     }

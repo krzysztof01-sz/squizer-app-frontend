@@ -6,15 +6,18 @@
   flex-direction: column;
   width: 90vw;
   margin: 0 auto;
-  .userData {
-    width: 100%;
-    margin-top: 3vh;
-    @include flexCenter;
-    .userData__profile {
+  .page__firstPart {
+    .userData {
+      width: 100%;
+      margin-top: 3vh;
       @include flexCenter;
-      flex-direction: column;
-      width: 50%;
-      margin-right: 5%;
+      .userData__profile {
+        @include flexCenter;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 50%;
+        margin-right: 5%;
+      }
     }
   }
 }
@@ -37,7 +40,7 @@
       height: 80vh;
       overflow-y: scroll;
       width: 45%;
-      margin: 5vh 5% 0 0;
+      margin: 5vh 0 0 0;
       @include primaryScroll;
     }
   }
@@ -61,6 +64,14 @@
       .userData {
         width: 500px;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .pageWrapper {
+    .page__secondPart {
+      height: 70vh;
     }
   }
 }

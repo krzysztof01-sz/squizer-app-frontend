@@ -65,8 +65,15 @@
 }
 @media only screen and (min-width: 1921px) {
   .quiz {
+    font-size: $font-medium;
     margin-top: 10vh;
     width: 35%;
+    .quiz__questionsView {
+      .question__content {
+        width: 50%;
+        font-size: $font-mediumXL;
+      }
+    }
   }
   .gameNavigationButtons {
     width: 35%;

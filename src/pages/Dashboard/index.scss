@@ -7,7 +7,7 @@
   margin: 5vh auto 0;
 }
 .searchBarWrapper {
-  margin: 5vh auto 10vh;
+  margin: 10vh auto 5vh;
 }
 .dashboardHeader {
   margin: 5vh auto;
@@ -40,5 +40,14 @@
   .searchBarWrapper {
     width: 30%;
     margin-left: 5%;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .dashboardHeader {
+    width: 400px;
+  }
+  .searchBarWrapper {
+    width: 20%;
   }
 }

@@ -36,37 +36,9 @@
     }
     .splashScreen__firstPart {
       margin-right: 15vw;
-      .description {
-        &__title {
-          font-size: $font-largeXXL;
-        }
-        &__content {
-          font-size: $font-medium;
-          margin-bottom: 10vh;
-        }
-      }
-      .hero {
-        width: 80%;
-      }
     }
     .splashScreen__secondPart {
       flex-direction: column-reverse;
-      .slider {
-        width: 95%;
-        &__imageSection {
-          .slider__image {
-            width: 15vw;
-            height: 55vh;
-            margin-right: 7vw;
-          }
-        }
-      }
-      .CTA {
-        border-radius: 10px;
-        width: 95%;
-        margin: 0 auto;
-        @include secondaryShadow;
-      }
     }
   }
 }
@@ -77,43 +49,14 @@
     flex-direction: row;
     .splashScreen__firstPart,
     .splashScreen__secondPart {
-      height: 120vh;
+      height: 130vh;
       width: 40%;
     }
     .splashScreen__firstPart {
       margin-right: 10vw;
-      .description {
-        &__title {
-          font-size: $font-largeXXL;
-        }
-        &__content {
-          width: 100%;
-          font-size: $font-mediumXL;
-          margin-bottom: 10vh;
-        }
-      }
-      .hero {
-        width: 90%;
-      }
     }
     .splashScreen__secondPart {
       flex-direction: column-reverse;
-      .slider {
-        width: 85%;
-        &__imageSection {
-          .slider__image {
-            width: 12vw;
-            height: 45vh;
-            margin-right: 6vw;
-          }
-        }
-      }
-      .CTA {
-        border-radius: 10px;
-        width: 85%;
-        margin: 0 auto;
-        @include secondaryShadow;
-      }
     }
   }
 }
@@ -124,60 +67,14 @@
     flex-direction: row;
     .splashScreen__firstPart,
     .splashScreen__secondPart {
-      height: 110vh;
+      height: 120vh;
       width: 40%;
     }
     .splashScreen__firstPart {
       margin-right: 10vw;
-      .description {
-        &__title {
-          font-size: $font-hugeXXL;
-        }
-        &__content {
-          width: 100%;
-          font-size: $font-huge;
-          margin-bottom: 10vh;
-        }
-      }
-      .hero {
-        width: 90%;
-      }
     }
     .splashScreen__secondPart {
       flex-direction: column-reverse;
-      .slider {
-        width: 85%;
-        &__imageSection {
-          .slider__image {
-            width: 10vw;
-            height: 40vh;
-            margin-right: 7vw;
-          }
-        }
-        &__switchSection {
-          .dot {
-            width: 30px;
-            height: 30px;
-            &:last-child {
-              margin: 0;
-            }
-          }
-        }
-      }
-      .CTA {
-        border-radius: 10px;
-        width: 85%;
-        font-size: $font-large;
-        margin: 0 auto;
-        @include secondaryShadow;
-        a {
-          .CTA__button {
-            width: 200px;
-            padding: 15px;
-            font-size: $font-large;
-          }
-        }
-      }
     }
   }
 }

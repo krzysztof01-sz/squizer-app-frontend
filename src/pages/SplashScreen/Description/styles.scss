@@ -13,3 +13,50 @@
     text-align: center;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .description {
+    &__content {
+      width: 60vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+  .description {
+    &__title {
+      font-size: $font-largeXXL;
+    }
+    &__content {
+      width: 100%;
+      font-size: $font-medium;
+      margin-bottom: 10vh;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+  .description {
+    &__title {
+      font-size: $font-largeXXL;
+    }
+    &__content {
+      width: 100%;
+      font-size: $font-medium;
+      margin-bottom: 10vh;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .description {
+    &__title {
+      font-size: $font-largeXXL;
+    }
+    &__content {
+      width: 100%;
+      font-size: $font-mediumXL;
+      margin-bottom: 10vh;
+    }
+  }
+}

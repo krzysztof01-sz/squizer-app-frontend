@@ -17,3 +17,9 @@
     transition: background 0.4s color 0.4s ease;
   }
 }
+
+@media only screen and (min-width: 1921px) and (max-width: 3840px) {
+  .quizButton {
+    width: 130px;
+  }
+}
