@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Layout from '../../global/Components/Layout';
 import Avatar from './Avatar';
 import ChangeAvatarButton from './ChangeAvatarButton';
@@ -9,10 +10,8 @@ import { useUserProfile } from '../../hooks';
 import Loader from '../../global/Components/Loader';
 import ErrorPage from '../ErrorPage';
 import SectionHeader from '../../global/Components/SectionHeader';
-import Nav from '../Dashboard/Nav';
-import './index.scss';
-import { useState } from 'react';
 import ChangeAvatarModal from './ChangeAvatarModal';
+import './index.scss';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +25,6 @@ const UserProfile = () => {
   return (
     <Layout>
       <main className="pageWrapper">
-        <Nav />
         <ChangeAvatarModal
           shouldDefaultOptionRender={user.avatarType === 'custom'}
           isOpen={isModalOpen}

@@ -52,9 +52,9 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
 
   return isOpen ? (
     <section className="changeAvatarModal">
-      <div onClick={() => setIsOpen(!isOpen)}>
-        <ExitIcon onClick />
-      </div>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        <ExitIcon />
+      </button>
       <AvatarPreview preview={preview} />
       <ErrorMessage message={error} />
       {shouldDefaultOptionRender ? <DefaultAvatarButton handleClick={setDefaultAvatar} /> : null}
