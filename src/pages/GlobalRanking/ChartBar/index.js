@@ -9,7 +9,9 @@ const ChartBar = ({ user: { nickname, stats, avatar }, loading, barHeight }) => 
     <div className="chart__bar">
       <div className="chart__lineWrapper">
         <div style={{ height: `${barHeight}%` }} className="bar__line">
-          <p className="chart__bar-points">{points} pt</p>
+          <p aria-label={`user ${nickname} got ${points} points`} className="chart__bar-points">
+            {points} pt
+          </p>
         </div>
       </div>
 

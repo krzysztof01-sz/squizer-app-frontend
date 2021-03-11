@@ -21,7 +21,7 @@ const Ranking = () => {
           <Chart users={users} />
         </section>
 
-        <section className="rankingWrapper">
+        <section aria-label="user ranking" className="rankingWrapper">
           <SectionHeader>Global ranking</SectionHeader>
           <RankingList users={users} />
         </section>
