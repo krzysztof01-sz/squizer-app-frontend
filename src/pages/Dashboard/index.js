@@ -1,6 +1,5 @@
 import { memo } from 'react';
 
-import Nav from './Nav';
 import QuizzesList from './QuizzesList';
 import SearchBar from './SearchBar';
 import DashboardHeader from './DashboardHeader';
@@ -9,7 +8,6 @@ import Layout from '../../global/Components/Layout';
 import Loader from '../../global/Components/Loader';
 import { SearchIcon } from '../../global/Icons';
 import FilteringProvider from '../../contexts/Filtering';
-
 import { useQuizzes } from '../../hooks';
 import './index.scss';
 
@@ -23,13 +21,13 @@ const Dashboard = () => {
     <Layout>
       <FilteringProvider>
         <section className="navSearchbarWrapper">
-          <Nav />
           <SearchBar>
             {(filterQuizzes) => {
               return (
                 <div className="searchBarWrapper">
                   <label className="label">
                     <input
+                      aria-label="search a quiz"
                       type="text"
                       className="input searchBar"
                       placeholder="search..."
