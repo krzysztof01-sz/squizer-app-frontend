@@ -1,8 +1,10 @@
 .form__wrapper {
   .form {
-    .loginButton {
-      margin-top: 5vh;
+    .accessibleWrapper {
       align-self: flex-end;
+      .loginButton {
+        margin-top: 5vh;
+      }
     }
   }
 }
