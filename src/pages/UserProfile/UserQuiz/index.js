@@ -23,7 +23,7 @@ const UserQuiz = ({ quizId }) => {
     );
 
   return (
-    <article className="userQuiz">
+    <article role="listitem" className="userQuiz">
       <p className="userQuiz__title">{quiz.title}</p>
       <p className="userQuiz__description">{shortenText(quiz.description, 200)}</p>
       <section className="userQuiz__actionsBar">

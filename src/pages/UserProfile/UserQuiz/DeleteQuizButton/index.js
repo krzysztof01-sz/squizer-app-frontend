@@ -3,7 +3,7 @@ import './styles.scss';
 
 const DeleteQuizButton = ({ callback }) => {
   return (
-    <button className="button deleteQuizButton" onClick={callback}>
+    <button aria-label="Delete quiz" className="button deleteQuizButton" onClick={callback}>
       <BinIcon />
     </button>
   );
