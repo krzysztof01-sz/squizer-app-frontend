@@ -10,10 +10,11 @@
       "jsx": true
     }
   },
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier", "plugin:jsx-a11y/recommended"],
+  "plugins": ["prettier", "jsx-a11y"],
   "parser": "babel-eslint",
   "rules": {
+    "jsx-a11y/rule-name": 2,
     "prettier/prettier": ["error"],
     "no-undef": "off",
     "no-console": "warn",
