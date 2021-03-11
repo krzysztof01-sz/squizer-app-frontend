@@ -1,6 +1,5 @@
+import { maxCommentLength } from '../../../../utils/constants';
 import './styles.scss';
-
-const maxCommentLength = 500;
 
 const CharactersCounter = ({ charactersNumber }) => {
   return (
