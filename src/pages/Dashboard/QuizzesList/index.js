@@ -9,7 +9,7 @@ const QuizzesList = ({ quizzes }) => {
   return (
     <>
       {invisibleQuizzesQuantity === 0 ? <LackOfQuizzesView /> : null}
-      <section className="quizzesList">
+      <section role="list" className="quizzesList">
         {quizzes.map((quiz) => {
           return <QuizCard key={quiz._id} quiz={quiz} />;
         })}
