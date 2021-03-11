@@ -9,7 +9,7 @@ const formatPlace = (place) => {
 
 const Stats = ({ rankingPlace, points }) => {
   return (
-    <div className="userData__stats">
+    <div aria-label="Your statistics" className="userData__stats">
       <p>Ranking: {`${formatPlace(rankingPlace)} place`}</p>
       <p>Scored points: {points}</p>
     </div>
