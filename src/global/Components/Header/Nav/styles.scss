@@ -15,3 +15,13 @@
     }
   }
 }
+
+@media only screen and (min-width: 1921px) {
+  .header__nav {
+    .nav__list {
+      .nav__item {
+        font-size: $font-mediumXL;
+      }
+    }
+  }
+}

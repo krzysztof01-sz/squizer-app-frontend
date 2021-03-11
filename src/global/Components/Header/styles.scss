@@ -9,10 +9,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 1vh;
+  padding: 1vh 0;
   .header__logo {
     width: 100px;
-    padding-left: 2vw;
+    padding: 1vh 0 0 3vw;
   }
   .header__actionButtons {
     display: flex;
