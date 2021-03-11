@@ -2,7 +2,7 @@ import './styles.scss';
 
 const TextArea = ({ comment, setComment }) => {
   return (
-    <label className="label">
+    <label className="label" aria-label="content">
       write a comment
       <textarea
         name="content"
