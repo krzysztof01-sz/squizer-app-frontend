@@ -1,6 +1,14 @@
-const TextAreaInput = ({ callback, labelName, value, name, labelClass = '', inputClass = '', ...rest }) => {
+const TextAreaInput = ({
+  callback,
+  labelName,
+  value,
+  name,
+  labelClass = '',
+  inputClass = '',
+  ...rest
+}) => {
   return (
-    <label className="label form__label quizForm__label">
+    <label aria-label={labelName} className="label form__label quizForm__label">
       {labelName}
       <textarea
         onChange={callback}
