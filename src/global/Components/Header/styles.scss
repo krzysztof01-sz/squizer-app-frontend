@@ -7,13 +7,18 @@
   top: 0;
   background-color: $foundation;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding-top: 1vh;
   .header__logo {
-    padding: 1vh 0 0 2vw;
+    width: 100px;
+    padding-left: 2vw;
   }
-  .header__nav {
-    display: none;
+  .header__actionButtons {
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    align-self: flex-end;
   }
   .logoutButton {
     width: 100px;
@@ -27,15 +32,6 @@
     justify-content: space-between;
     .header__logo {
       width: 10vw;
-    }
-    .header__nav {
-      display: block;
-      width: 40%;
-      margin-left: 30%;
-      .nav__list {
-        @include flexCenter;
-        justify-content: space-around;
-      }
     }
   }
 }

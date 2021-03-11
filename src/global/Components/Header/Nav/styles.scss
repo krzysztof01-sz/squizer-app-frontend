@@ -1,0 +1,17 @@
+@import '../../../../styles/mixins.scss';
+
+.header__nav {
+  display: none;
+}
+
+@media only screen and (min-width: 1000px) {
+  .header__nav {
+    display: block;
+    width: 40%;
+    margin-left: 30%;
+    .nav__list {
+      @include flexCenter;
+      justify-content: space-around;
+    }
+  }
+}

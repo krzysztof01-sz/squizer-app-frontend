@@ -1,38 +1,37 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/Logo.svg';
+import AccessibleWrapper from '../../AccessibleWrapper';
+import Nav from './Nav';
+import HeaderButton from '../../Buttons/HeaderButton';
 import { AuthContext } from '../../../contexts/Auth';
-import LogoutButton from '../../Buttons/Logout';
-import HeaderLoginButton from './LoginButton';
+import { navItems } from '../../../utils/constants';
 import './styles.scss';
 
 const Header = () => {
   const { isLogged } = useContext(AuthContext);
   return (
     <header className="header">
-      <Link tabIndex="-1" to={isLogged ? '/dashboard' : '/'}>
-        <img className="header__logo" src={Logo} alt="logo" />
-      </Link>
+      <AccessibleWrapper>
+        <Link to={isLogged ? '/dashboard' : '/'}>
+          <img className="header__logo" src={Logo} alt="logo" />
+        </Link>
+      </AccessibleWrapper>
       {isLogged ? (
-        <>
-          <nav className="header__nav">
-            <ul className="nav__list">
-              <Link to="/quizform">
-                <li className="nav__item">add a new quiz</li>
-              </Link>
-              <Link to="/ranking">
-                <li className="nav__item">ranking</li>
-              </Link>
-              <Link to="/profile">
-                <li className="nav__item">user profile</li>
-              </Link>
-              <li className="nav__item">about</li>
-            </ul>
-          </nav>
-          <LogoutButton />
-        </>
+        <Nav navItems={navItems} />
       ) : (
-        <HeaderLoginButton />
+        <section className="header__actionButtons">
+          <HeaderButton>
+            <Link to="/login">
+              <p className="header__button">Login</p>
+            </Link>
+          </HeaderButton>
+          <HeaderButton>
+            <Link to="/signup">
+              <p className="header__button">Sign up</p>
+            </Link>
+          </HeaderButton>
+        </section>
       )}
     </header>
   );
