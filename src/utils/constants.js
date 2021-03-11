@@ -8,6 +8,27 @@ export const colors = {
   primaryColor: '#e368d9',
 };
 
+export const navItems = [
+  {
+    route: '/quizform',
+    text: 'add a new quiz',
+  },
+  {
+    route: '/ranking',
+    text: 'ranking',
+  },
+  {
+    route: '/profile',
+    text: 'user profile',
+  },
+  {
+    route: '/about',
+    text: 'about',
+  },
+];
+
+export const maxCommentLength = 500;
+
 export const categories = ['maths', 'it', 'english', 'riddles'];
 
 export const categoryToColor = new Map([
