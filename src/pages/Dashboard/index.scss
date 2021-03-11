@@ -1,7 +1,7 @@
 @import '../../styles/mixins.scss';
 
-.nav {
-  .nav__header {
+.mobileNav {
+  .mobileNav__header {
     margin-bottom: 2vh;
   }
   margin: 5vh auto 0;
@@ -22,7 +22,7 @@
     margin-left: 5%;
   }
   .dashboardHeader {
-    width: min-content;
+    width: 300px;
     margin: 5vh 0 2vh 5%;
     justify-content: space-between;
     padding: 0;
@@ -33,12 +33,6 @@
   .quizzesList {
     display: flex;
     flex-wrap: wrap;
-  }
-}
-
-@media only screen and (min-width: 999px) {
-  .nav {
-    display: none;
   }
 }
 
