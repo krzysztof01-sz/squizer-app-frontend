@@ -5,11 +5,11 @@ import './styles.scss';
 const Avatar = ({ userId }) => {
   const { user } = useUser(userId);
   if (user) {
-    return <img className="profile__avatar" alt="user avatar" src={user.avatar} />;
+    return <img className="profile__avatar" alt={`user ${user.avatar} avatar`} src={user.avatar} />;
   } else {
     return (
       <div className="profile__avatar">
-        <Loader />
+        <Loader width={200} height={200} />
       </div>
     );
   }
