@@ -7,9 +7,14 @@ module.exports = {
   mode: 'development',
   entry: ['@babel/polyfill', './src/App.js'],
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devServer: {
     port: 8000,
