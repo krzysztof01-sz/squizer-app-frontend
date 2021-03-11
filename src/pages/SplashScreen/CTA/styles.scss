@@ -12,9 +12,9 @@
     margin: 0 auto 4vh;
   }
   a {
-    display: flex;
-    justify-content: flex-end;
+    display: contents;
     .CTA__button {
+      align-self: flex-end;
       width: 120px;
       font-weight: bold;
       color: $foundation;
