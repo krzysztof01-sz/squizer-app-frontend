@@ -8,6 +8,8 @@
     display: flex;
     .slider__image {
       object-fit: cover;
+      width: 55vw;
+      height: 45vh;
       margin-right: 10vw;
     }
     &__slide {
@@ -67,7 +69,6 @@
       .slider__image {
         width: 10vw;
         height: 40vh;
-        margin-right: 5vw;
       }
     }
     &__switchSection {
