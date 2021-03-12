@@ -2,14 +2,18 @@
 
 .answerView {
   cursor: default;
+  &--checked,
+  &:focus {
+    border-bottom: 4px solid lighten($contrast, 60);
+  }
 }
 
 .correct {
-  background-color: lighten($valid, 25);
+  background-color: $valid;
   border-bottom: 4px solid lighten($valid, 20);
 }
 
 .incorrect {
-  background-color: lighten($invalid, 25);
+  background-color: $invalid;
   border-bottom: 4px solid lighten($invalid, 20);
 }
