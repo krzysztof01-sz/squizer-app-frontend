@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './mixins.scss';
 @import './global/Components/Link.scss';
 
 :root {
@@ -7,7 +8,7 @@
 
 ::selection,
 ::selection {
-  background-color: $primary;
+  background-color: $contrast;
 }
 
 * {
@@ -26,6 +27,16 @@ body {
   overflow-x: hidden;
 }
 
+*:focus {
+  outline: none;
+  border-bottom: 4px solid $secondary;
+  transition: border-bottom 0.2s;
+}
+
+h1 {
+  font-weight: normal;
+}
+
 .app {
   font-size: $font-small;
 }
@@ -34,7 +45,10 @@ ul {
   list-style-type: none;
 }
 
+input[type],
+select,
 textarea {
+  color: $contrast;
   font-family: 'Poppins', sans-serif;
 }
 
