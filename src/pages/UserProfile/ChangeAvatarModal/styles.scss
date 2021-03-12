@@ -13,6 +13,9 @@
   top: 20vh;
   @include primaryShadow;
   background-color: $foundation;
+  .buttonsWrapper {
+    @include flexCenter;
+  }
   .exitIcon {
     font-size: $font-medium;
     color: $contrast;

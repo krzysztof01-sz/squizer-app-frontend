@@ -14,7 +14,7 @@
       .userData__profile {
         @include flexCenter;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         width: 50%;
         margin-right: 5%;
       }
