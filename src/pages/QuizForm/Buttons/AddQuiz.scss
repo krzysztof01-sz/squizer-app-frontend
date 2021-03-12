@@ -1,16 +1,14 @@
-@import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
 
 .addQuizButton {
   width: 100%;
   align-self: flex-end;
-  color: $primary;
-  border: 2px solid $primary;
+  color: $secondary;
+  border: 2px solid $secondary;
   font-weight: bold;
-  @include accessible;
   &:focus,
   &:hover {
-    border: 2px solid $secondary;
-    color: $secondary;
+    border: 2px solid $primary;
+    color: $primary;
   }
 }
