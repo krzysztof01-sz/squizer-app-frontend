@@ -1,8 +1,10 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .logoutButton {
   background-color: $primary;
   color: $foundation;
+  @include hoverable;
 }
 
 @media only screen and (min-width: 1921px) and (max-width: 3840px) {

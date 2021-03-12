@@ -1,11 +1,14 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .fileInputWrapper {
   display: flex;
   .fileInput__label {
+    margin-right: 15px;
     display: block;
-    background: transparentize($secondary, 0.1);
+    background: $primary;
     color: $foundation;
+    @include hoverable;
     .fileInput {
       display: none;
     }

@@ -1,12 +1,10 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .loginButton {
   font-weight: bold;
-  background-color: $secondary;
+  background-color: $primary;
   color: $foundation;
-  border: 2px solid $secondary;
-  &:hover {
-    background: transparentize($secondary, 0.2);
-    transition: background 0.3s ease-in-out;
-  }
+  border: 2px solid $contrast;
+  @include hoverable;
 }

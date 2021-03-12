@@ -2,5 +2,10 @@
 
 .defaultAvatarButton {
   background-color: $foundation;
-  color: $secondary;
+  color: $primary;
+  margin-left: 10px;
+  &:hover {
+    background: darken($foundation, 3);
+    transition: background 0.4s;
+  }
 }
