@@ -12,11 +12,6 @@
       width: 90%;
       margin: 6vh auto;
     }
-    .question__answers {
-      .answer__content {
-        margin-bottom: 2vh;
-      }
-    }
   }
   .switchDots {
     margin: 5vh 0;
@@ -24,18 +19,29 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
-}
-.gameNavigationButtons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10vh;
-  .button {
-    @include flexCenter;
-    width: 90%;
+  .gameNavigationButtons {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 10vh;
+    .gameNavigation__left,
+    .gameNavigation__right {
+      width: 45%;
+      .button {
+        width: 100%;
+      }
+    }
   }
-  .gameNavigation__left,
-  .gameNavigation__right {
-    width: 40%;
+}
+
+@media only screen and (min-width: 768px) {
+  .quiz {
+    width: 70%;
+    .gameNavigationButtons {
+      .gameNavigation__left,
+      .gameNavigation__right {
+        width: 35%;
+      }
+    }
   }
 }
 
@@ -43,48 +49,31 @@
   .quiz {
     margin-top: 15vh;
     width: 50%;
-    .quiz__questionsView {
-      .question__content {
-        width: 50%;
-        font-size: $font-smallXL;
+
+    .gameNavigationButtons {
+      width: 80%;
+      margin: 0 auto 10vh;
+      .gameNavigation__left,
+      .gameNavigation__right {
+        width: 35%;
+        .button {
+          width: 100%;
+        }
       }
-    }
-  }
-  .gameNavigationButtons {
-    width: 50%;
-    margin: 0 auto 10vh;
-    .button {
-      @include flexCenter;
-      width: 90%;
-    }
-    .gameNavigation__left,
-    .gameNavigation__right {
-      width: 30%;
     }
   }
 }
 @media only screen and (min-width: 1921px) {
   .quiz {
-    font-size: $font-medium;
+    width: 35%;
     margin-top: 10vh;
-    width: 35%;
-    .quiz__questionsView {
-      .question__content {
-        width: 50%;
-        font-size: $font-mediumXL;
+    font-size: $font-medium;
+    .gameNavigationButtons {
+      width: 80%;
+      .gameNavigation__left,
+      .gameNavigation__right {
+        width: 30%;
       }
-    }
-  }
-  .gameNavigationButtons {
-    width: 35%;
-    margin: 0 auto 10vh;
-    .button {
-      @include flexCenter;
-      width: 90%;
-    }
-    .gameNavigation__left,
-    .gameNavigation__right {
-      width: 30%;
     }
   }
 }
