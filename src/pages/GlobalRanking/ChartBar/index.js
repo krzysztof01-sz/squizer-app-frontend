@@ -1,5 +1,5 @@
 import { shortenText } from '../../../utils/functions';
-import { renderAvatar } from '../helpers/renderAvatar';
+import renderAvatar from '../helpers/renderAvatar';
 import './styles.scss';
 
 const ChartBar = ({ user: { nickname, stats, avatar }, loading, barHeight }) => {

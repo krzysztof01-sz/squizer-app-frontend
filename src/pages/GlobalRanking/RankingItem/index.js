@@ -1,4 +1,4 @@
-import { renderAvatar } from '../helpers/renderAvatar';
+import renderAvatar from '../helpers/renderAvatar';
 import './styles.scss';
 
 const RankingItem = ({ place, user: { nickname, stats, avatar, isItMe }, loading }) => {
