@@ -3,8 +3,10 @@
 .answer__content {
   cursor: pointer;
   width: 100%;
-  border-bottom: 4px solid lighten($contrast, 60);
-  background-color: lighten($contrast, 78);
+  margin-bottom: 3vh;
+  color: $contrast;
+  border-bottom: 4px solid $contrast;
+  background-color: darken($foundation, 4);
   text-align: center;
   font-weight: bold;
   padding: 10px;
