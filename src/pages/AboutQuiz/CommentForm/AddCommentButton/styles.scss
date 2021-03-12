@@ -1,4 +1,5 @@
 @import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
 
 .commentForm__button {
   width: 120px;
@@ -6,9 +7,9 @@
   background-color: $primary;
   color: $foundation;
   margin: 1vh 0;
-  &:hover,
+  @include hoverable;
   &:focus {
-    background-color: $secondary;
-    transition: background 0.4s ease-in;
+    border-bottom: 4px solid $secondary;
+    transition: border-bottom 0.4s;
   }
 }

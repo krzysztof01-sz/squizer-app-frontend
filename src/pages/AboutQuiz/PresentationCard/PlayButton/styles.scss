@@ -4,13 +4,14 @@
 a {
   display: contents;
   .quizCard__button {
-    border: 1px solid $contrast;
     width: 30%;
     margin-right: 10%;
+    @include hoverable;
     &:focus {
       background-color: $primary;
       color: $foundation;
-      border: 2px solid $foundation;
+      border-bottom: 4px solid $secondary;
+      transition: border-bottom 0.2s;
     }
   }
 }
