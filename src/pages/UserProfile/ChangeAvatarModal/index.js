@@ -9,6 +9,7 @@ import { ExitIcon } from '../../../global/Icons';
 import SetAvatarButton from '../SetAvatarButton';
 import * as fb from '../../../utils/feedbackMessages';
 import * as api from '../../../api';
+import { photoTypes } from '../../../utils/constants';
 import './styles.scss';
 
 const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRender }) => {
@@ -18,7 +19,7 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
 
   const setDefaultAvatar = () => {
     setPreview(DefaultAvatar);
-    setAvatar('default');
+    setAvatar(photoTypes.default);
     setError('');
   };
 
@@ -57,16 +58,18 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
       </button>
       <AvatarPreview preview={preview} />
       <ErrorMessage message={error} />
-      {shouldDefaultOptionRender ? <DefaultAvatarButton handleClick={setDefaultAvatar} /> : null}
-      <FileInput handleChange={handleAvatarChange} />
+      <section className="buttonsWrapper">
+        <FileInput handleChange={handleAvatarChange} />
+        {shouldDefaultOptionRender ? <DefaultAvatarButton handleClick={setDefaultAvatar} /> : null}
+      </section>
       {avatar ? (
         <SetAvatarButton
           callback={async () => {
             let response;
             if (typeof avatar === 'string') {
-              response = await api.setAvatar(userId, 'default');
+              response = await api.setAvatar(userId, photoTypes.default);
             } else {
-              response = await api.setAvatar(userId, 'custom', avatar);
+              response = await api.setAvatar(userId, photoTypes.custom, avatar);
             }
 
             if (response?.success) {

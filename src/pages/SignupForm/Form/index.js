@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -22,14 +22,14 @@ import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 
-import { responseTypes } from '../../../utils/constants';
+import { photoTypes, responseTypes } from '../../../utils/constants';
 import './styles.scss';
 import SectionHeader from '../../../global/Components/SectionHeader';
 import { useCsrfToken } from '../../../hooks';
 
 const Form = () => {
   const history = useHistory();
-  const { csrfToken, loading } = useCsrfToken();
+  const { csrfToken } = useCsrfToken();
 
   const [error, setError] = useState([]);
   const [process, setProcess] = useState('');
@@ -69,7 +69,7 @@ const Form = () => {
     setValidationMessages([]);
 
     formData.avatar = avatar;
-    formData.avatarType = avatar?.name ? 'custom' : 'default';
+    formData.avatarType = avatar?.name ? photoTypes.custom : photoTypes.default;
     if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
     setProcess(fb.REGISTERING_PROCESS);
@@ -78,7 +78,7 @@ const Form = () => {
 
     if (addingUserResponse.type === responseTypes.success) {
       const { msg, userId } = addingUserResponse;
-      if (formData.avatarType === 'custom') await api.setUserAvatar(userId, avatar);
+      if (formData.avatarType === photoTypes.custom) await api.setUserAvatar(userId, avatar);
       setValidationMessages(msg);
       setTimeout(() => history.push('/login'), 500);
     } else {
@@ -98,7 +98,7 @@ const Form = () => {
   const setDefaultAvatar = (e) => {
     e.preventDefault();
     setError('');
-    setAvatar('default');
+    setAvatar(photoTypes.default);
     setPreview(DefaultAvatar);
   };
 

@@ -11,6 +11,7 @@ import Loader from '../../global/Components/Loader';
 import ErrorPage from '../ErrorPage';
 import SectionHeader from '../../global/Components/SectionHeader';
 import ChangeAvatarModal from './ChangeAvatarModal';
+import { photoTypes } from '../../utils/constants';
 import './index.scss';
 
 const UserProfile = () => {
@@ -26,7 +27,7 @@ const UserProfile = () => {
     <Layout>
       <main className="pageWrapper">
         <ChangeAvatarModal
-          shouldDefaultOptionRender={user.avatarType === 'custom'}
+          shouldDefaultOptionRender={user.avatarType === photoTypes.custom}
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
           userId={user._id}

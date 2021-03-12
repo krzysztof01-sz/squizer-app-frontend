@@ -1,5 +1,5 @@
 import { firebaseStorage } from '../../config/firebase';
-import { responseTypes } from '../utils/constants';
+import { photoTypes, responseTypes } from '../utils/constants';
 import DefaultAvatar from '../assets/images/DefaultAvatar.png';
 
 const baseURL = 'http://localhost:8080';
@@ -101,7 +101,7 @@ export const getUserById = async (userId) => {
   if (type === responseTypes.success) {
     delete user.password;
 
-    if (user.avatarType === 'custom') {
+    if (user.avatarType === photoTypes.custom) {
       const avatarLink = await getAvatar(userId);
       user.avatar = avatarLink;
     } else {
@@ -233,7 +233,7 @@ export const setUserAvatarType = async (userId, type) => {
 
 export const setAvatar = async (userId, avatarType, avatar = null) => {
   try {
-    if (avatarType === 'default') {
+    if (avatarType === photoTypes.default) {
       await deleteUserPhoto(userId);
       await setUserAvatarType(userId, avatarType);
     } else {
