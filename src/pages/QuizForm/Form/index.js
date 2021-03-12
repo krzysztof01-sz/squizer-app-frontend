@@ -15,7 +15,7 @@ import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 
 import ErrorPage from '../../ErrorPage';
-import { categories, responseTypes } from '../../../utils/constants';
+import { quizCategories, responseTypes } from '../../../utils/constants';
 import Layout from '../../../global/Components/Layout';
 
 const Form = () => {
@@ -164,7 +164,7 @@ const Form = () => {
               labelName="category"
               inputText="Choose a category"
               name="category"
-              options={categories}
+              options={quizCategories}
               value={generalQuizData?.category}
               callback={({ target }) =>
                 setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })
