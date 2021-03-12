@@ -2,18 +2,33 @@
 
 .question__content {
   width: 100%;
-  text-align: center;
+  line-height: 180%;
   font-weight: bold;
+  text-align: center;
   font-size: $font-small;
   position: relative;
   &::before {
     position: absolute;
     content: attr(data-questionid);
-    top: -35px;
+    top: -25px;
     left: -5px;
     display: block;
     z-index: -1;
     font-size: $font-huge;
-    color: transparentize($secondary, 0.7);
+    color: transparentize($primary, 0.7);
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1920px) {
+  .question__content {
+    width: 70%;
+    font-size: $font-smallXL;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .question__content {
+    width: 50%;
+    font-size: $font-mediumXL;
   }
 }
