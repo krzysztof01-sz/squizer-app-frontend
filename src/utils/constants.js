@@ -4,9 +4,7 @@ export const compressionOptions = {
   useWebWorker: true,
 };
 
-export const colors = {
-  primaryColor: '#e368d9',
-};
+export const maxCommentLength = 500;
 
 export const navItems = [
   {
@@ -27,20 +25,36 @@ export const navItems = [
   },
 ];
 
-export const maxCommentLength = 500;
-
-export const categories = ['maths', 'it', 'english', 'riddles'];
+export const quizCategories = [
+  'English',
+  'General knowledge',
+  'Geography',
+  'IT',
+  'Maths',
+  'Riddles',
+  'Science',
+  'Other',
+];
 
 export const categoryToColor = new Map([
-  ['maths', '#ea80ff'],
-  ['it', '#7aff81'],
-  ['english', '#8080ff'],
-  ['riddles', '#e6e84d'],
+  ['English', '#F7BA89'],
+  ['General knowledge', '#7E401E'],
+  ['Geography', '#608740'],
+  ['IT', '#EB8768'],
+  ['Maths', '#D7E0E2'],
+  ['Riddles', '#DDE5E7'],
+  ['Science', '#52cfe5'],
+  ['Other', '#5E7592'],
 ]);
 
 export const responseTypes = {
   success: 'success',
   error: 'error',
+};
+
+export const photoTypes = {
+  custom: 'custom',
+  default: 'default',
 };
 
 export const prefferedImageExtensions = ['image/png', 'image/jpg', 'image/jpeg'];
