@@ -11,7 +11,7 @@
     width: 90%;
     margin: 0 auto;
     padding: 10% 8%;
-    background-color: transparentize($foundation, 0.6);
+    background-color: transparentize($foundation, 0.4);
     .imageAndAvatarWrapper {
       position: relative;
       .quizCard__categoryImage {
@@ -54,13 +54,14 @@
 
 @media only screen and (min-width: 1000px) and (max-width: 1599px) {
   .quizCard__wrapper {
+    height: 110vh;
     .quizCard {
       width: 65%;
       padding: 5% 4%;
       .imageAndAvatarWrapper {
         .quizCard__categoryImage {
           width: 100%;
-          height: 300px;
+          height: 350px;
         }
       }
 
@@ -83,8 +84,9 @@
 
 @media only screen and (min-width: 1600px) and (max-width: 1920px) {
   .quizCard__wrapper {
+    height: 80vh;
     .quizCard {
-      width: 60%;
+      width: 55%;
       padding: 4% 4%;
       .imageAndAvatarWrapper {
         .quizCard__categoryImage {
