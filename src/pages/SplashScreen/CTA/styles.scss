@@ -4,6 +4,7 @@
 .CTA {
   display: flex;
   padding: 50px 30px;
+  border-radius: $border-medium;
   flex-direction: column;
   width: 100%;
   background-color: transparentize($foundation, 0.6);
@@ -20,6 +21,7 @@
       font-weight: bold;
       color: $foundation;
       background-color: $primary;
+      @include hoverable;
     }
   }
 }
@@ -33,7 +35,6 @@
 
 @media only screen and (min-width: 1000px) and (max-width: 1366px) {
   .CTA {
-    border-radius: 10px;
     width: 95%;
     margin: 0 auto;
     @include secondaryShadow;
@@ -42,7 +43,6 @@
 
 @media only screen and (min-width: 1367px) and (max-width: 1920px) {
   .CTA {
-    border-radius: 10px;
     width: 85%;
     margin: 0 auto;
     @include secondaryShadow;
@@ -51,7 +51,6 @@
 
 @media only screen and (min-width: 1921px) {
   .CTA {
-    border-radius: 10px;
     width: 100%;
     font-size: $font-medium;
     margin: 0 auto;
