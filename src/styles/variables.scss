@@ -1,18 +1,29 @@
 // colors
 
-$foundation: rgb(242, 242, 242);
-$contrast: rgb(37, 37, 37);
-$primary: rgb(227, 104, 217);
-$secondary: rgb(113, 27, 173);
+// light theme
+
+// $foundation: rgb(242, 242, 242);
+// $contrast: rgb(37, 37, 37);
+// $primary: rgb(182, 51, 171);
+// $secondary: rgb(113, 27, 173);
+// $invalid: rgb(202, 73, 73);
+// $valid: rgb(45, 156, 45);
+
+// dark theme
+
+$foundation: rgb(37, 37, 37);
+$contrast: rgb(219, 219, 219);
+$primary: rgb(251, 192, 45);
+$secondary: rgb(68, 138, 255);
 $invalid: rgb(202, 73, 73);
 $valid: rgb(45, 156, 45);
 
 // font sizes
 
 $font-hugeXXL: 9.5rem;
-
 $font-hugeXL: 6.5rem;
 $font-huge: 5.5rem;
+
 $font-extraLarge: 4.5rem;
 $font-largeXXL: 3.5rem;
 $font-largeXL: 3.2rem;
@@ -30,4 +41,10 @@ $font-small: 1.6rem;
 $font-miniXL: 1.3rem;
 $font-mini: 1.15rem;
 
+// borders
+
+$border-small: 5px;
+$border-medium: 10px;
+
+// other
 $letter-spacing-small: 0.1rem;
