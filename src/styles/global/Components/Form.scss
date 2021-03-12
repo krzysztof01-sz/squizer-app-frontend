@@ -2,11 +2,12 @@
 @import '../../mixins.scss';
 
 .form__wrapper {
-  padding: 10vh 0;
   @include flexCenter;
+  padding: 10vh 0;
   .form {
     @include flexCenter;
     @include primaryShadow;
+    background-color: darken($foundation, 5);
     flex-direction: column;
     width: 90vw;
     padding: 7vh 5vw;

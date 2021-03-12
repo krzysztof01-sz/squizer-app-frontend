@@ -1,12 +1,12 @@
 @import '../../variables.scss';
 
 .button {
-  width: 150px;
-  border-radius: 10px;
-  padding: 7px 5px;
-  text-align: center;
-  font-size: $font-small;
   font-family: 'Poppins', sans-serif;
+  font-size: $font-small;
+  text-align: center;
+  width: 150px;
+  border-radius: $border-medium;
+  padding: 7px 5px;
   outline: none;
   cursor: pointer;
 }
