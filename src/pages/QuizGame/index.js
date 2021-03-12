@@ -90,6 +90,7 @@ const QuizGame = () => {
       <Layout>
         <section className="quiz">
           <SectionHeader isCenter={true}>Question no.{questionID + 1}</SectionHeader>
+
           <article className="quiz__questionsView">
             <QuestionContent questionID={questionID} content={currentQuestion.content} />
 
@@ -111,44 +112,46 @@ const QuizGame = () => {
               })}
             </section>
           </article>
+
           <aside
             aria-label="click tab to go to the next question or shift+tab to go to the previous question"
             className="switchDots"
           >
             {renderSwitchDots()}
           </aside>
-        </section>
-        <section className="gameNavigationButtons">
-          <div className="gameNavigation__left">
-            {questionID > 0 ? (
-              <PreviousQuestionButton setQuestion={() => setQuestionID(questionID - 1)} />
-            ) : null}
-          </div>
-          <div className="gameNavigation__right">
-            {questionID < questions.length - 1 ? (
-              <NextQuestionButton setQuestion={() => setQuestionID(questionID + 1)} />
-            ) : (
-              <FinishQuizButton
-                callback={async () => {
-                  const correctAnswers = checkAnswers(userAnswers);
-                  const givenAnswers = questions.length;
-                  const stats = { correctAnswers, givenAnswers };
 
-                  if (typeof correctAnswers === 'number') {
-                    setIsSubmitting(true);
-                    const { type } = await api.updateUserAfterGame(quizId, stats);
-                    setIsSubmitting(false);
+          <section className="gameNavigationButtons">
+            <div className="gameNavigation__left">
+              {questionID > 0 ? (
+                <PreviousQuestionButton setQuestion={() => setQuestionID(questionID - 1)} />
+              ) : null}
+            </div>
+            <div className="gameNavigation__right">
+              {questionID < questions.length - 1 ? (
+                <NextQuestionButton setQuestion={() => setQuestionID(questionID + 1)} />
+              ) : (
+                <FinishQuizButton
+                  callback={async () => {
+                    const correctAnswers = checkAnswers(userAnswers);
+                    const givenAnswers = questions.length;
+                    const stats = { correctAnswers, givenAnswers };
 
-                    setCorrectAnswersQuantity(correctAnswers);
+                    if (typeof correctAnswers === 'number') {
+                      setIsSubmitting(true);
+                      const { type } = await api.updateUserAfterGame(quizId, stats);
+                      setIsSubmitting(false);
 
-                    if (type === responseTypes.error) {
-                      return setUpdatingError(fb.UPDATING_USER_RESULT_ERROR);
+                      setCorrectAnswersQuantity(correctAnswers);
+
+                      if (type === responseTypes.error) {
+                        return setUpdatingError(fb.UPDATING_USER_RESULT_ERROR);
+                      }
                     }
-                  }
-                }}
-              />
-            )}
-          </div>
+                  }}
+                />
+              )}
+            </div>
+          </section>
         </section>
       </Layout>
     );
