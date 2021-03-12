@@ -22,14 +22,14 @@ const QuizResult = ({ correctAnswersQuantity, userAnswers, questions }) => {
     <section aria-label="result" className="quizResult">
       <section className="quizResult__generalData">
         <p className="result">
-          {correctAnswersQuantity}/{questionsQuantity}
+          Points: {correctAnswersQuantity}/{questionsQuantity}
         </p>
         <p className="result">Percentage result: {percentageResult}%</p>
         <p className="result">School grade: {schoolGrade}</p>
+        <Link to="/dashboard" className="quizResult__link">
+          Come back to the dashboard
+        </Link>
       </section>
-      <Link to="/dashboard" className="quizResult__link">
-        Come back to the dashboard
-      </Link>
       {questions.map((question, questionID) => {
         const { correctAnswer } = question;
         const userAnswer = userAnswers[questionID];
