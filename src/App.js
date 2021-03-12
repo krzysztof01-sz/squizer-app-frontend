@@ -12,6 +12,7 @@ import AboutQuiz from './pages/AboutQuiz';
 import Ranking from './pages/GlobalRanking';
 import AuthProvider, { AuthContext } from './contexts/Auth';
 import UserProfile from './pages/UserProfile';
+import About from './pages/About';
 import * as fb from './utils/feedbackMessages';
 import './styles/App.scss';
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path="/">
             {isLogged ? <Redirect to="/dashboard" /> : <SplashScreen />}
           </Route>
+          <Route path="/about">{isLogged ? <About /> : <LoginForm />}</Route>
           <Route path="/signup">{isLogged ? <Redirect to="/dashboard" /> : <SignupForm />}</Route>
           <Route path="/login">{isLogged ? <Redirect to="/dashboard" /> : <LoginForm />}</Route>
           <Route path="/dashboard">{isLogged ? <Dashboard /> : <Redirect to="/login" />}</Route>

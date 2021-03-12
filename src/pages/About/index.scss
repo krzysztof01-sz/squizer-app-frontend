@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  width: 90vw;
+  margin: 0 auto;
+  .header {
+    text-align: center;
+    margin-top: 3vh;
+  }
+  .list {
+    list-style-type: disc;
+    .list__item {
+      margin-left: 20px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .wrapper {
+    font-size: $font-medium;
+    width: 60vw;
+  }
+}
