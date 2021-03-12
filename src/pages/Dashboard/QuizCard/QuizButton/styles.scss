@@ -1,9 +1,8 @@
 @import '../../../../styles/variables.scss';
 
 .quizButton {
-  width: 100px;
-  padding: 4px;
-  border-radius: 6px;
+  width: 110px;
+  border-radius: $border-medium;
   font-weight: bold;
   color: $contrast;
   background: transparent;
