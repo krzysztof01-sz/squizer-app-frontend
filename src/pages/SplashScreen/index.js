@@ -8,7 +8,7 @@ import Slider from './Slider';
 
 import SwitchDot from '../QuizGame/SwitchDot';
 import Image from './Slider/Image';
-import BgImage from '../../assets/images/bgs/bg1.png';
+import BgImage from '../../assets/images/BgImage.png';
 import screen1 from '../../assets/images/screens/screen1.png';
 import screen2 from '../../assets/images/screens/screen2.png';
 import screen3 from '../../assets/images/screens/screen3.png';
