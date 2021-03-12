@@ -1,7 +1,15 @@
+@import '../../../styles/variables.scss';
+
 .form__wrapper {
   .form {
     .avatarPreview {
       margin-bottom: 8vh;
+    }
+    .fileInputWrapper {
+      .button {
+        width: 110px;
+        font-size: $font-miniXL;
+      }
     }
     .signupButton {
       margin-top: 7vh;
@@ -10,6 +18,32 @@
     .errorMessage,
     .resultMessage {
       margin-top: 2vh;
+    }
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .form__wrapper {
+    .form {
+      .fileInputWrapper {
+        .button {
+          width: 150px;
+          padding: 10px;
+          font-size: $font-small;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .form__wrapper {
+    .form {
+      .fileInputWrapper {
+        .button {
+          width: 170px;
+        }
+      }
     }
   }
 }
