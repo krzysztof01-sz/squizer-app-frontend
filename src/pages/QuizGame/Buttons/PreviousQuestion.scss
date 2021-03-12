@@ -1,8 +1,8 @@
 @import '../../../styles/variables.scss';
 
 .previousQuestionButton {
-  margin-left: 10%;
-  background-color: $foundation;
+  border-radius: $border-medium;
+  background-color: lighten($foundation, 3);
   color: lighten($contrast, 40);
   .arrowLeftIcon {
     margin-right: 10px;
