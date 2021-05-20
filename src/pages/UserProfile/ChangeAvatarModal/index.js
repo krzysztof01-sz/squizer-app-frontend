@@ -67,9 +67,9 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
           callback={async () => {
             let response;
             if (typeof avatar === 'string') {
-              response = await api.setAvatar(userId, photoTypes.default);
+              response = await api.updateUserAvatar(userId, photoTypes.default);
             } else {
-              response = await api.setAvatar(userId, photoTypes.custom, avatar);
+              response = await api.updateUserAvatar(userId, photoTypes.custom, avatar);
             }
 
             if (response?.success) {
