@@ -10,13 +10,13 @@ const instance = axios.create({
   baseURL,
   withCredentials: true,
   headers: {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': baseURL,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
 
-// Auth api
+// Auth API
 
 export const getToken = async () => {
   const { data } = await instance.get('/auth/csrf').catch(({ response }) => response);
