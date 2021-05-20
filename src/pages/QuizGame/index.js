@@ -54,13 +54,7 @@ const QuizGame = () => {
   const renderSwitchDots = () => {
     const questionsDots = [];
     for (let i = 0; i < questions.length; i++) {
-      const element = (
-        <SwitchDot
-          filled={i === questionID ? true : false}
-          key={i}
-          callback={() => setQuestionID(i)}
-        />
-      );
+      const element = <SwitchDot filled={i === questionID ? true : false} key={i} callback={() => setQuestionID(i)} />;
       questionsDots.push(element);
     }
     return questionsDots;
@@ -122,9 +116,7 @@ const QuizGame = () => {
 
           <section className="gameNavigationButtons">
             <div className="gameNavigation__left">
-              {questionID > 0 ? (
-                <PreviousQuestionButton setQuestion={() => setQuestionID(questionID - 1)} />
-              ) : null}
+              {questionID > 0 ? <PreviousQuestionButton setQuestion={() => setQuestionID(questionID - 1)} /> : null}
             </div>
             <div className="gameNavigation__right">
               {questionID < questions.length - 1 ? (
@@ -138,7 +130,7 @@ const QuizGame = () => {
 
                     if (typeof correctAnswers === 'number') {
                       setIsSubmitting(true);
-                      const { type } = await api.updateUserAfterGame(quizId, stats);
+                      const { type } = await api.updateUserStatistics(quizId, stats);
                       setIsSubmitting(false);
 
                       setCorrectAnswersQuantity(correctAnswers);
@@ -159,11 +151,7 @@ const QuizGame = () => {
     return (
       <Layout>
         <ErrorMessage message={updatingError} />
-        <QuizResult
-          userAnswers={userAnswers}
-          questions={questions}
-          correctAnswersQuantity={correctAnswersQuantity}
-        />
+        <QuizResult userAnswers={userAnswers} questions={questions} correctAnswersQuantity={correctAnswersQuantity} />
       </Layout>
     );
 };
