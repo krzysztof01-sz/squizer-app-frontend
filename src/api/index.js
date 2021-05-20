@@ -1,90 +1,40 @@
+import axios from 'axios';
 import { firebaseStorage } from '../../config/firebase';
 import { photoTypes, responseTypes } from '../utils/constants';
 import DefaultAvatar from '../assets/images/DefaultAvatar.png';
 
-const baseURL = 'http://localhost:8080';
+// const baseURL = 'https://squizer-backend.ct8.pl';
+const baseURL = 'http://localhost:8080/';
 
-const getBasicRequestObject = () => {
-  return {
-    method: 'GET',
-    credentials: 'include',
-    'Access-Control-Allow-Origin': baseURL,
-  };
-};
+const instance = axios.create({
+  baseURL,
+  withCredentials: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+});
 
-const getPostRequestObject = () => {
-  return {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    credentials: 'include',
-    'Access-Control-Allow-Origin': baseURL,
-  };
-};
-
-const getAuthRequestObject = (csrfToken) => {
-  return {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'csrf-token': csrfToken,
-    },
-    credentials: 'include',
-    'Access-Control-Allow-Origin': baseURL,
-  };
-};
-
-const getUpdateRequestObject = () => {
-  return {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    credentials: 'include',
-    'Access-Control-Allow-Origin': baseURL,
-  };
-};
-
-const getDeleteRequestObject = () => {
-  return {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    credentials: 'include',
-    'Access-Control-Allow-Origin': baseURL,
-  };
-};
+// Auth api
 
 export const getToken = async () => {
-  const data = await fetch(`${baseURL}/auth/csrf`);
-  const { csrfToken } = await data.json();
-  return csrfToken;
+  const { data } = await instance.get('/auth/csrf').catch(({ response }) => response);
+  return data.csrfToken;
 };
 
 export const registerUser = async (formData) => {
-  const feedback = await fetch(`${baseURL}/auth/register`, {
-    ...getAuthRequestObject(formData._csrf),
-    body: JSON.stringify({ ...formData }),
-  });
-
-  const response = await feedback.json();
-  return response;
+  const { data } = await instance
+    .post('/auth/register', JSON.stringify({ ...formData }), { headers: { 'csrf-token': formData._csrf } })
+    .catch(({ response }) => response);
+  return data;
 };
 
 export const loginUser = async (formData) => {
-  const feedback = await fetch(`${baseURL}/auth/login`, {
-    ...getAuthRequestObject(formData._csrf),
-    body: JSON.stringify({ ...formData }),
-  });
-
-  const response = await feedback.json();
-  return response;
+  const { data } = await instance
+    .post('/auth/login', JSON.stringify({ ...formData }), { headers: { 'csrf-token': formData._csrf } })
+    .catch(({ response }) => response);
+  return data;
 };
 
 export const logoutUser = () => {
@@ -92,21 +42,24 @@ export const logoutUser = () => {
   location.reload();
 };
 
-export const getUserById = async (userId) => {
-  const response = await fetch(`${baseURL}/api/users/${userId}`, getBasicRequestObject());
-  const data = await response.json();
+// User API
 
+const determineUserAvatar = async (user) => {
+  return user.avatarType === photoTypes.custom ? await getUserAvatar(user._id) : DefaultAvatar;
+};
+
+const processUser = async ({ password, ...user }) => {
+  const userAvatar = await determineUserAvatar(user);
+  return { ...user, avatar: userAvatar };
+};
+
+export const getUser = async (userId) => {
+  const { data } = await instance.get(`/api/users/${userId}`).catch(({ response }) => response);
   const { type, user } = data;
 
   if (type === responseTypes.success) {
-    delete user.password;
-
-    if (user.avatarType === photoTypes.custom) {
-      const avatarLink = await getAvatar(userId);
-      user.avatar = avatarLink;
-    } else {
-      user.avatar = DefaultAvatar;
-    }
+    const processedUser = await processUser(user);
+    return processedUser;
   } else {
     user.nick = '';
     user.avatar = DefaultAvatar;
@@ -115,97 +68,17 @@ export const getUserById = async (userId) => {
   return user;
 };
 
-export const getQuizzes = async () => {
-  const quizzes = await fetch(`${baseURL}/api/quizzes`, getBasicRequestObject());
-  const response = await quizzes.json();
-  return response;
-};
-
-export const getAvatar = async (userId) => {
-  const avatarLink = await firebaseStorage.ref(`avatars/${userId}`).getDownloadURL();
-  return avatarLink;
-};
-
-export const getCategoryImage = async (moduleName) => {
-  const { default: image } = await import(`../assets/images/categories/${moduleName}.png`);
-  return image;
-};
-
-export const addQuiz = async (quiz) => {
-  const result = await fetch(`${baseURL}/api/quizzes`, {
-    ...getPostRequestObject(),
-    body: JSON.stringify({ ...quiz }),
-  });
-
-  const response = await result.json();
-  return response;
-};
-
-export const getQuizQuestions = async (quizId) => {
-  const data = await fetch(`${baseURL}/api/quizzes/${quizId}/questions`, getBasicRequestObject());
-  const response = await data.json();
-  return response;
-};
-
-export const getQuiz = async (id) => {
-  const response = await fetch(`${baseURL}/api/quizzes/${id}`, getBasicRequestObject());
-  const data = await response.json();
-
-  return data;
-};
-
-export const addComment = async (quizId, comment) => {
-  const response = await fetch(`${baseURL}/api/quizzes/${quizId}/comments`, {
-    ...getUpdateRequestObject(),
-    body: JSON.stringify({ content: comment }),
-  });
-
-  const result = await response.json();
-  return result;
-};
-
-export const getQuizComments = async (quizId) => {
-  const response = await fetch(
-    `${baseURL}/api/quizzes/${quizId}/comments`,
-    getBasicRequestObject(),
-  );
-
-  const result = await response.json();
-  return result;
-};
-
-export const getAllUsers = async () => {
-  const response = await fetch(`${baseURL}/api/users`, getBasicRequestObject());
-
-  const result = await response.json();
-  return result;
-};
-
-export const updateUserAfterGame = async (quizId, stats) => {
-  const response = await fetch(`${baseURL}/api/users`, {
-    ...getUpdateRequestObject(),
-    body: JSON.stringify({ quizId, stats }),
-  });
-
-  const result = await response.json();
-  return result;
-};
-
-export const getProfileData = async () => {
-  const response = await fetch(`${baseURL}/api/account`, getBasicRequestObject());
-  const data = await response.json();
-
+export const getUsers = async () => {
+  const { data } = await instance.get('/api/users').catch(({ response }) => response);
   return data;
 };
 
 export const getUserQuizzes = async (userId) => {
-  const response = await fetch(`${baseURL}/api/users/${userId}/quizzes`, getBasicRequestObject());
-  const data = await response.json();
-
+  const { data } = await instance.get(`/api/users/${userId}/quizzes`).catch(({ response }) => response);
   return data;
 };
 
-export const setUserAvatar = async (userId, avatar) => {
+export const addUserAvatar = async (userId, avatar) => {
   try {
     const snapshot = await firebaseStorage.ref(`avatars/${userId}`).put(avatar);
     return snapshot.state;
@@ -214,7 +87,25 @@ export const setUserAvatar = async (userId, avatar) => {
   }
 };
 
-export const deleteUserPhoto = async (userId) => {
+export const getUserAvatar = async (userId) => {
+  const avatar = await firebaseStorage
+    .ref(`avatars/${userId}`)
+    .getDownloadURL()
+    .catch((err) => DefaultAvatar);
+  return avatar;
+};
+
+export const updateUserStatistics = async (quizId, stats) => {
+  const { data } = await instance.put('/api/users', JSON.stringify({ quizId, stats })).catch(({ response }) => response);
+  return data;
+};
+
+export const getProfileData = async () => {
+  const { data } = await instance.get('/api/me').catch(({ response }) => response);
+  return data;
+};
+
+const deleteUserAvatar = async (userId) => {
   try {
     await firebaseStorage.ref(`avatars/${userId}`).delete();
   } catch (e) {
@@ -222,23 +113,21 @@ export const deleteUserPhoto = async (userId) => {
   }
 };
 
-export const setUserAvatarType = async (userId, type) => {
-  const response = await fetch(`${baseURL}/api/users/${userId}/set-avatar/${type}`, {
-    ...getUpdateRequestObject(),
-    body: JSON.stringify({ avatarType: type }),
-  });
-  const data = await response.json();
+const updateUserAvatarType = async (userId, type) => {
+  const { data } = await instance
+    .put(`/api/users/${userId}/update-avatar/${type}`, JSON.stringify({ avatarType: type }))
+    .catch(({ response }) => response);
   return data;
 };
 
-export const setAvatar = async (userId, avatarType, avatar = null) => {
+export const updateUserAvatar = async (userId, avatarType, avatar = null) => {
   try {
     if (avatarType === photoTypes.default) {
-      await deleteUserPhoto(userId);
-      await setUserAvatarType(userId, avatarType);
+      await deleteUserAvatar(userId);
+      await updateUserAvatarType(userId, avatarType);
     } else {
-      await setUserAvatar(userId, avatar);
-      await setUserAvatarType(userId, avatarType);
+      await addUserAvatar(userId, avatar);
+      await updateUserAvatarType(userId, avatarType);
     }
     return { success: true };
   } catch (e) {
@@ -246,8 +135,48 @@ export const setAvatar = async (userId, avatarType, avatar = null) => {
   }
 };
 
+//  Quizzes API
+
+export const getQuiz = async (id) => {
+  const { data } = await instance.get(`/api/quizzes/${id}`).catch(({ response }) => response);
+  return data;
+};
+
+export const getQuizzes = async () => {
+  const { data } = await instance.get('/api/quizzes').catch(({ response }) => response);
+  return data;
+};
+
+export const addQuiz = async (quiz) => {
+  const { data } = await instance.post('/api/quizzes', JSON.stringify({ ...quiz })).catch(({ response }) => response);
+  return data;
+};
+
+export const getQuizQuestions = async (quizId) => {
+  const { data } = await instance.get(`/api/quizzes/${quizId}/questions`).catch(({ response }) => response);
+  return data;
+};
+
+export const getQuizComments = async (quizId) => {
+  const { data } = await instance.get(`/api/quizzes/${quizId}/comments`).catch(({ response }) => response);
+  return data;
+};
+
 export const deleteQuiz = async (quizId) => {
-  const response = await fetch(`${baseURL}/api/quizzes/${quizId}`, getDeleteRequestObject());
-  const result = await response.json();
-  return result;
+  const { data } = await instance.delete(`/api/quizzes/${quizId}`).catch(({ response }) => response);
+  return data;
+};
+
+export const addComment = async (quizId, comment) => {
+  const { data } = await instance
+    .post(`/api/quizzes/${quizId}/comments`, JSON.stringify({ content: comment }))
+    .catch(({ response }) => response);
+  return data;
+};
+
+// other
+
+export const getCategoryImage = async (moduleName) => {
+  const { default: image } = await import(`../assets/images/categories/${moduleName}.png`);
+  return image;
 };
