@@ -44,10 +44,7 @@ const UserProfile = () => {
             <Stats rankingPlace={user.rankingPlace} points={user.stats.correctAnswers} />
           </section>
 
-          <CorrectAnswersBar
-            givenAnswersQuantity={stats.givenAnswers}
-            correctAnswersQuantity={stats.correctAnswers}
-          />
+          <CorrectAnswersBar givenAnswersQuantity={stats.givenAnswers} correctAnswersQuantity={stats.correctAnswers} />
         </section>
 
         <section className="page__secondPart">
