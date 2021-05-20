@@ -12,7 +12,7 @@ const RankingDataWrapper = ({ user, children }) => {
       if (user.avatarType === photoTypes.default) {
         setAvatar(DefaultAvatar);
       } else {
-        const avatar = await api.getAvatar(id);
+        const avatar = await api.getUserAvatar(id);
         setAvatar(avatar);
       }
       setLoading(false);
