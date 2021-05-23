@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -14,15 +15,15 @@ import LoginButton from '../../../global/Buttons/Login';
 import Loader from '../../../global/Components/Loader';
 import SectionHeader from '../../../global/Components/SectionHeader';
 
-import { AuthContext } from '../../../contexts/Auth';
+import { useCsrfToken } from '../../../hooks';
+import { UserContext } from '../../../contexts/User';
 import { responseTypes } from '../../../utils/constants';
-
 import '../../../styles/global/Components/Form.scss';
 import './styles.scss';
-import { useCsrfToken } from '../../../hooks';
 
 const Form = () => {
-  const { setIsLogged } = useContext(AuthContext);
+  const history = useHistory();
+  const { setUser } = useContext(UserContext);
   const { csrfToken } = useCsrfToken();
   const [process, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
@@ -52,9 +53,9 @@ const Form = () => {
     const { msg, type } = loginUserResponse;
 
     if (type === responseTypes.success) {
-      localStorage.setItem('isLogged', true);
       setValidationMessages(msg);
-      setIsLogged(true);
+      setUser(loginUserResponse.user);
+      history.push('/dashboard');
     } else {
       setValidationMessages(msg);
     }
