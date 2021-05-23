@@ -8,7 +8,7 @@ export const useUser = (id) => {
 
   useEffect(() => {
     const getUserData = async (userId) => {
-      const user = await api.getUserById(userId);
+      const user = await api.getUser(userId);
       setUser(user);
     };
     getUserData(id);
@@ -79,6 +79,8 @@ export const useQuizzes = () => {
     getQuizzes();
   }, []);
 
+  () => setLoading(false);
+
   return { quizzes, loading, error };
 };
 
@@ -102,7 +104,7 @@ export const useQuizCard = (quizId) => {
         setQuiz(response.data);
 
         const { createdBy, category } = response.data;
-        const user = await api.getUserById(createdBy);
+        const user = await api.getUser(createdBy);
         const categoryImage = await api.getCategoryImage(category);
         setUser(user);
         setCategoryImage(categoryImage);
@@ -114,7 +116,7 @@ export const useQuizCard = (quizId) => {
     };
     getQuiz(quizId);
 
-    return () => setLoading(false);
+    () => setLoading(false);
   }, []);
 
   return { quiz, user, categoryImage, error, loading };
@@ -148,9 +150,9 @@ export const useUsers = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getAllUsers = async () => {
+    const getUsers = async () => {
       try {
-        const response = await api.getAllUsers();
+        const response = await api.getUsers();
         if (response.type === responseTypes.error) throw response.msg;
         setUsers(response.users);
       } catch (e) {
@@ -159,7 +161,7 @@ export const useUsers = () => {
 
       setLoading(false);
     };
-    getAllUsers();
+    getUsers();
   }, []);
 
   return { users, error, loading };
