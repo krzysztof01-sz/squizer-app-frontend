@@ -37,9 +37,14 @@ export const loginUser = async (formData) => {
   return data;
 };
 
-export const logoutUser = () => {
-  localStorage.removeItem('auth-token');
-  location.reload();
+export const logoutUser = async () => {
+  const { data } = await instance.get('/auth/logout');
+  return data;
+};
+
+export const refetchUser = async () => {
+  const { data } = await instance.get('/auth/refetch').catch(({ response }) => response);
+  return data;
 };
 
 // User API
