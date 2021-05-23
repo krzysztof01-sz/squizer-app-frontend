@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import LoginForm from './pages/LoginForm';
@@ -10,49 +10,73 @@ import QuizForm from './pages/QuizForm';
 import ErrorPage from './pages/ErrorPage';
 import AboutQuiz from './pages/AboutQuiz';
 import Ranking from './pages/GlobalRanking';
-import AuthProvider, { AuthContext } from './contexts/Auth';
 import UserProfile from './pages/UserProfile';
 import About from './pages/About';
-import * as fb from './utils/feedbackMessages';
+import UserProvider, { UserContext } from './contexts/User';
+import * as api from './api';
 import './styles/App.scss';
 
 const wrapper = document.querySelector('.app');
 
 const App = () => {
-  const { isLogged } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext);
+
+  // when user refresh the page manually, run refetchUser function
+  useEffect(() => {
+    if (!user) {
+      const refetchUser = async () => {
+        const result = await api.refetchUser();
+        setUser(result.user);
+      };
+      refetchUser();
+    }
+
+    return () => false;
+  }, [user]);
 
   return (
-    <React.StrictMode>
-      <Router>
+    <Router>
+      {user ? (
         <Switch>
           <Route exact path="/">
-            {isLogged ? <Redirect to="/dashboard" /> : <SplashScreen />}
+            <Redirect to="/dashboard" />
           </Route>
-          <Route path="/about">{isLogged ? <About /> : <LoginForm />}</Route>
-          <Route path="/signup">{isLogged ? <Redirect to="/dashboard" /> : <SignupForm />}</Route>
-          <Route path="/login">{isLogged ? <Redirect to="/dashboard" /> : <LoginForm />}</Route>
-          <Route path="/dashboard">{isLogged ? <Dashboard /> : <Redirect to="/login" />}</Route>
-          <Route path="/quizform">{isLogged ? <QuizForm /> : <Redirect to="/login" />}</Route>
-          <Route path="/quiz/:quizId/play">
-            {isLogged ? <QuizGame /> : <Redirect to="/login" />}
+          <Route path="/signup">
+            <Redirect to="/dashboard" />
           </Route>
-          <Route path="/quiz/:quizId/about">
-            {isLogged ? <AboutQuiz /> : <Redirect to="/login" />}
+          <Route path="/login">
+            <Redirect to="/dashboard" />
           </Route>
-          <Route path="/ranking">{isLogged ? <Ranking /> : <Redirect to="/login" />}</Route>
-          <Route path="/profile">{isLogged ? <UserProfile /> : <Redirect to="/login" />}</Route>
+          <Route path="/about" component={About} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/quizform" component={QuizForm} />
+          <Route path="/quiz/:quizId/play" component={QuizGame} />
+          <Route path="/quiz/:quizId/about" component={AboutQuiz} />
+          <Route path="/ranking" component={Ranking} />
+          <Route path="/profile" component={UserProfile} />
           <Route>
-            <ErrorPage msg={fb.PAGE_DOESNT_EXISTS} />
+            <ErrorPage msg={'Page not accessible'} />
           </Route>
         </Switch>
-      </Router>
-    </React.StrictMode>
+      ) : (
+        <Switch>
+          <Route exact path="/" component={SplashScreen} />
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/login" component={LoginForm} />
+          <Route>
+            <ErrorPage msg={'Page not accessible'} />
+          </Route>
+        </Switch>
+      )}
+    </Router>
   );
 };
 
 ReactDOM.render(
-  <AuthProvider>
-    <App />
-  </AuthProvider>,
+  <React.StrictMode>
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </React.StrictMode>,
   wrapper,
 );
