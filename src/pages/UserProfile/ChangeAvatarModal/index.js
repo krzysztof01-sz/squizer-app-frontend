@@ -1,7 +1,4 @@
-import { useState } from 'react';
 import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
-import DefaultAvatar from '../../../assets/images/DefaultAvatar.png';
-import { compressPhoto, isFileImage } from '../../../utils/functions';
 import AvatarPreview from '../../../global/Components/AvatarPreview';
 import DefaultAvatarButton from '../../../global/Buttons/DefaultAvatarButton';
 import FileInput from '../../../global/Components/FileInput';
@@ -10,46 +7,12 @@ import SetAvatarButton from '../SetAvatarButton';
 import * as fb from '../../../utils/feedbackMessages';
 import * as api from '../../../api';
 import { photoTypes } from '../../../utils/constants';
+import { useFileInput } from '../../../hooks/useFileInput';
+import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 import './styles.scss';
 
 const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRender }) => {
-  const [preview, setPreview] = useState(null);
-  const [error, setError] = useState(null);
-  const [avatar, setAvatar] = useState(null);
-
-  const setDefaultAvatar = () => {
-    setPreview(DefaultAvatar);
-    setAvatar(photoTypes.default);
-    setError('');
-  };
-
-  const showAvatar = (file) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', function () {
-      setPreview(this.result);
-    });
-    reader.readAsDataURL(file);
-  };
-
-  const handleAvatarChange = async (e) => {
-    const avatar = e.target.files[0];
-
-    if (!isFileImage(avatar)) {
-      setError(fb.AVATAR_EXTENSION_ERROR);
-      setPreview(null);
-      setAvatar(null);
-      return false;
-    }
-
-    setError('');
-
-    const compressedAvatar = await compressPhoto(avatar);
-    if (!compressedAvatar) return setError(fb.AVATAR_COMPRESSING_ERROR);
-
-    showAvatar(compressedAvatar);
-    setAvatar(compressedAvatar);
-    setPreview(compressedAvatar);
-  };
+  const { avatar, error, preview, process, handleAvatarChange, setError, setDefaultAvatar } = useFileInput();
 
   return isOpen ? (
     <section className="changeAvatarModal">
@@ -57,6 +20,7 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
         <ExitIcon />
       </button>
       <AvatarPreview preview={preview} />
+      <ProcessMessage message={process} />
       <ErrorMessage message={error} />
       <section className="buttonsWrapper">
         <FileInput handleChange={handleAvatarChange} />
@@ -65,12 +29,10 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
       {avatar ? (
         <SetAvatarButton
           callback={async () => {
-            let response;
-            if (typeof avatar === 'string') {
-              response = await api.updateUserAvatar(userId, photoTypes.default);
-            } else {
-              response = await api.updateUserAvatar(userId, photoTypes.custom, avatar);
-            }
+            let response =
+              typeof avatar === 'string'
+                ? await api.updateUserAvatar(userId, photoTypes.default)
+                : await api.updateUserAvatar(userId, photoTypes.custom, avatar);
 
             if (response?.success) {
               location.reload();
