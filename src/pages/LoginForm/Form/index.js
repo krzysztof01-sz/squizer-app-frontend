@@ -1,15 +1,12 @@
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
-import * as yup from 'yup';
 import * as fb from '../../../utils/feedbackMessages';
 import * as api from '../../../api';
 
 import Input from '../../../global/Components/Input';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
-import InputValidation from '../../../global/Components/Messages/InputValidationMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import LoginButton from '../../../global/Buttons/Login';
 import Loader from '../../../global/Components/Loader';
@@ -28,12 +25,7 @@ const Form = () => {
   const [process, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
 
-  const schema = yup.object().shape({
-    nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
-    password: yup.string().trim().min(8, fb.PASSWORD_SHORT).max(15, fb.PASSWORD_LONG).required(fb.PASSWORD_REQUIRED),
-  });
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       nickname: '',
       password: '',
@@ -62,17 +54,14 @@ const Form = () => {
   };
 
   if (!csrfToken) return <Loader width={100} height={100} />;
+
   return (
     <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
       <section className="form">
         <SectionHeader isCenter={true}>Login form</SectionHeader>
 
         <Input labelName="nickname" register={register({ required: true })} type="text" name="nickname" min="3" max="15" />
-        <InputValidation message={errors.nickname?.message} />
-
         <Input labelName="password" register={register({ required: true })} type="password" name="password" min="8" max="15" />
-        <InputValidation message={errors.password?.message} />
-
         <ProcessMessage message={process} />
 
         {validationMessages.map(({ msg, type }, index) => {
