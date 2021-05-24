@@ -16,7 +16,7 @@ import './index.scss';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user, error, loading } = useUserProfile();
+  const { profile: user, error, loading } = useUserProfile();
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage msg={error} />;
