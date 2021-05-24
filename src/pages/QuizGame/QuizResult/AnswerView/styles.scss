@@ -4,7 +4,7 @@
   cursor: default;
   &--checked,
   &:focus {
-    border-bottom: 4px solid lighten($contrast, 60);
+    border-bottom: 4px solid darken($secondary, 30);
   }
 }
 
