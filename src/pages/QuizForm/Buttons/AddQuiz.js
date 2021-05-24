@@ -9,7 +9,7 @@ const AddQuizButton = ({ callback, isActive }) => {
         e.preventDefault();
         callback();
       }}
-      className="button addQuizButton addQuizButton--accessible"
+      className="button addQuizButton"
     >
       Add quiz
     </button>

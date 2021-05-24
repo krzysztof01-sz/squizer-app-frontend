@@ -3,11 +3,7 @@ import './AddQuestion.scss';
 
 const AddQuestionButton = ({ callback }) => {
   return (
-    <button
-      aria-label="add a question"
-      onClick={(e) => callback(e)}
-      className="button addQuestionButton addQuestionButton--accessible"
-    >
+    <button aria-label="add a question" onClick={(e) => callback(e)} className="button addQuestionButton">
       add <ArrowCircleRight />
     </button>
   );
