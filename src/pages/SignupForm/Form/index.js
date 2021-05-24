@@ -6,8 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as api from '../../../api';
 import * as fb from '../../../utils/feedbackMessages';
-import DefaultAvatar from '../../../assets/images/DefaultAvatar.png';
-import { isFileImage, compressPhoto } from '../../../utils/functions';
 
 import SingupButton from '../../../global/Buttons/Signup';
 import DefaultAvatarButton from '../../../global/Buttons/DefaultAvatarButton';
@@ -23,19 +21,18 @@ import ActionResultMessage from '../../../global/Components/Messages/ActionResul
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 
 import { photoTypes, responseTypes } from '../../../utils/constants';
-import './styles.scss';
 import SectionHeader from '../../../global/Components/SectionHeader';
 import { useCsrfToken } from '../../../hooks';
+import { useFileInput } from '../../../hooks/useFileInput';
+import './styles.scss';
 
 const Form = () => {
   const history = useHistory();
   const { csrfToken } = useCsrfToken();
+  const { avatar, preview, setDefaultAvatar, handleAvatarChange, error, setError, process } = useFileInput();
 
-  const [error, setError] = useState([]);
-  const [process, setProcess] = useState('');
+  const [_, setProcess] = useState('');
   const [validationMessages, setValidationMessages] = useState([]);
-  const [avatar, setAvatar] = useState(null);
-  const [preview, setPreview] = useState(null);
 
   const schema = yup.object().shape({
     nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
@@ -60,6 +57,7 @@ const Form = () => {
 
     formData.avatar = avatar;
     formData.avatarType = avatar?.name ? photoTypes.custom : photoTypes.default;
+
     if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
     setProcess(fb.REGISTERING_PROCESS);
@@ -78,46 +76,13 @@ const Form = () => {
     }
   };
 
-  const showAvatar = (file) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', function () {
-      setPreview(this.result);
-    });
-    reader.readAsDataURL(file);
-  };
-
-  const setDefaultAvatar = (e) => {
-    e.preventDefault();
-    setError('');
-    setAvatar(photoTypes.default);
-    setPreview(DefaultAvatar);
-  };
-
-  const handleAvatarChange = async (e) => {
-    const avatar = e.target.files[0];
-    if (!isFileImage(avatar)) {
-      setError(fb.AVATAR_EXTENSION_ERROR);
-      setAvatar(null);
-      setPreview(null);
-      return false;
-    }
-
-    setError('');
-
-    setProcess(fb.AVATAR_COMPESSING_START);
-    const compressedAvatar = await compressPhoto(avatar);
-    setProcess('');
-
-    if (!compressedAvatar) return setError(fb.AVATAR_COMPRESSING_ERROR);
-    showAvatar(avatar);
-    setAvatar(compressedAvatar);
-  };
-
   if (!csrfToken) return <Loader width={100} height={100} />;
+
   return (
     <form method="POST" className="form__wrapper" onSubmit={handleSubmit(onSubmit)}>
       <section className="form">
         <SectionHeader isCenter={true}>Registration form</SectionHeader>
+
         <Input labelName="nickname" register={register({ required: true })} type="text" name="nickname" min="3" max="15" />
         <InputValidation message={errors.nickname?.message} />
 
@@ -150,7 +115,6 @@ const Form = () => {
         })}
 
         <input ref={register()} type="hidden" name="_csrf" value={csrfToken} />
-
         <SingupButton isDisabled={process} />
       </section>
     </form>
