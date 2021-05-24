@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import LoginForm from './pages/LoginForm';
@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile';
 import About from './pages/About';
 import UserProvider, { UserContext } from './contexts/User';
 import * as api from './api';
+import { PAGE_NOT_ACCESSIBLE } from './utils/feedbackMessages';
 import './styles/App.scss';
 
 const wrapper = document.querySelector('.app');
@@ -36,38 +37,23 @@ const App = () => {
 
   return (
     <Router>
-      {user ? (
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/dashboard" />
-          </Route>
-          <Route path="/signup">
-            <Redirect to="/dashboard" />
-          </Route>
-          <Route path="/login">
-            <Redirect to="/dashboard" />
-          </Route>
-          <Route path="/about" component={About} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/quizform" component={QuizForm} />
-          <Route path="/quiz/:quizId/play" component={QuizGame} />
-          <Route path="/quiz/:quizId/about" component={AboutQuiz} />
-          <Route path="/ranking" component={Ranking} />
-          <Route path="/profile" component={UserProfile} />
-          <Route>
-            <ErrorPage msg={'Page not accessible'} />
-          </Route>
-        </Switch>
-      ) : (
-        <Switch>
-          <Route exact path="/" component={SplashScreen} />
-          <Route path="/signup" component={SignupForm} />
-          <Route path="/login" component={LoginForm} />
-          <Route>
-            <ErrorPage msg={'Page not accessible'} />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route exact path="/">
+          {user ? <Redirect to="/dashboard" /> : <SplashScreen />}
+        </Route>
+        <Route path="/about">{user ? <About /> : <LoginForm />}</Route>
+        <Route path="/signup">{user ? <Redirect to="/dashboard" /> : <SignupForm />}</Route>
+        <Route path="/login">{user ? <Redirect to="/dashboard" /> : <LoginForm />}</Route>
+        <Route path="/dashboard">{user ? <Dashboard /> : <Redirect to="/login" />}</Route>
+        <Route path="/quizform">{user ? <QuizForm /> : <Redirect to="/login" />}</Route>
+        <Route path="/quiz/:quizId/play">{user ? <QuizGame /> : <Redirect to="/login" />}</Route>
+        <Route path="/quiz/:quizId/about">{user ? <AboutQuiz /> : <Redirect to="/login" />}</Route>
+        <Route path="/ranking">{user ? <Ranking /> : <Redirect to="/login" />}</Route>
+        <Route path="/profile">{user ? <UserProfile /> : <Redirect to="/login" />}</Route>
+        <Route>
+          <ErrorPage msg={PAGE_NOT_ACCESSIBLE} />
+        </Route>
+      </Switch>
     </Router>
   );
 };
