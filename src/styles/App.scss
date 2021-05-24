@@ -9,6 +9,7 @@
 ::selection,
 ::selection {
   background-color: $contrast;
+  color: $foundation;
 }
 
 * {
@@ -27,18 +28,19 @@ body {
   overflow-x: hidden;
 }
 
-*:focus {
-  outline: none;
-  border-bottom: 4px solid $secondary;
-  transition: border-bottom 0.2s;
-}
-
 h1 {
   font-weight: normal;
 }
 
 .app {
   font-size: $font-small;
+}
+
+*:focus {
+  outline: none;
+  border-bottom: 4px solid darken($secondary, 20);
+  border-width: 100;
+  transition: border-bottom 0.2s;
 }
 
 ul {
