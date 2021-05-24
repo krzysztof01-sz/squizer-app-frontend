@@ -7,6 +7,7 @@
   height: 80vh;
   text-align: center;
   &__message {
+    color: $primary;
     font-size: $font-medium;
   }
   .link {
