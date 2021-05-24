@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Answer from './Answer';
@@ -20,8 +20,10 @@ import * as fb from '../../utils/feedbackMessages';
 import * as api from '../../api';
 import './index.scss';
 import SectionHeader from '../../global/Components/SectionHeader';
+import { UserContext } from '../../contexts/User';
 
 const QuizGame = () => {
+  const { setUser } = useContext(UserContext);
   const { quizId } = useParams();
   const { questions, loading, error } = useQuestions(quizId);
   const [userAnswers, setUserAnswers] = useState([]);
@@ -130,7 +132,8 @@ const QuizGame = () => {
 
                     if (typeof correctAnswers === 'number') {
                       setIsSubmitting(true);
-                      const { type } = await api.updateUserStatistics(quizId, stats);
+                      const { type, user } = await api.updateUserStatistics(quizId, stats);
+                      setUser(user);
                       setIsSubmitting(false);
 
                       setCorrectAnswersQuantity(correctAnswers);
