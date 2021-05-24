@@ -4,7 +4,7 @@ import './styles.scss';
 const PlayButton = ({ link }) => {
   return (
     <Link to={link}>
-      <button className="button quizCard__button quizCard__button--accessible">Play!</button>
+      <button className="button quizCard__button">Play!</button>
     </Link>
   );
 };

@@ -8,7 +8,7 @@ const Comment = ({ comment: { _id, authorId, content, creationDate } }) => {
   const { user } = useUser(authorId);
 
   return user ? (
-    <article className="comment" tabIndex="0" key={_id}>
+    <article className="comment" key={_id}>
       <div role="contentinfo" className="commentInfo">
         <img className="comment__avatar" src={user.avatar} alt={`${user.nickname} avatar`} />
         <p className="comment__author">{user.nickname}</p>
