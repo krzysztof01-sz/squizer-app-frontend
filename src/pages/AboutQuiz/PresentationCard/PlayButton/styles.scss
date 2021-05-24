@@ -5,6 +5,7 @@ a {
   display: contents;
   .quizCard__button {
     width: 30%;
+    height: 80%;
     margin-right: 10%;
     @include hoverable;
     &:focus {
