@@ -1,10 +1,10 @@
-import './styles.scss';
 import AccessibleWrapper from '../../AccessibleWrapper';
+import './styles.scss';
 
 const FileInput = ({ handleChange }) => {
   return (
-    <AccessibleWrapper>
-      <label aria-label="add an avatar" className="button fileInput__label">
+    <AccessibleWrapper withTabIndex={false}>
+      <label tabIndex={0} aria-label="add an avatar" className="button fileInput__label">
         add an avatar
         <input
           role="button"
