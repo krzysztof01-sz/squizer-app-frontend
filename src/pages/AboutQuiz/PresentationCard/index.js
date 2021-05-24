@@ -10,7 +10,7 @@ const PresentationCard = ({ card: { quiz, user, categoryImage } }) => {
   const backgroundStyles = {
     backgroundImage: `url(${categoryImage})`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100vw 100vh',
+    backgroundSize: '100vw 120vh',
   };
 
   return (
@@ -27,6 +27,7 @@ const PresentationCard = ({ card: { quiz, user, categoryImage } }) => {
             <PlayButton link={`/quiz/${quizId}/play`} />
             <div className="infoWrapper">
               <p className="quizCard__author">author: {user.nickname}</p>
+              <p className="quizCard__category">category: {quiz.category}</p>
               <p className="quizCard__creationDate">created in: {formatDate(quiz.creationDate)}</p>
             </div>
           </div>
