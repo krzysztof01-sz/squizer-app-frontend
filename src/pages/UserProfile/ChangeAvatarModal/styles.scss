@@ -3,16 +3,20 @@
 
 .changeAvatarModal {
   @include flexCenter;
+  @include primaryShadow;
+  background-color: darken($foundation, 3);
   flex-direction: column;
   padding: 30px 0;
   z-index: 1;
-
   position: fixed;
-  width: 90vw;
   margin: 0 auto;
-  top: 20vh;
-  @include primaryShadow;
-  background-color: $foundation;
+  top: 25vh;
+  width: 90vw;
+  .errorMessage,
+  .processMessage {
+    margin-top: 4vh;
+    font-size: $font-small;
+  }
   .buttonsWrapper {
     @include flexCenter;
   }
@@ -39,6 +43,13 @@
 .fileInput__label {
   background-color: $primary;
   color: $foundation;
+}
+
+@media only screen and (min-width: 700px) {
+  .changeAvatarModal {
+    margin: 0 auto;
+    width: 70vw;
+  }
 }
 
 @media only screen and (min-width: 1366px) {
