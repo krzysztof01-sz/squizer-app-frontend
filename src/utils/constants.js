@@ -4,6 +4,12 @@ export const compressionOptions = {
   useWebWorker: true,
 };
 
+// colors copied from variables.scss file
+export const colors = {
+  valid: '#2d9c2d',
+  invalid: '#ca4949',
+};
+
 export const maxCommentLength = 500;
 
 export const navItems = [
@@ -25,16 +31,7 @@ export const navItems = [
   },
 ];
 
-export const quizCategories = [
-  'English',
-  'General knowledge',
-  'Geography',
-  'IT',
-  'Maths',
-  'Riddles',
-  'Science',
-  'Other',
-];
+export const quizCategories = ['English', 'General knowledge', 'Geography', 'IT', 'Maths', 'Riddles', 'Science', 'Other'];
 
 export const categoryToColor = new Map([
   ['English', '#F7BA89'],
