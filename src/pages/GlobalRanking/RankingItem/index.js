@@ -1,7 +1,7 @@
 import renderAvatar from '../helpers/renderAvatar';
 import './styles.scss';
 
-const RankingItem = ({ place, user: { nickname, stats, avatar, isItMe }, loading }) => {
+const RankingItem = ({ place, isItMe, user: { nickname, stats, avatar }, loading }) => {
   const points = stats.correctAnswers;
 
   return (
