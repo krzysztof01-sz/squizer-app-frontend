@@ -1,10 +1,11 @@
 .form__wrapper {
   .form {
-    .accessibleWrapper {
+    .input {
+      margin-bottom: 2vh;
+    }
+    .loginButton {
       align-self: flex-end;
-      .loginButton {
-        margin-top: 5vh;
-      }
+      margin-top: 5vh;
     }
   }
 }
