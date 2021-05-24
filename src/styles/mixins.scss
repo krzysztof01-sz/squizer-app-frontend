@@ -1,13 +1,5 @@
 @import './variables.scss';
 
-@mixin accessible {
-  &--accessible:focus,
-  &--accessible:active {
-    outline: none;
-    border-bottom: 3px solid $primary;
-  }
-}
-
 @mixin avatar($size) {
   object-fit: cover;
   width: $size;
