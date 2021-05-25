@@ -35,9 +35,5 @@ export const FILL_ALL_DATA = 'Fill all data about the quiz';
 // other
 
 export const COMMENTS_NOT_FOUND = `Nobody comments this quiz yet.`;
-export const UPDATING_USER_RESULT_ERROR = `Your result cannot be updated. Try again later.`;
-
-export const UPDATING_AVATAR_ERROR = `Couldn't update an avatar. Try again later.`;
-
 export const QUIZ_DELETING_CONFIRMATION = 'Do you want to delete this quiz?';
 export const PAGE_NOT_ACCESSIBLE = 'Page not accessible';
