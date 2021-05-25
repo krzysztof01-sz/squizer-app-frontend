@@ -1,4 +1,5 @@
 import Layout from '../../global/Components/Layout';
+import ErrorImg from '../../assets/images/Error.svg';
 import './index.scss';
 
 const ErrorPage = ({ msg, children }) => {
@@ -11,6 +12,8 @@ const ErrorPage = ({ msg, children }) => {
             🥺
           </span>
         </h1>
+
+        <img className="errorPage__image" alt={`Error: ${msg}`} src={ErrorImg} />
         {children}
       </section>
     </Layout>

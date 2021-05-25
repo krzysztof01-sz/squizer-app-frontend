@@ -10,8 +10,20 @@
     color: $primary;
     font-size: $font-medium;
   }
+  &__image {
+    margin: 5vh auto 0;
+    width: 90vw;
+  }
   .link {
     font-size: $font-smallXL;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .errorPage {
+    &__image {
+      width: 20vw;
+    }
   }
 }
 
