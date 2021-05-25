@@ -26,8 +26,8 @@ const App = () => {
   useEffect(() => {
     if (!user) {
       const refetchUser = async () => {
-        const result = await api.refetchUser();
-        setUser(result.user);
+        const { data } = await api.refetchUser();
+        setUser(data);
       };
       refetchUser();
     }
