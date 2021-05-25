@@ -22,7 +22,7 @@ import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 
 import { photoTypes, responseTypes } from '../../../utils/constants';
 import SectionHeader from '../../../global/Components/SectionHeader';
-import { useCsrfToken } from '../../../hooks';
+import { useCsrfToken } from '../../../hooks/useCsrfToken';
 import { useFileInput } from '../../../hooks/useFileInput';
 import './styles.scss';
 
@@ -61,17 +61,15 @@ const Form = () => {
     if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
     setProcess(fb.REGISTERING_PROCESS);
-    const addingUserResponse = await api.registerUser(formData);
+    const { type, msg, userId } = await api.registerUser(formData);
     setProcess('');
 
-    if (addingUserResponse.type === responseTypes.success) {
-      const { msg, userId } = addingUserResponse;
+    if (type === responseTypes.success) {
       if (formData.avatarType === photoTypes.custom) await api.addUserAvatar(userId, avatar);
 
       setValidationMessages(msg);
       setTimeout(() => history.push('/login'), 500);
     } else {
-      const { msg } = addingUserResponse;
       setValidationMessages(msg);
     }
   };

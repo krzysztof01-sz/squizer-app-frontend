@@ -12,7 +12,7 @@ import LoginButton from '../../../global/Buttons/Login';
 import Loader from '../../../global/Components/Loader';
 import SectionHeader from '../../../global/Components/SectionHeader';
 
-import { useCsrfToken } from '../../../hooks';
+import { useCsrfToken } from '../../../hooks/useCsrfToken';
 import { UserContext } from '../../../contexts/User';
 import { responseTypes } from '../../../utils/constants';
 import '../../../styles/global/Components/Form.scss';
@@ -39,14 +39,12 @@ const Form = () => {
     setValidationMessages([]);
 
     setProcess(fb.LOGGING_PROCESS);
-    const loginUserResponse = await api.loginUser(formData);
+    const { msg, type, user } = await api.loginUser(formData);
     setProcess('');
-
-    const { msg, type } = loginUserResponse;
 
     if (type === responseTypes.success) {
       setValidationMessages(msg);
-      setUser(loginUserResponse.user);
+      setUser(user);
       history.push('/dashboard');
     } else {
       setValidationMessages(msg);
