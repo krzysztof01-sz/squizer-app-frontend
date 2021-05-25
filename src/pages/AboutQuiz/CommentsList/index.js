@@ -1,5 +1,5 @@
 import Comment from '../Comment';
-import * as fb from '../../../utils/feedbackMessages';
+import { COMMENTS_NOT_FOUND } from '../../../utils/feedbackMessages';
 import './styles.scss';
 
 const CommentsList = ({ comments }) => {
@@ -13,7 +13,7 @@ const CommentsList = ({ comments }) => {
           return <Comment key={comment._id} comment={comment} />;
         })
       ) : (
-        <p>{fb.COMMENTS_NOT_FOUND}</p>
+        <p className="comments__info">{COMMENTS_NOT_FOUND}</p>
       )}
     </section>
   );
