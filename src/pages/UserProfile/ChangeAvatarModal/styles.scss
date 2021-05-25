@@ -12,13 +12,23 @@
   margin: 0 auto;
   top: 25vh;
   width: 90vw;
-  .errorMessage,
+  .resultMessage,
   .processMessage {
-    margin-top: 4vh;
     font-size: $font-small;
+    text-align: center;
+  }
+  .resultMessage {
+    margin-bottom: 3vh;
+  }
+  .processMessage {
+    margin-top: 5vh;
   }
   .buttonsWrapper {
     @include flexCenter;
+    align-items: baseline;
+    .defaultAvatarButton {
+      width: 120px;
+    }
   }
   .exitIcon {
     font-size: $font-medium;
@@ -36,13 +46,12 @@
   }
 }
 
-.fileInput {
-  display: none;
-}
-
 .fileInput__label {
   background-color: $primary;
   color: $foundation;
+  .fileInput {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 700px) {
@@ -61,5 +70,10 @@
 @media only screen and (min-width: 1920px) {
   .changeAvatarModal {
     width: 40vw;
+    .buttonsWrapper {
+      .defaultAvatarButton {
+        width: 150px;
+      }
+    }
   }
 }
