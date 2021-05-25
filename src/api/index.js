@@ -18,7 +18,7 @@ const instance = axios.create({
 
 // Auth API
 
-export const getToken = async () => {
+export const getCsrfToken = async () => {
   const { data } = await instance.get('/auth/csrf').catch(({ response }) => response);
   return data.csrfToken;
 };
@@ -60,7 +60,7 @@ const processUser = async ({ password, ...user }) => {
 
 export const getUser = async (userId) => {
   const { data } = await instance.get(`/api/users/${userId}`).catch(({ response }) => response);
-  const { type, user } = data;
+  const { type, data: user } = data;
 
   if (type === responseTypes.success) {
     const processedUser = await processUser(user);
@@ -83,15 +83,6 @@ export const getUserQuizzes = async (userId) => {
   return data;
 };
 
-export const addUserAvatar = async (userId, avatar) => {
-  try {
-    const snapshot = await firebaseStorage.ref(`avatars/${userId}`).put(avatar);
-    return snapshot.state;
-  } catch (err) {
-    return err.message;
-  }
-};
-
 export const getUserAvatar = async (userId) => {
   const avatar = await firebaseStorage
     .ref(`avatars/${userId}`)
@@ -105,8 +96,8 @@ export const updateUserStatistics = async (quizId, stats) => {
   return data;
 };
 
-export const getProfileData = async () => {
-  const { data } = await instance.get('/api/me').catch(({ response }) => response);
+export const getUserRankingPlace = async (userId) => {
+  const { data } = await instance.get(`/api/users/${userId}/ranking-place`).catch(({ response }) => response);
   return data;
 };
 
@@ -125,18 +116,29 @@ const updateUserAvatarType = async (userId, type) => {
   return data;
 };
 
+export const addUserAvatar = async (userId, avatar) => {
+  try {
+    const snapshot = await firebaseStorage.ref(`avatars/${userId}`).put(avatar);
+    return snapshot.state;
+  } catch (err) {
+    return err.message;
+  }
+};
+
 export const updateUserAvatar = async (userId, avatarType, avatar = null) => {
   try {
     if (avatarType === photoTypes.default) {
       await deleteUserAvatar(userId);
-      await updateUserAvatarType(userId, avatarType);
     } else {
       await addUserAvatar(userId, avatar);
-      await updateUserAvatarType(userId, avatarType);
     }
-    return { success: true };
+
+    const { type, msg } = await updateUserAvatarType(userId, avatarType);
+    if (type === responseTypes.error) throw msg;
+
+    return { type: responseTypes.success, msg };
   } catch (e) {
-    return { success: false };
+    return { type: responseTypes.error, msg: e };
   }
 };
 
