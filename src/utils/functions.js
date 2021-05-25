@@ -31,8 +31,3 @@ export const shortenText = (text, length) => {
 
   return text;
 };
-
-export const shuffleArray = (arr) => {
-  arr = arr.sort(() => Math.random() - 0.5);
-  return arr;
-};
