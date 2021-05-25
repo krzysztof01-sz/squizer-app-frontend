@@ -1,9 +1,10 @@
 import Loader from '../../../global/Components/Loader';
-import { useUser } from '../../../hooks';
+import { useUser } from '../../../hooks/useUser';
 import './styles.scss';
 
 const Avatar = ({ userId }) => {
   const { user } = useUser(userId);
+
   if (user) {
     return <img className="profile__avatar" alt={`user ${user.avatar} avatar`} src={user.avatar} />;
   } else {

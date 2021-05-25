@@ -6,9 +6,8 @@ import CorrectAnswersBar from './CorrectAnswersBar';
 import Greeting from './Greeting';
 import Stats from './Stats';
 import UserQuizzesList from './UserQuizzesList';
-import { useUserProfile } from '../../hooks';
+import { useUserProfile } from '../../hooks/useUserProfile';
 import Loader from '../../global/Components/Loader';
-import ErrorPage from '../ErrorPage';
 import SectionHeader from '../../global/Components/SectionHeader';
 import ChangeAvatarModal from './ChangeAvatarModal';
 import { photoTypes } from '../../utils/constants';
@@ -16,10 +15,9 @@ import './index.scss';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { profile: user, error, loading } = useUserProfile();
+  const { profile: user, loading } = useUserProfile();
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage msg={error} />;
 
   const { stats } = user;
 

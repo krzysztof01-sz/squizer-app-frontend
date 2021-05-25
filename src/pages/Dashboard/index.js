@@ -8,11 +8,12 @@ import Layout from '../../global/Components/Layout';
 import Loader from '../../global/Components/Loader';
 import { SearchIcon } from '../../global/Icons';
 import FilteringProvider from '../../contexts/Filtering';
-import { useQuizzes } from '../../hooks';
+import { getQuizzes } from '../../api';
+import { useFetching } from '../../hooks/useFetching';
 import './index.scss';
 
 const Dashboard = () => {
-  const { quizzes, loading, error } = useQuizzes();
+  const { data: quizzes, loading, error } = useFetching(getQuizzes);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage msg={error} />;

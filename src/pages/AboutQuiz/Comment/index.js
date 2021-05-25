@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import Loader from '../../../global/Components/Loader';
-import { useUser } from '../../../hooks';
+import { useUser } from '../../../hooks/useUser';
 import { formatDate } from '../../../utils/functions';
 import './styles.scss';
 

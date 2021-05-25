@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../../../global/Components/Loader';
-import { useQuiz } from '../../../hooks';
 import { responseTypes } from '../../../utils/constants';
 import { QUIZ_DELETING_CONFIRMATION } from '../../../utils/feedbackMessages';
 import { shortenText } from '../../../utils/functions';
 import DeleteQuizButton from './DeleteQuizButton';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
-import * as api from '../../../api';
 import './styles.scss';
+import { useFetching } from '../../../hooks/useFetching';
+import { getQuiz } from '../../../api';
+import SectionHeader from '../../../global/Components/SectionHeader';
+import * as api from '../../../api';
 
 const UserQuiz = ({ quizId }) => {
   const [deletingResult, setDeletingResult] = useState(null);
-  const { quiz, error, loading } = useQuiz(quizId);
+  const { data: quiz, error, loading } = useFetching(getQuiz, quizId);
 
   if (loading) return <Loader width={200} height={200} />;
   if (error)

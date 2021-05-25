@@ -3,12 +3,13 @@ import ErrorPage from '../ErrorPage';
 import Loader from '../../global/Components/Loader';
 import Chart from './Chart';
 import RankingList from './RankingList';
-import { useUsers } from '../../hooks';
 import SectionHeader from '../../global/Components/SectionHeader';
+import { useFetching } from '../../hooks/useFetching';
+import { getUsers } from '../../api';
 import './index.scss';
 
 const Ranking = () => {
-  const { users, error, loading } = useUsers();
+  const { data: users, loading, error } = useFetching(getUsers);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage msg={error} />;

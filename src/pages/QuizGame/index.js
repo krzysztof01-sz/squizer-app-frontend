@@ -14,25 +14,26 @@ import PreviousQuestionButton from './Buttons/PreviousQuestion';
 import NextQuestionButton from './Buttons/NextQuestion';
 import FinishQuizButton from './Buttons/FinishQuiz';
 
-import { useQuestions } from '../../hooks';
 import { responseTypes } from '../../utils/constants';
 import * as fb from '../../utils/feedbackMessages';
-import * as api from '../../api';
 import './index.scss';
 import SectionHeader from '../../global/Components/SectionHeader';
 import { UserContext } from '../../contexts/User';
+import { useFetching } from '../../hooks/useFetching';
+import { getQuizQuestions } from '../../api';
+import * as api from '../../api';
 
 const QuizGame = () => {
   const { setUser } = useContext(UserContext);
   const { quizId } = useParams();
-  const { questions, loading, error } = useQuestions(quizId);
+  const { data: questions, loading, error } = useFetching(getQuizQuestions, quizId);
   const [userAnswers, setUserAnswers] = useState([]);
   const [correctAnswersQuantity, setCorrectAnswersQuantity] = useState(false);
   const [questionID, setQuestionID] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [updatingError, setUpdatingError] = useState(null);
 
-  useEffect(() => setUserAnswers(new Array(questions.length).fill(undefined)), [loading]);
+  useEffect(() => setUserAnswers(new Array(questions?.length).fill(undefined)), [loading]);
 
   const getCorrectAnswers = () => {
     const correctAnswers = [];
@@ -53,15 +54,6 @@ const QuizGame = () => {
     }
   };
 
-  const renderSwitchDots = () => {
-    const questionsDots = [];
-    for (let i = 0; i < questions.length; i++) {
-      const element = <SwitchDot filled={i === questionID ? true : false} key={i} callback={() => setQuestionID(i)} />;
-      questionsDots.push(element);
-    }
-    return questionsDots;
-  };
-
   // display the previously marked user answer
   useEffect(() => {
     const answersElements = document.querySelectorAll('.answer__content');
@@ -74,10 +66,19 @@ const QuizGame = () => {
     }
   }, [questionID, userAnswers]);
 
-  const quizNotFinished = typeof correctAnswersQuantity === 'boolean';
+  const renderSwitchDots = () => {
+    const questionsDots = [];
+    for (let i = 0; i < questions.length; i++) {
+      const element = <SwitchDot filled={i === questionID ? true : false} key={i} callback={() => setQuestionID(i)} />;
+      questionsDots.push(element);
+    }
+    return questionsDots;
+  };
 
   if (loading || isSubmitting) return <Loader />;
   if (error) return <ErrorPage msg={error} />;
+
+  const quizNotFinished = typeof correctAnswersQuantity === 'boolean';
 
   if (quizNotFinished) {
     const currentQuestion = questions[questionID];
@@ -131,15 +132,16 @@ const QuizGame = () => {
                     const stats = { correctAnswers, givenAnswers };
 
                     if (typeof correctAnswers === 'number') {
-                      setIsSubmitting(true);
-                      const { type, user } = await api.updateUserStatistics(quizId, stats);
-                      setUser(user);
-                      setIsSubmitting(false);
-
                       setCorrectAnswersQuantity(correctAnswers);
 
-                      if (type === responseTypes.error) {
-                        return setUpdatingError(fb.UPDATING_USER_RESULT_ERROR);
+                      setIsSubmitting(true);
+                      const { type, data, msg } = await api.updateUserStatistics(quizId, stats);
+                      setIsSubmitting(false);
+
+                      if (type === responseTypes.success) {
+                        return setUser(data);
+                      } else {
+                        return setUpdatingError(msg);
                       }
                     }
                   }}
