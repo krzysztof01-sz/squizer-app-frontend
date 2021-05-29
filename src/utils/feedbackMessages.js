@@ -20,6 +20,7 @@ export const REGISTERING_PROCESS = 'Registering...';
 
 export const LOGGING_PROCESS = 'Logging...';
 export const LOGOUT_CONFIRMATION = 'Do you want to log out?';
+export const COMMENT_DELETE_CONFIRMATION = 'Do you want to delete this comment?';
 
 // authentication
 
