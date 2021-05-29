@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { responseTypes } from '../utils/constants';
 import * as api from '../api';
+import axios from 'axios';
 
 export const useQuizCard = (quizId) => {
   const [quiz, setQuiz] = useState(null);
@@ -10,6 +11,9 @@ export const useQuizCard = (quizId) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const cancelToken = axios.CancelToken;
+    const source = cancelToken.source();
+
     (async (id) => {
       try {
         const { data, type, msg } = await api.getQuiz(id);
@@ -20,7 +24,7 @@ export const useQuizCard = (quizId) => {
         const { createdBy, category } = data;
         const user = await api.getUser(createdBy);
         const categoryImage = await api.getCategoryImage(category);
-        setUser(user);
+        setUser(user.data);
         setCategoryImage(categoryImage);
       } catch (e) {
         setError(e);
@@ -29,7 +33,7 @@ export const useQuizCard = (quizId) => {
       setLoading(false);
     })(quizId);
 
-    return () => setLoading(false);
+    return () => source.cancel();
   }, []);
 
   return { quiz, user, categoryImage, error, loading };
