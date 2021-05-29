@@ -8,6 +8,7 @@ export const compressionOptions = {
 export const colors = {
   valid: '#2d9c2d',
   invalid: '#ca4949',
+  primary: '#fbc02d',
 };
 
 export const maxCommentLength = 500;
@@ -63,3 +64,5 @@ export const emojiCupsMap = new Map([
   [2, '🥈'],
   [3, '🥉'],
 ]);
+
+export const unauthenticatedRoutes = ['/login', '/', '/signup'];
