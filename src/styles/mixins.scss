@@ -43,7 +43,7 @@
 
 @mixin hoverable {
   &:hover {
-    background: lighten($primary, 10);
+    background: darken($contrast, 10);
     transition: background 0.3s;
   }
 }
