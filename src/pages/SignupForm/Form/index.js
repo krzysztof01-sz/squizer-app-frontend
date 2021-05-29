@@ -1,14 +1,9 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import * as api from '../../../api';
-import * as fb from '../../../utils/feedbackMessages';
-
 import SingupButton from '../../../global/Buttons/Signup';
-import DefaultAvatarButton from '../../../global/Buttons/DefaultAvatarButton';
+import DefaultAvatar from '../../../global/Buttons/DefaultAvatar';
 import AvatarPreview from '../../../global/Components/AvatarPreview';
 import Input from '../../../global/Components/Input';
 import FileInput from '../../../global/Components/FileInput';
@@ -20,19 +15,19 @@ import ErrorMessage from '../../../global/Components/Messages/ErrorMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 
-import { photoTypes, responseTypes } from '../../../utils/constants';
+import { photoTypes } from '../../../utils/constants';
 import SectionHeader from '../../../global/Components/SectionHeader';
-import { useCsrfToken } from '../../../hooks/useCsrfToken';
 import { useFileInput } from '../../../hooks/useFileInput';
+import { useFetching } from '../../../hooks/useFetching';
+import { useAuth } from '../../../hooks/useAuth';
+import * as fb from '../../../utils/feedbackMessages';
+import * as api from '../../../api';
 import './styles.scss';
 
 const Form = () => {
-  const history = useHistory();
-  const { csrfToken } = useCsrfToken();
+  const { data: csrfToken } = useFetching(api.getCsrfToken);
   const { avatar, preview, setDefaultAvatar, handleAvatarChange, error, setError, process } = useFileInput();
-
-  const [_, setProcess] = useState('');
-  const [validationMessages, setValidationMessages] = useState([]);
+  const { registerUser, process: registrationProcess, validationMessages } = useAuth();
 
   const schema = yup.object().shape({
     nickname: yup.string().trim().min(3, fb.NICKNAME_SHORT).max(15, fb.NICKNAME_LONG).required(fb.NICKNAME_REQUIRED),
@@ -52,26 +47,13 @@ const Form = () => {
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = async (formData) => {
-    setValidationMessages([]);
-
+  const onSubmit = (formData) => {
     formData.avatar = avatar;
     formData.avatarType = avatar?.name ? photoTypes.custom : photoTypes.default;
 
     if (!formData.avatar) return setError(fb.CHOOSE_YOUR_AVATAR);
 
-    setProcess(fb.REGISTERING_PROCESS);
-    const { type, msg, userId } = await api.registerUser(formData);
-    setProcess('');
-
-    if (type === responseTypes.success) {
-      if (formData.avatarType === photoTypes.custom) await api.addUserAvatar(userId, avatar);
-
-      setValidationMessages(msg);
-      setTimeout(() => history.push('/login'), 500);
-    } else {
-      setValidationMessages(msg);
-    }
+    registerUser(formData);
   };
 
   if (!csrfToken) return <Loader width={100} height={100} />;
@@ -102,11 +84,11 @@ const Form = () => {
 
         <div className="fileInputWrapper">
           <FileInput handleChange={handleAvatarChange} />
-          <DefaultAvatarButton handleClick={setDefaultAvatar} />
+          <DefaultAvatar handleClick={setDefaultAvatar} />
         </div>
 
         <ErrorMessage message={error} />
-        <ProcessMessage message={process} />
+        <ProcessMessage message={process || registrationProcess} />
 
         {validationMessages.map(({ msg, type }, index) => {
           return <ActionResultMessage msg={msg} type={type} key={index} />;
