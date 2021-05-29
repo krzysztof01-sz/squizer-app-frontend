@@ -1,8 +1,8 @@
 import './styles.scss';
 
-const AddCommentButton = ({ disabled }) => {
+const AddCommentButton = ({ isDisabled }) => {
   return (
-    <button disabled={disabled} className="button commentForm__button">
+    <button disabled={isDisabled} className="button commentForm__button">
       Add
     </button>
   );

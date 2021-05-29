@@ -4,7 +4,7 @@
 .comment {
   background-color: darken($foundation, 5);
   width: 100%;
-  padding: 10px;
+  padding: 15px 15px 0px;
   border-bottom: 3px solid darken($foundation, 20);
   margin-bottom: 5vh;
   .commentInfo {
@@ -20,5 +20,20 @@
       text-align: right;
       margin-right: 2vw;
     }
+  }
+  .saveButton {
+    background-color: $primary;
+  }
+  .comment__actionButtonsWrapper {
+    @include flexCenter;
+    justify-content: left;
+    align-items: baseline;
+    margin: 2vh 0;
+    .saveButton {
+      margin-right: 2vw;
+    }
+  }
+  .resultMessage {
+    margin: 2vh 0 1vh;
   }
 }
