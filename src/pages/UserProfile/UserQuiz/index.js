@@ -4,7 +4,7 @@ import Loader from '../../../global/Components/Loader';
 import { responseTypes } from '../../../utils/constants';
 import { QUIZ_DELETING_CONFIRMATION } from '../../../utils/feedbackMessages';
 import { shortenText } from '../../../utils/functions';
-import DeleteQuizButton from './DeleteQuizButton';
+import DeleteButton from '../../../global/Buttons/Delete';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import './styles.scss';
 import { useFetching } from '../../../hooks/useFetching';
@@ -29,22 +29,20 @@ const UserQuiz = ({ quizId }) => {
       <p className="userQuiz__title">{quiz.title}</p>
       <p className="userQuiz__description">{shortenText(quiz.description, 200)}</p>
       <section className="userQuiz__actionsBar">
-        <div className="iconsWrapper">
-          <DeleteQuizButton
-            callback={async () => {
-              if (confirm(QUIZ_DELETING_CONFIRMATION)) {
-                const result = await api.deleteQuiz(quizId);
-                setDeletingResult(result);
+        <DeleteButton
+          callback={async () => {
+            if (confirm(QUIZ_DELETING_CONFIRMATION)) {
+              const result = await api.deleteQuiz(quizId);
+              setDeletingResult(result);
 
-                if (result.type === responseTypes.success) {
-                  location.reload();
-                }
+              if (result.type === responseTypes.success) {
+                location.reload();
               }
-            }}
-          />
-        </div>
+            }
+          }}
+        />
         <Link to={`/quiz/${quizId}/about`}>
-          <button className="button userQuiz__button">check</button>
+          <button className="button userQuiz__checkButton">check</button>
         </Link>
       </section>
 

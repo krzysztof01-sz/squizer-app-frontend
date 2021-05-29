@@ -21,11 +21,7 @@
     @include flexCenter;
     justify-content: space-between;
     margin-bottom: 1.5vh;
-    .iconsWrapper {
-      width: 20%;
-      margin-top: 5px;
-    }
-    .userQuiz__button {
+    .userQuiz__checkButton {
       width: 100px;
       padding: 5px;
       background-color: $secondary;
@@ -43,12 +39,7 @@
 @media only screen and (min-width: 1367px) {
   .userQuiz {
     padding: 25px 15px 20px;
-    .userQuiz__actionsBar {
-      .iconsWrapper {
-        width: 15%;
-      }
-    }
-    .userQuiz__button {
+    .userQuiz__checkButton {
       width: 100px;
       padding: 5px;
       margin-top: 10px;
@@ -78,7 +69,7 @@
           width: 100%;
         }
       }
-      .userQuiz__button {
+      .userQuiz__checkButton {
         width: 150px;
         padding: 10px 5px;
         margin-top: 15px;
