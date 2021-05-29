@@ -1,29 +1,19 @@
-import { useContext, useState } from 'react';
-import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-
-import * as fb from '../../../utils/feedbackMessages';
-import * as api from '../../../api';
-
 import Input from '../../../global/Components/Input';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import LoginButton from '../../../global/Buttons/Login';
 import Loader from '../../../global/Components/Loader';
 import SectionHeader from '../../../global/Components/SectionHeader';
-
-import { useCsrfToken } from '../../../hooks/useCsrfToken';
-import { UserContext } from '../../../contexts/User';
-import { responseTypes } from '../../../utils/constants';
+import { useFetching } from '../../../hooks/useFetching';
+import { getCsrfToken } from '../../../api';
+import { useAuth } from '../../../hooks/useAuth';
 import '../../../styles/global/Components/Form.scss';
 import './styles.scss';
 
 const Form = () => {
-  const history = useHistory();
-  const { setUser } = useContext(UserContext);
-  const { csrfToken } = useCsrfToken();
-  const [process, setProcess] = useState('');
-  const [validationMessages, setValidationMessages] = useState([]);
+  const { data: csrfToken } = useFetching(getCsrfToken);
+  const { loginUser, process, validationMessages } = useAuth();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -35,21 +25,7 @@ const Form = () => {
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = async (formData) => {
-    setValidationMessages([]);
-
-    setProcess(fb.LOGGING_PROCESS);
-    const { msg, type, user } = await api.loginUser(formData);
-    setProcess('');
-
-    if (type === responseTypes.success) {
-      setValidationMessages(msg);
-      setUser(user);
-      history.push('/dashboard');
-    } else {
-      setValidationMessages(msg);
-    }
-  };
+  const onSubmit = (formData) => loginUser(formData);
 
   if (!csrfToken) return <Loader width={100} height={100} />;
 
