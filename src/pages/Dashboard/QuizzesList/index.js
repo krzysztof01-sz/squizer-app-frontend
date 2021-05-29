@@ -6,6 +6,7 @@ import './styles.scss';
 
 const QuizzesList = ({ quizzes }) => {
   const { invisibleQuizzesQuantity } = useContext(FilteringContext);
+
   return (
     <>
       {invisibleQuizzesQuantity === 0 ? <LackOfQuizzesView /> : null}

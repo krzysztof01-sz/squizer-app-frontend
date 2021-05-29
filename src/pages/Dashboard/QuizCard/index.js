@@ -2,14 +2,15 @@ import QuizButton from './QuizButton';
 import { categoryToColor as map, maxDescrptionLengthOnCard } from '../../../utils/constants';
 import { formatDate, shortenText } from '../../../utils/functions';
 import { useCategoryImage } from '../../../hooks/useCategoryImage';
-import { useUser } from '../../../hooks/useUser';
-import Loader from '../../../global/Components/Loader';
-import './styles.scss';
 import { memo } from 'react';
+import { useFetching } from '../../../hooks/useFetching';
+import { getUser } from '../../../api';
+import { Skeleton } from '@material-ui/lab';
+import './styles.scss';
 
 const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, category } }) => {
   const { categoryImage } = useCategoryImage(category);
-  const { user } = useUser(createdBy);
+  const { data: user } = useFetching(getUser, createdBy);
 
   return user && categoryImage ? (
     <article role="listitem" className="quizCard" style={{ borderBottom: `10px solid ${map.get(category)}` }}>
@@ -29,7 +30,9 @@ const QuizCard = ({ quiz: { _id, title, description, creationDate, createdBy, ca
     </article>
   ) : (
     <article className="quizCard">
-      <Loader width={200} height={200} />
+      <Skeleton variant="rect" className="quizCard__categoryImageWrapper" />
+      <Skeleton variant="text" height={40} />
+      <Skeleton variant="text" height={40} />
     </article>
   );
 };
