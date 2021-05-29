@@ -1,5 +1,5 @@
-import Layout from '../../global/Components/Layout';
 import ErrorImg from '../../assets/images/Error.svg';
+import Layout from '../../global/Components/Layout';
 import './index.scss';
 
 const ErrorPage = ({ msg, children }) => {
