@@ -20,7 +20,7 @@ const instance = axios.create({
 
 export const getCsrfToken = async () => {
   const { data } = await instance.get('/auth/csrf').catch(({ response }) => response);
-  return data.csrfToken;
+  return data;
 };
 
 export const registerUser = async (formData) => {
@@ -64,13 +64,13 @@ export const getUser = async (userId) => {
 
   if (type === responseTypes.success) {
     const processedUser = await processUser(user);
-    return processedUser;
+    return { type, data: processedUser };
   } else {
     user.nick = '';
     user.avatar = DefaultAvatar;
   }
 
-  return user;
+  return { type, data: user };
 };
 
 export const getUsers = async () => {
@@ -177,6 +177,18 @@ export const deleteQuiz = async (quizId) => {
 export const addComment = async (quizId, comment) => {
   const { data } = await instance
     .post(`/api/quizzes/${quizId}/comments`, JSON.stringify({ content: comment }))
+    .catch(({ response }) => response);
+  return data;
+};
+
+export const deleteQuizComment = async (quizId, commentId) => {
+  const { data } = await instance.delete(`/api/quizzes/${quizId}/comments/${commentId}`).catch(({ response }) => response);
+  return data;
+};
+
+export const updateQuizComment = async (quizId, commentId, comment) => {
+  const { data } = await instance
+    .put(`/api/quizzes/${quizId}/comments/${commentId}`, JSON.stringify({ content: comment }))
     .catch(({ response }) => response);
   return data;
 };
