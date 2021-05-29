@@ -1,9 +1,10 @@
+import { getUser } from '../../../api';
 import Loader from '../../../global/Components/Loader';
-import { useUser } from '../../../hooks/useUser';
+import { useFetching } from '../../../hooks/useFetching';
 import './styles.scss';
 
 const Avatar = ({ userId }) => {
-  const { user } = useUser(userId);
+  const { data: user } = useFetching(getUser, userId);
 
   if (user) {
     return <img className="profile__avatar" alt={`user ${user.avatar} avatar`} src={user.avatar} />;
