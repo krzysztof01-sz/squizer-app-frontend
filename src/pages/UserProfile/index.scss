@@ -6,7 +6,7 @@
   flex-direction: column;
   width: 90vw;
   margin: 0 auto;
-  .page__firstPart {
+  .firstPart {
     .userData {
       width: 100%;
       margin-top: 3vh;
@@ -20,49 +20,69 @@
       }
     }
   }
-}
-
-@media only screen and (min-width: 700px) and (max-width: 999px) {
-  .pageWrapper {
-    width: 70vw;
+  .secondPart {
+    .sectionHeader {
+      .secondPart__errorImg {
+        width: 90%;
+        margin: 10vh auto 0;
+      }
+    }
   }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 768px) and (max-width: 1366px) {
   .pageWrapper {
+    margin-top: 5vh;
+    width: 90vw;
     flex-direction: row;
     justify-content: space-around;
-    .userData {
-      width: 350px;
+    .firstPart {
+      width: 45%;
+      .userData {
+        width: 350px;
+      }
     }
-    .page__secondPart {
+    .secondPart {
       padding: 10px;
       height: 80vh;
       overflow-y: scroll;
       width: 45%;
       margin: 5vh 0 0 0;
       @include primaryScroll;
+      .sectionHeader {
+        .secondPart__errorImg {
+          width: 70%;
+          margin: 10vh auto 0;
+        }
+      }
     }
   }
 }
 
-@media only screen and (min-width: 1000px) and (max-width: 1366px) {
+@media only screen and (min-width: 1367px) and (max-width: 1920px) {
   .pageWrapper {
     width: 90vw;
-    .page__firstPart {
+    flex-direction: row;
+    justify-content: space-around;
+    .firstPart {
       width: 45%;
-      margin-left: 5%;
-    }
-  }
-}
-
-@media only screen and (min-width: 1367px) {
-  .pageWrapper {
-    width: 80vw;
-    .page__firstPart {
-      margin: 0;
+      margin-left: 5vw;
       .userData {
-        width: 500px;
+        width: 600px;
+      }
+    }
+    .secondPart {
+      padding: 10px;
+      height: 80vh;
+      overflow-y: scroll;
+      width: 45%;
+      margin: 5vh 0 0 0;
+      @include primaryScroll;
+      .sectionHeader {
+        .secondPart__errorImg {
+          width: 70%;
+          margin: 10vh auto 0;
+        }
       }
     }
   }
@@ -70,8 +90,29 @@
 
 @media only screen and (min-width: 1921px) {
   .pageWrapper {
-    .page__secondPart {
-      height: 70vh;
+    width: 90vw;
+    flex-direction: row;
+    justify-content: space-around;
+    .firstPart {
+      width: 45%;
+      margin-left: 5vw;
+      .userData {
+        width: 600px;
+      }
+    }
+    .secondPart {
+      padding: 10px;
+      height: 80vh;
+      overflow-y: scroll;
+      width: 45%;
+      margin: 5vh 0 0 0;
+      @include primaryScroll;
+      .sectionHeader {
+        .secondPart__errorImg {
+          width: 70%;
+          margin: 10vh auto 0;
+        }
+      }
     }
   }
 }
