@@ -1,15 +1,15 @@
+import { useState } from 'react';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import AvatarPreview from '../../../global/Components/AvatarPreview';
-import DefaultAvatarButton from '../../../global/Buttons/DefaultAvatarButton';
+import DefaultAvatar from '../../../global/Buttons/DefaultAvatar';
 import FileInput from '../../../global/Components/FileInput';
 import { ExitIcon } from '../../../global/Icons';
-import SetAvatarButton from '../SetAvatarButton';
+import SaveButton from '../../../global/Buttons/SaveButton';
 import * as api from '../../../api';
 import { photoTypes, responseTypes } from '../../../utils/constants';
 import { useFileInput } from '../../../hooks/useFileInput';
 import ProcessMessage from '../../../global/Components/Messages/ProcessMessage';
 import './styles.scss';
-import { useState } from 'react';
 
 const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRender }) => {
   const { avatar, preview, process, handleAvatarChange, setDefaultAvatar } = useFileInput();
@@ -26,10 +26,10 @@ const ChangeAvatarModal = ({ isOpen, setIsOpen, userId, shouldDefaultOptionRende
 
       <section className="buttonsWrapper">
         <FileInput handleChange={handleAvatarChange} />
-        {shouldDefaultOptionRender ? <DefaultAvatarButton handleClick={setDefaultAvatar} /> : null}
+        {shouldDefaultOptionRender ? <DefaultAvatar handleClick={setDefaultAvatar} /> : null}
       </section>
       {avatar ? (
-        <SetAvatarButton
+        <SaveButton
           callback={async () => {
             const response =
               typeof avatar === 'string'
