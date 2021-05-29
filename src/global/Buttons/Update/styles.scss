@@ -1,0 +1,17 @@
+@import '../../../styles/mixins.scss';
+
+.updateButton {
+  @include hoverable;
+  @include flexCenter;
+  font-size: 1.7rem;
+  justify-content: space-around;
+  width: 110px;
+  margin-right: 2vw;
+}
+
+@media only screen and (min-width: 1920px) {
+  .updateButton {
+    width: 130px;
+    font-size: 1.7rem;
+  }
+}

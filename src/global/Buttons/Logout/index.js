@@ -1,20 +1,11 @@
-import * as api from '../../../api';
-import { LOGOUT_CONFIRMATION } from '../../../utils/feedbackMessages';
+import { useAuth } from '../../../hooks/useAuth';
 import './styles.scss';
 
 const LogoutButton = () => {
+  const { logoutUser } = useAuth();
+
   return (
-    <button
-      className="button logoutButton"
-      onClick={async () => {
-        if (confirm(LOGOUT_CONFIRMATION)) {
-          const { success } = await api.logoutUser();
-          if (success) location.assign('/login');
-        } else {
-          return false;
-        }
-      }}
-    >
+    <button className="button logoutButton" onClick={() => logoutUser()}>
       <p>Logout</p>
     </button>
   );

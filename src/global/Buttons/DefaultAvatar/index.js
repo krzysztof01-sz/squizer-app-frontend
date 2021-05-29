@@ -1,7 +1,7 @@
 import './styles.scss';
 import '../../../styles/global/Components/Button.scss';
 
-const DefaultAvatarButton = ({ handleClick }) => {
+const DefaultAvatar = ({ handleClick }) => {
   return (
     <button className="button defaultAvatarButton" onClick={handleClick}>
       use default
@@ -9,4 +9,4 @@ const DefaultAvatarButton = ({ handleClick }) => {
   );
 };
 
-export default DefaultAvatarButton;
+export default DefaultAvatar;
