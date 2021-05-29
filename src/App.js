@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import LoginForm from './pages/LoginForm';
@@ -13,27 +13,13 @@ import Ranking from './pages/GlobalRanking';
 import UserProfile from './pages/UserProfile';
 import About from './pages/About';
 import UserProvider, { UserContext } from './contexts/User';
-import * as api from './api';
 import { PAGE_NOT_ACCESSIBLE } from './utils/feedbackMessages';
 import './styles/App.scss';
 
 const wrapper = document.querySelector('.app');
 
 const App = () => {
-  const { user, setUser } = useContext(UserContext);
-
-  // when user refresh the page manually, run refetchUser function
-  useEffect(() => {
-    if (!user) {
-      const refetchUser = async () => {
-        const { data } = await api.refetchUser();
-        setUser(data);
-      };
-      refetchUser();
-    }
-
-    return () => false;
-  }, [user]);
+  const { user } = useContext(UserContext);
 
   return (
     <Router>
@@ -61,7 +47,11 @@ const App = () => {
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <Router>
+        <Switch>
+          <App />
+        </Switch>
+      </Router>
     </UserProvider>
   </React.StrictMode>,
   wrapper,
