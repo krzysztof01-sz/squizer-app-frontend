@@ -15,7 +15,7 @@ import ActionResultMessage from '../../../global/Components/Messages/ActionResul
 
 import { quizCategories, responseTypes } from '../../../utils/constants';
 import Layout from '../../../global/Components/Layout';
-import { useQuizForm } from '../useQuizForm';
+import { useQuizForm } from '../../../hooks/useQuizForm';
 import { colors } from '../../../utils/constants';
 
 const focusOnFirstInput = () => document.querySelector('textarea[name="content"]').focus();
