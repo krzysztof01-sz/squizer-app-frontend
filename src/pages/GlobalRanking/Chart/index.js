@@ -18,9 +18,7 @@ const Chart = ({ users }) => {
 
         return (
           <RankingDataWrapper key={user._id} user={user}>
-            {({ user, loading }) => (
-              <ChartBar user={user} loading={loading} barHeight={barHeight} />
-            )}
+            {({ user, loading }) => <ChartBar user={user} loading={loading} barHeight={barHeight} />}
           </RankingDataWrapper>
         );
       })}
