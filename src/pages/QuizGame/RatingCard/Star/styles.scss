@@ -1,0 +1,11 @@
+@import '../../../../styles/variables.scss';
+
+.starWrapper {
+  .starIcon {
+    font-size: $font-medium;
+  }
+  color: darken($foundation, 10);
+  &--light {
+    color: $primary;
+  }
+}

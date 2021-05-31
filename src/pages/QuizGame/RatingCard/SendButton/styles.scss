@@ -1,0 +1,14 @@
+@import '../../../../styles/variables.scss';
+
+.send__button {
+  background-color: $primary;
+  align-self: flex-end;
+  margin-top: 2vh;
+  width: 90px;
+}
+
+@media only screen and (min-width: 1920px) {
+  .send__button {
+    width: 110px;
+  }
+}
