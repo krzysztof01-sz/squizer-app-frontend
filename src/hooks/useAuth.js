@@ -39,7 +39,7 @@ export const useAuth = () => {
       if (formData.avatarType === photoTypes.custom) await api.addUserAvatar(userId, formData.avatar);
 
       setValidationMessages(msg);
-      setTimeout(() => history.push('/login'), 300);
+      setTimeout(() => history.push('/dashboard'), 300);
     } else {
       setValidationMessages(msg);
     }
