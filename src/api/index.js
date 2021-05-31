@@ -193,6 +193,13 @@ export const updateQuizComment = async (quizId, commentId, comment) => {
   return data;
 };
 
+export const sendQuizRating = async (quizId, ratingData) => {
+  const { data } = await instance
+    .post(`/api/quizzes/${quizId}/ratings`, JSON.stringify(ratingData))
+    .catch(({ response }) => response);
+  return data;
+};
+
 // other
 
 export const getCategoryImage = async (moduleName) => {
