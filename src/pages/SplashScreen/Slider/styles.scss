@@ -7,7 +7,7 @@
   &__imageSection {
     display: flex;
     .slider__image {
-      border-radius: 6px;
+      border-radius: $border-small;
       object-fit: cover;
       width: 55vw;
       height: 45vh;
