@@ -10,10 +10,12 @@ import {
   faSearch,
   faTimes,
   faSave,
+  faStar,
+  faEdit,
+  faTrash,
+  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import cameraIcon from './camera.svg';
-import updateIcon from './update.svg';
-import binIcon from './bin.svg';
 
 export const ChevronIcon = () => {
   return <FontAwesomeIcon className="chevronIcon" icon={faChevronDown} />;
@@ -60,9 +62,17 @@ export const SaveIcon = () => {
 };
 
 export const UpdateIcon = () => {
-  return <img className="udpateIcon" src={updateIcon} alt="update icon" />;
+  return <FontAwesomeIcon className="udpateIcon" icon={faEdit} />;
 };
 
 export const BinIcon = () => {
-  return <img className="binIcon" src={binIcon} alt="bin icon" />;
+  return <FontAwesomeIcon className="binIcon" icon={faTrash} />;
+};
+
+export const StarIcon = () => {
+  return <FontAwesomeIcon className="starIcon" icon={faStar} />;
+};
+
+export const SendIcon = () => {
+  return <FontAwesomeIcon className="sendIcon" icon={faPaperPlane} />;
 };
