@@ -7,15 +7,20 @@ This repository contains only a frontend part of the whole project.
 The application is available on: [https://squizer.ct8.pl](https://squizer.ct8.pl).
 
 If you want to run it on your machine:
-- close this repository
-- run **npm install**
-- run **npm start**
+- download Node.js [from this link](https://nodejs.org/en/download/) if you don't have it installed yet
+- clone this repository
+- open folder with the project in your editor
+- open bash terminal
+- run **npm install** to install all the necessary packages
+- run **npm start** to run the application in the development mode
 
-### Testing credentials
-login: user1
+## Testing credentials
 
-password: user1123
+I've created 5 users for the testing reasons. Every user has a:
+- nickname created according to the pattern: user[id] (where id is the number from 1-5)
+- password created according to the pattern: user[id]123
 
+So, if you want to login as a user3, the password is: user3123.
 
 ## sQuizer v2.0 - new features
 
@@ -31,10 +36,10 @@ password: user1123
 
 ## Implemented features:
 - Login and registration
-- Dashboard + skeleton loading
-- Adding, deleting quizzes
+- Dashboard with quizzes cards + keleton loading
+- Adding and deleting quizzes
 - Playing in quizzes
-- Scoring and ranking system
+- Scoring, statistics and ranking system
 - Adding comments
 - Basic accessibility and security
 - Adding and managing your avatar
@@ -62,3 +67,17 @@ My goal was to learn how to communicate with a backend using React, implement my
 
 ## Designing
 - Figma
+
+## Exemplary screenshots
+
+![Dashboard](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/dashboard.png)
+
+![User profile](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/profile.png)
+
+![Ranking](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/ranking.png)
+
+![Quiz presentation](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/about-quiz.png)
+
+![Quiz creator](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/quizform.png)
+
+![Game](https://github.com/krzysztof01-sz/squizer-app-frontend/blob/main/screenshots/quizgame.png)
