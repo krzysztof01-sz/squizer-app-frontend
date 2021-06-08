@@ -57,7 +57,8 @@ export const photoTypes = {
 
 export const prefferedImageExtensions = ['image/png', 'image/jpg', 'image/jpeg'];
 
-export const maxDescrptionLengthOnCard = 80;
+export const maxDescriptionLengthOnCard = 80;
+export const maxTitleLengthOnCard = 50;
 
 export const emojiCupsMap = new Map([
   [1, '🥇'],
