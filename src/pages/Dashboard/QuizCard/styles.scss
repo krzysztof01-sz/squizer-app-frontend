@@ -1,8 +1,23 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
+.quizCard__badge {
+  @include flexCenter;
+  justify-content: space-around;
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  left: -10px;
+  text-align: center;
+  width: 100px;
+  background-color: lighten($foundation, 10);
+  color: $contrast;
+}
+
 .quizCard {
+  position: relative;
   width: 100%;
+  background: darken($foundation, 2);
   .quizCard__categoryImageWrapper {
     overflow: hidden;
     position: relative;
@@ -21,12 +36,16 @@
     }
   }
   .quizCard__info {
-    position: relative;
-    background-color: $foundation;
-    padding: 12px 4px;
+    background-color: transparent;
+    padding: 12px 10px;
     height: 180px;
     .quizCard__title {
-      margin: 2vh 0;
+      display: flex;
+      align-items: center;
+    }
+    .quizCard__title {
+      height: 7vh;
+      margin: 1vh 0 2vh;
       font-size: $font-smallXL;
       font-weight: bold;
     }
@@ -36,8 +55,6 @@
       font-size: $font-miniXL;
     }
     .quizCard__buttonAndDateWrapper {
-      position: absolute;
-      bottom: 0;
       display: flex;
       width: 95%;
       justify-content: space-between;
@@ -78,6 +95,10 @@
       height: 300px;
     }
     .quizCard__info {
+      height: 260px;
+      .quizCard__title {
+        font-size: $font-medium;
+      }
       .quizCard__description {
         font-size: $font-small;
       }
@@ -98,9 +119,11 @@
     .quizCard__info {
       height: 250px;
       .quizCard__title {
+        height: 2vh;
         font-size: $font-medium;
       }
       .quizCard__description {
+        height: 2vh;
         font-size: $font-medium;
       }
     }
