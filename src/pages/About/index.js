@@ -25,23 +25,29 @@ const About = () => {
           <ListItem>Avatar updating</ListItem>
         </ul>
 
+        <Heading>sQuizer v2.0 - new features</Heading>
+        <ul className="list">
+          <ListItem>
+            Quizzes rating - now, you can rate visited quizzes, the average rate is visible in the "about quiz" subpage.
+          </ListItem>
+          <ListItem>
+            Quizzes creator - your form data is now kept in the localStorage, so you don't need to worry about disappearing data.
+            Added UI improvements
+          </ListItem>
+          <ListItem>Added better loader, and error handling</ListItem>
+          <ListItem>Autologging after successful registration</ListItem>
+          <ListItem>Comments updating and deleting</ListItem>
+          <ListItem>Added "visited" badge in the quiz card to inform that you've solved some quiz</ListItem>
+          <ListItem>Removed login form validation on the client side</ListItem>
+          <ListItem>Added different subtle UI corrections</ListItem>
+          <ListItem>Authentication and authorization security improvements + fixed bug with authentication.</ListItem>
+        </ul>
+
         <Heading>Why did I create sQuizer?</Heading>
         <p>
-          In my previous project
-          <a className="link" href="https://burza-idzie.web.app">
-            <i>(Csale)</i>
-          </a>{' '}
-          I was working with firebase. It turned out to be a really powerful technology but I was a bit disgusted that I didn't
-          know how it works. I mean I knew nothing about authentication, security and working with backend. So in order to learn
-          it I decided to create a small project which later became more complex. Finally, I've learned a lot of thing doing this
-          project so I achieved my basic goal.
-        </p>
-
-        <Heading>Am I planning to add new features?</Heading>
-        <p>
-          Yes, I'm planning to add better authentication because now I still use partially localStorage for handling user
-          authentication on the frontend side (backend has cookie-based auth) or totally change it on cookie + session. Also
-          comments deleting and random quiz generation. But I don't guarantee that I'll be done in 100% 😄.
+          I wanted to learn how to communicate with a backend using React, implement authentication, authorization, security and
+          accessibility on my own, so decided to create a small project which later became more complex. Finally, I've learned a
+          lot of things even those I didn't meant. Finally, I achieved my basic goal.
         </p>
 
         <Heading>If you want to check my github repos:</Heading>
