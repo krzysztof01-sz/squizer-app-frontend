@@ -31,3 +31,12 @@ export const shortenText = (text, length) => {
 
   return text;
 };
+
+export const getStarsRenderingOrder = (rating) => {
+  const renderingOrder = [];
+  for (let i = 1; i <= 5; i++) {
+    const isLightStar = i <= rating;
+    renderingOrder.push({ isLightStar, id: i });
+  }
+  return renderingOrder;
+};
