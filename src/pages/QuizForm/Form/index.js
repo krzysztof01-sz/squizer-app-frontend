@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as api from '../../../api';
 
 import AddQuizButton from '../Buttons/AddQuiz';
@@ -17,6 +17,7 @@ import { quizCategories, responseTypes } from '../../../utils/constants';
 import Layout from '../../../global/Components/Layout';
 import { useQuizForm } from '../../../hooks/useQuizForm';
 import { colors } from '../../../utils/constants';
+import CharactersCounter from '../../../global/Components/CharactersCounter';
 
 const focusOnFirstInput = () => document.querySelector('textarea[name="content"]').focus();
 
@@ -72,6 +73,7 @@ const Form = () => {
               value={generalQuizData?.description}
               callback={({ target }) => setGeneralQuizData({ ...generalQuizData, [target.name]: target.value })}
             />
+            <CharactersCounter charactersNumber={generalQuizData?.description?.length} />
           </section>
 
           <section className="questionsPart">
@@ -149,9 +151,14 @@ const Form = () => {
                       if (typeof validationResult === 'boolean') {
                         const nextQuestion = questions[questionID + 1];
                         const isShowedCurrentQuestion = !nextQuestion;
+                        setQuestions([...questions]);
+
                         if (isShowedCurrentQuestion) {
                           setQuestions(() => [...questions, initialQuestionData]);
                         }
+
+                        localStorage.setItem('quiz-data', JSON.stringify(questions));
+                        localStorage.setItem('general-quiz-data', JSON.stringify({ ...generalQuizData }));
                       } else {
                         focusOnFirstInput();
                         return setClientErrors(validationResult);
@@ -175,7 +182,11 @@ const Form = () => {
                     setIsSubmitting(false);
                     setServerErrors(response.msg);
 
-                    if (response.type === responseTypes.success) return history.push('/dashboard');
+                    if (response.type === responseTypes.success) {
+                      localStorage.removeItem('quiz-data');
+                      localStorage.removeItem('general-quiz-data');
+                      return history.push('/dashboard');
+                    }
                   }}
                 />
               ) : null}
