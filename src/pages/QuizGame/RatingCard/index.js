@@ -7,6 +7,8 @@ import { responseTypes } from '../../../utils/constants';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import { useParams } from 'react-router';
 import { UserContext } from '../../../contexts/User';
+import { getStarsRenderingOrder } from '../../../utils/functions';
+import AccessibleWrapper from '../../../global/AccessibleWrapper';
 
 const RatingCard = () => {
   const [rating, setRating] = useState(undefined);
@@ -17,15 +19,6 @@ const RatingCard = () => {
     user: { _id: userId },
   } = useContext(UserContext);
 
-  const getStarsRenderingOrder = (rating) => {
-    const renderingOrder = [];
-    for (let i = 0; i < 5; i++) {
-      const isLightStar = i <= rating;
-      renderingOrder.push({ isLightStar, id: i });
-    }
-    return renderingOrder;
-  };
-
   return (
     <section className="ratingCard">
       {actionResult?.type === responseTypes.success || (
@@ -33,7 +26,9 @@ const RatingCard = () => {
           <p className="ratingCard__question">How would you rate this quiz?</p>
           <div className="ratingCard__starsBox" role="list">
             {getStarsRenderingOrder(rating).map(({ isLightStar: isLight, id }) => (
-              <Star isLight={isLight} key={id} callback={() => setRating(id)} />
+              <AccessibleWrapper key={id}>
+                <Star isLight={isLight} key={id} callback={() => setRating(id)} />
+              </AccessibleWrapper>
             ))}
           </div>
         </>
@@ -43,7 +38,7 @@ const RatingCard = () => {
         <SendButton
           isDisabled={isSending}
           callback={async () => {
-            const userRating = rating + 1;
+            const userRating = rating;
 
             setIsSending(true);
             const { type, msg } = await api.sendQuizRating(quizId, { userId, rating: userRating });
