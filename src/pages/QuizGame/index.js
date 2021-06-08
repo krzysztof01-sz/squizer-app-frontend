@@ -24,7 +24,7 @@ import * as api from '../../api';
 import RatingCard from './RatingCard';
 
 const QuizGame = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const { quizId } = useParams();
   const { data: questions, loading, error } = useFetching(getQuizQuestions, quizId);
   const [userAnswers, setUserAnswers] = useState([]);
