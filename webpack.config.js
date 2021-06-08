@@ -4,7 +4,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: ['@babel/polyfill', './src/App.js'],
   output: {
     filename: '[name].bundle.js',
