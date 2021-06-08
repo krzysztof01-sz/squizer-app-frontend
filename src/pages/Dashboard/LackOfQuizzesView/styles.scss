@@ -3,8 +3,38 @@
 
 .lackOfQuizzes {
   @include flexCenter;
+  flex-direction: column;
+  margin-bottom: 5vh;
   height: 50vh;
   &__message {
+    margin: 4vh 0;
     font-size: $font-medium;
+  }
+  &__image {
+    width: 90vw;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1366px) {
+  .lackOfQuizzes {
+    &__image {
+      width: 25vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .lackOfQuizzes {
+    &__image {
+      width: 25vw;
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .lackOfQuizzes {
+    &__image {
+      width: 20vw;
+    }
   }
 }
