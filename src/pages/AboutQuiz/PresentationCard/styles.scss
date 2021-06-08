@@ -3,7 +3,7 @@
 
 .quizCard__wrapper {
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   padding: 5vh 0;
   backdrop-filter: blur(20px);
   background-repeat: no-repeat;
@@ -36,6 +36,10 @@
       overflow-wrap: break-word;
       font-size: $font-small;
       margin: 2vh 0;
+    }
+    .quizCard__starsWrapper {
+      display: flex;
+      margin: 1vh 0;
     }
     .buttonAndInfoWrapper {
       @include flexCenter;
@@ -85,7 +89,7 @@
 
 @media only screen and (min-width: 1600px) and (max-width: 1920px) {
   .quizCard__wrapper {
-    height: 80vh;
+    height: 90vh;
     .quizCard {
       width: 55%;
       padding: 4% 4%;
