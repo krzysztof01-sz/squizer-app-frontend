@@ -14,6 +14,7 @@ import {
   faEdit,
   faTrash,
   faPaperPlane,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import cameraIcon from './camera.svg';
 
@@ -75,4 +76,8 @@ export const StarIcon = () => {
 
 export const SendIcon = () => {
   return <FontAwesomeIcon className="sendIcon" icon={faPaperPlane} />;
+};
+
+export const CheckIcon = () => {
+  return <FontAwesomeIcon className="checkIcon" icon={faCheck} />;
 };
