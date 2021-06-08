@@ -44,17 +44,6 @@
   .header {
     @include flexCenter;
     justify-content: space-between;
-    .header__logo {
-      width: 10vw;
-    }
-  }
-}
-
-@media only screen and (min-width: 1367px) and (max-width: 1920px) {
-  .header {
-    .header__logo {
-      width: 11vw;
-    }
   }
 }
 
