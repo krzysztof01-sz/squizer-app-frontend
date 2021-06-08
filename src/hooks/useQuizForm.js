@@ -2,11 +2,16 @@ import { useState } from 'react';
 import * as fb from '../utils/feedbackMessages';
 
 export const useQuizForm = () => {
-  const [generalQuizData, setGeneralQuizData] = useState({
-    title: '',
-    category: '',
-    description: '',
-  });
+  const savedQuestionData = JSON.parse(localStorage.getItem('quiz-data'));
+  const savedGeneralQuizData = JSON.parse(localStorage.getItem('general-quiz-data'));
+
+  const [generalQuizData, setGeneralQuizData] = useState(
+    savedGeneralQuizData ?? {
+      title: '',
+      category: '',
+      description: '',
+    },
+  );
   const initialQuestionData = {
     content: '',
     correctAnswer: '',
@@ -14,8 +19,9 @@ export const useQuizForm = () => {
     optionalAnswer2: '',
     optionalAnswer3: '',
   };
-  const initialQuestionID = 0;
-  const [questions, setQuestions] = useState([{ ...initialQuestionData }]);
+
+  const [questions, setQuestions] = useState(savedQuestionData ?? [{ ...initialQuestionData }]);
+  const initialQuestionID = questions.length === 0 ? 0 : questions.length - 1;
   const [questionID, setQuestionID] = useState(initialQuestionID);
 
   const getCurrentQuestionsContents = () => {
