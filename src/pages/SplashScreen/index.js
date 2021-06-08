@@ -45,11 +45,7 @@ const SplashScreen = () => {
                 </section>
                 <section className="slider__switchSection">
                   {images.map((_, index) => (
-                    <SwitchDot
-                      key={index}
-                      callback={() => setImageID(index)}
-                      filled={index === imageID}
-                    />
+                    <SwitchDot key={index} callback={() => setImageID(index)} filled={index === imageID} />
                   ))}
                 </section>
               </section>

@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   .splashScreen__firstPart {
+    margin-top: 5vh;
     .description {
       margin: 10vh 0 5vh;
     }
@@ -49,7 +50,7 @@
     flex-direction: row;
     .splashScreen__firstPart,
     .splashScreen__secondPart {
-      height: 130vh;
+      height: 135vh;
       width: 40%;
     }
     .splashScreen__firstPart {
