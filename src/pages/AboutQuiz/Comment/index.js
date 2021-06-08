@@ -10,7 +10,7 @@ import { useParams } from 'react-router';
 import ActionResultMessage from '../../../global/Components/Messages/ActionResultMessage';
 import TextArea from '../CommentForm/TextArea';
 import SaveButton from '../../../global/Buttons/SaveButton';
-import CharactersCounter from '../CommentForm/CharactersCounter';
+import CharactersCounter from '../../../global/Components/CharactersCounter';
 import CancelEditingButton from './CancelEditingButton';
 import { useComment } from '../../../hooks/useComment';
 import './styles.scss';
