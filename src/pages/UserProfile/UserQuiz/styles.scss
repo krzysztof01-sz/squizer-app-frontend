@@ -39,6 +39,14 @@
 @media only screen and (min-width: 1367px) {
   .userQuiz {
     padding: 25px 15px 20px;
+    &__title {
+      font-size: $font-normal;
+    }
+    &__description {
+      margin-bottom: 30px;
+      font-size: $font-normal;
+      word-wrap: break-word;
+    }
     .userQuiz__checkButton {
       width: 100px;
       padding: 5px;
