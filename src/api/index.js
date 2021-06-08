@@ -3,17 +3,21 @@ import { firebaseStorage } from '../../config/firebase';
 import { photoTypes, responseTypes } from '../utils/constants';
 import DefaultAvatar from '../assets/images/DefaultAvatar.png';
 
-// const baseURL = 'https://squizer-backend.ct8.pl';
-const baseURL = 'http://localhost:8080/';
+// const baseURL = 'http://localhost:8080';
+const baseURL = 'https://squizer-backend.herokuapp.com';
+
+axios.defaults.withCredentials = true;
+
+axios.defaults.headers = {
+  'Access-Control-Allow-Methods': '*',
+  'Access-Control-Allow-Credentials': true,
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
 
 const instance = axios.create({
   baseURL,
-  withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Origin': baseURL,
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
+  crossdomain: true,
 });
 
 // Auth API
