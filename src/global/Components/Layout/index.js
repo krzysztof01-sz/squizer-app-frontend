@@ -13,8 +13,6 @@ const Layout = ({ children }) => {
   const { user } = useContext(UserContext);
   const { refetchUser } = useAuth();
 
-  useEffect(() => window.scrollTo(0, 0), []);
-
   useEffect(() => {
     const currentRoute = history.location.pathname;
 
@@ -29,6 +27,8 @@ const Layout = ({ children }) => {
       return () => false;
     }
   }, [user]);
+
+  useEffect(() => window.scrollTo(0, 0), []);
 
   return (
     <>
